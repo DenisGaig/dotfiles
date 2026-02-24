@@ -1,0 +1,113 @@
+/* rofidex.rasi
+   Thème Rofi dédié à Rofidex — cohérent avec theme.rasi
+   Emplacement : ~/.config/rofi/rofidex.rasi
+*/
+
+* {
+    /* Palette — identique à theme.rasi */
+    main-bg:        #1d1e2fef;
+    main-fg:        #cdd6f4ff;
+    main-br:        #cba6f7ff;
+    main-ex:        #f5e0dcff;
+    select-bg:      #b89dee8a;
+    select-fg:      #11111bff;
+
+    /* Reset */
+    background-color:   transparent;
+    text-color:         @main-fg;
+    border:             0;
+    margin:             0;
+    padding:            0;
+    spacing:            0;
+}
+
+window {
+    background-color:   @main-bg;
+    border:             2px solid;
+    border-color:       @main-br;
+    border-radius:      12px;
+    width:              680px;
+    location:           center;
+}
+
+mainbox {
+    padding:    12px;
+    spacing:    8px;
+}
+
+/* --- Barre de recherche -------------------------------------------------- */
+
+inputbar {
+    background-color:   #2a2b3ddf;
+    border-radius:      8px;
+    padding:            10px 14px;
+    spacing:            8px;
+    children:           [ prompt, entry ];
+}
+
+prompt {
+    text-color:     @main-br;
+    font:           "FiraCode Nerd Font 11";
+}
+
+entry {
+    text-color:     @main-fg;
+    font:           "FiraCode Nerd Font 11";
+    placeholder:            "rechercher... (:k :s :c :d @lang)";
+    placeholder-color:      #6c7086ff;
+}
+
+/* --- Séparateur ---------------------------------------------------------- */
+
+separator {
+    background-color:   #313244ff;
+    height:             1px;
+    margin:             4px 0px;
+}
+
+/* --- Liste de résultats -------------------------------------------------- */
+
+listview {
+    lines:          8;
+    fixed-height:   true;
+    scrollbar:      false;
+    spacing:        2px;
+}
+
+element {
+    padding:        8px 12px;
+    border-radius:  6px;
+    spacing:        6px;
+    // children:       [ element-text ];
+}
+
+element normal.normal {
+    background-color:   transparent;
+    text-color:         @main-fg;
+}
+
+element selected.normal {
+    background-color:   @select-bg;
+    text-color:         @select-fg;
+}
+
+element alternate.normal {
+    background-color:   transparent;
+    text-color:         @main-fg;
+}
+
+element-text {
+    font:           "JetBrainsMono Nerd Font 10";
+    vertical-align: 0.5;
+}
+
+/* --- Message (aucun résultat) -------------------------------------------- */
+
+message {
+    padding:    6px 12px;
+}
+
+textbox {
+    text-color: @main-ex;
+    font:       "JetBrainsMono Nerd Font 10";
+}

@@ -1,0 +1,106 @@
+* {
+    main-bg:            #1d1e2fcf; 
+    main-fg:            #cdd6f4ff;
+    main-br:            #cba6f7ff;
+    main-ex:            #f5e0dcff;
+    select-bg:          #b89dee8a;
+    select-fg:          #11111bff;
+    separatorcolor:     transparent;
+    border-color:       transparent;
+}
+
+configuration {
+    font: "FiraCode Nerd Font 12";
+}
+
+window {
+    transparency:                "real";
+    background-color:            @main-bg;
+    border-color:                @main-br;
+    border:                      2px;
+    border-radius:               20px;
+    width:                       800px;
+    height:                      600px;
+    padding:                     20px;
+}
+
+mainbox {
+    background-color:            transparent;
+    spacing:                     15px;
+    children: 			 [ inputbar, textbox-separator, listview ];
+}
+
+inputbar {
+    background-color:            @main-bg;
+    border-color:                @main-br;
+    border:                      2px;
+    border-radius:               15px;
+    padding:                     15px 20px;
+    spacing:                     10px;
+    children:                    [ prompt, entry ];
+}
+
+prompt {
+    background-color:            transparent;
+    text-color:                  @main-br;
+    font:                        "FiraCode Nerd Font Bold 12";
+}
+
+entry {
+    background-color:            transparent;
+    text-color:                  @main-fg;
+    placeholder:                 "Rechercher un emoji...";
+    placeholder-color:           @main-fg;
+    font:                        "FiraCode Nerd Font 12";
+}
+
+textbox-separator {
+    expand:                      false;
+    str:                         "━━━━━━━━ Récents ━━━━━━━━━━━━";
+    background-color:            transparent;
+    text-color:                  @main-br;
+    font:                        "FiraCode Nerd Font 8";
+    horizontal-align:            0;
+    padding:                     5px 0px 10px 10px;
+}
+
+listview {
+    background-color:            transparent;
+    columns:                     8;
+    lines:                       6;
+    spacing:                     15px;
+    cycle:                       true;
+    dynamic:                     true;
+    layout:                      vertical;
+    fixed-height:                true;
+    fixed-columns:               true;
+    scrollbar:                   false;
+    padding:                     0px 0px 0px 10px;
+}
+
+
+element {
+    background-color:            transparent;
+    text-color:                  @main-fg;
+    border-radius:               12px;
+    padding:                     15px;
+    orientation:                 vertical;
+    spacing:                     5px;
+}
+
+element selected {
+    background-color:            @select-bg;
+    text-color:                  @select-fg;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    font:                        "FiraCode Nerd Font 28";
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+element-icon {
+    enabled: false;
+}

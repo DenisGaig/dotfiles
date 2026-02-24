@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Cible uniquement Spotify (remplace par le nom de ton lecteur préféré)
+PLAYER_NAME=("spotify" "brave")
+
+domain="org.mpris.MediaPlayer2"
+path="/org/mpris/MediaPlayer2"
+cmd="org.freedesktop.DBus.Properties.Get"
+
+getTitle() {
+  playerctl -p "$PLAYER_NAME" metadata --format "  {{ artist }} - {{ title }}"
+}
+
+isPlaying() {
+  status=$(playerctl -p "$PLAYER_NAME" metadata --format '{{status}}')
+  if [ "${status}" = "Playing" ]; then
+    echo $status; exit
+  fi
+  exit 1
+}
+
+togglePlay() {
+  playerctl -p "$PLAYER_NAME" play-pause
+}
+
+case "$1" in
+        --title)
+                getTitle
+        ;;
+        --isPlaying)
+                isPlaying
+        ;;
+esac

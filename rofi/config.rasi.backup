@@ -1,0 +1,39 @@
+@theme "/usr/share/rofi/themes/DarkBlue.rasi"
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+}
+
+* {
+    background-color: #0e001f;
+    border-color: #4a059e;
+    text-color: #787878;
+    selected-normal-background: #445482;
+    selected-normal-foreground: #eee8d5;
+}
+
+window {
+    background-color: @background-color;
+    transparency: "background";
+    border: 2;
+    border-color: @border-color;
+    border-radius: 10px;
+}
+
+inputbar {
+    background-color: #141414;
+    text-color: #787878;
+}
+
+listview {
+    background-color: @background-color;
+}
+
+element {
+    padding: 5px;
+}
+
+element selected {
+    background-color: @selected-normal-background;
+    text-color: @selected-normal-foreground;
+}

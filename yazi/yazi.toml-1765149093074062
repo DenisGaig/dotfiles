@@ -1,0 +1,8 @@
+[manager]
+ratio = [1, 2, 3]  # Proportions des panneaux
+linemode = "none"  # Affichage des lignes (métadonnées)
+show_hidden = true # Afficher les fichiers cachés
+
+[opener]
+edit = ["nvim", "$@"]  # Ouvrir les fichiers avec Neovim
+

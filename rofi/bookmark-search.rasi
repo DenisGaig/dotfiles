@@ -1,0 +1,144 @@
+/**
+ * Bookmark Search - Configuration Rofi
+ * Utilise le thème Catppuccin Mocha défini dans ~/.config/rofi/theme.rasi
+ * 
+ * À placer dans: ~/.config/rofi/bookmark-search.rasi
+ */
+
+configuration {
+    modi: "drun,run,filebrowser";
+    show-icons: false;
+    terminal: "kitty";
+    drun-display-format: "{name}";
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "  Apps";
+    display-run: "  Run";
+    display-filebrowser: "  Files";
+    sidebar-mode: false;
+    font: "FiraCode Nerd Font 10";
+    icon-theme: "Tela-circle-dracula";
+}
+
+@import "~/.config/rofi/theme.rasi"
+
+* {
+    background-color: @main-bg;
+    text-color: @main-fg;
+    font: "FiraCode Nerd Font 11";
+}
+
+window {
+    transparency: "real";
+    width: 70%;
+    height: 60%;
+    border-radius: 12px;
+    border: 2px solid;
+    border-color: @main-br;
+    padding: 0px;
+}
+
+mainbox {
+    border: 0;
+    padding: 0;
+    children: [ inputbar, message, listview ];
+}
+
+inputbar {
+    padding: 15px;
+    border: 0px 0px 2px 0px;
+    border-color: @main-br;
+    background-color: @main-bg;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @main-br;
+    padding: 0px 10px 0px 0px;
+    font: "FiraCode Nerd Font Bold 12";
+}
+
+entry {
+    background-color: transparent;
+    text-color: @main-fg;
+    placeholder-color: #6c7086;
+    placeholder: "Tapez votre recherche...";
+    cursor: text;
+}
+
+message {
+    padding: 10px;
+    background-color: @main-bg;
+    text-color: @main-fg;
+    border: 0px 0px 1px 0px;
+    border-color: @main-br;
+}
+
+textbox {
+    text-color: inherit;
+    background-color: transparent;
+}
+
+listview {
+    fixed-height: false;
+    dynamic: true;
+    scrollbar: true;
+    spacing: 5px;
+    padding: 10px;
+    background-color: @main-bg;
+    lines: 10;
+}
+
+element {
+    padding: 10px;
+    background-color: transparent;
+    text-color: @main-fg;
+    border-radius: 8px;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @main-fg;
+}
+
+element selected.normal {
+    background-color: @select-bg;
+    text-color: @select-fg;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @main-fg;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    vertical-align: 0.5;
+    margin: 0px;
+}
+
+element-icon {
+    background-color: transparent;
+    size: 24px;
+    margin: 0px 10px 0px 0px;
+}
+
+scrollbar {
+    width: 4px;
+    border: 0;
+    handle-width: 4px;
+    padding: 0;
+    handle-color: @main-br;
+    background-color: @main-bg;
+}
+
+/* Style pour les métadonnées (preview) */
+element.alternate {
+    padding: 5px 10px 5px 40px;
+}
+
+element.alternate selected {
+    background-color: @select-bg;
+}

@@ -1,0 +1,30 @@
+[mgr]
+ratio = [2, 2, 4]  # Proportions des panneaux
+linemode = "none"  # Affichage des lignes (métadonnées)
+show_hidden = true # Afficher les fichiers cachés
+
+[opener]
+edit = [
+    { run = 'nvim "$@"', block = true, for = "unix" },
+]
+open = [
+    { run = 'xdg-open "$@"', desc = "Open" },
+]
+image = [
+    { run = 'imv "$@"', desc = "View image", mime = ["image/*"], for = "unix" },
+]
+images = [
+    { run = 'imv-dir "$@"', desc = "View images", mime = ["image/*"], for = "unix" },
+]
+
+[open]
+rules = [
+    # Ouvre les fichiers texte avec nvim
+    { mime = "text/*", use = "edit" },
+    # Ouvre les images avec imv (fichier unique)
+    { mime = "image/*", use = "image" },
+    # Ouvre les dossiers ou plusieurs images avec imv-dir
+    { name = "*/", use = "images" },  # Pour les dossiers
+    { name = "*.{jpg,jpeg,png,gif,webp,bmp,tiff}", use = "images" },  # Pour les extensions d'images
+]
+

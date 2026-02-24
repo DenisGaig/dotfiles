@@ -1,0 +1,63 @@
+#!/bin/bash
+# ~/.config/hypr/scripts/rofimark.sh
+
+API_URL="http://localhost:8742"
+
+# Mode ajout
+if [ "${1:-}" = "add" ]; then
+    URL=$(wl-paste)
+    [[ "$URL" =~ ^https?:// ]] || { notify-send "❌ Pas d'URL valide"; exit 1; }
+    
+    NOTE=$(echo "" | rofi -dmenu -p "📝 Note:" -theme ~/.config/rofi/themes/rofimark.rasi)
+    
+    curl -s -X POST "$API_URL/add" \
+        -H "Content-Type: application/json" \
+        -d "{\"url\": \"$URL\", \"notes\": \"$NOTE\"}" > /dev/null
+    
+    notify-send "✅ Ajouté"
+    exit 0
+fi
+
+# Mode recherche - saisie requête
+QUERY=$(echo "" | rofi -dmenu \
+    -p "🔍" \
+    -mesg "Rechercher | Alt+A: Ajouter URL | Enter: Chercher" \
+    -theme ~/.config/rofi/themes/rofimark.rasi \
+    -kb-custom-1 "Alt+a")
+
+[ $? -eq 10 ] && exec "$0" add
+[ -z "$QUERY" ] && exit 0
+
+# Appel API /search
+RESPONSE=$(curl -s -X POST "$API_URL/search" \
+    -H "Content-Type: application/json" \
+    -d "{\"query\": \"$QUERY\", \"top_k\": 10}")
+
+# Vérifier si résultats
+TOTAL=$(echo "$RESPONSE" | jq -r '.total_results // 0')
+
+if [ "$TOTAL" -eq 0 ]; then
+    notify-send "🔍 Aucun résultat" "Pour: $QUERY"
+    exit 0
+fi
+
+# Construire liste pour Rofi
+# Format: Titre | URL | Type
+LIST=$(echo "$RESPONSE" | jq -r '.results[] | 
+    "\(.title // "Sans titre")|\(.url)|\(.content_type)|\(.score // "N/A")"')
+
+# Afficher résultats dans Rofi
+SELECTED=$(echo "$LIST" | awk -F'|' '{
+    icon = ($3 == "youtube") ? "▶️" : "🌐"
+    score = ($4 != "N/A") ? " [" $4 "]" : ""
+    print icon " " $1 score "\x00info\x1f" $2
+}' | rofi -dmenu \
+    -p "Résultats" \
+    -theme ~/.config/rofi/themes/rofimark.rasi \
+    -mesg "$TOTAL résultats pour: $QUERY")
+
+# Ouvrir si sélection
+if [ -n "$SELECTED" ]; then
+    URL=$(echo "$SELECTED" | sed 's/.*\x1f//')
+    brave "$URL" &
+fi
