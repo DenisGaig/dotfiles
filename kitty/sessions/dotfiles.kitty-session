@@ -1,0 +1,7 @@
+# 1. On crée l'onglet
+new_tab dotfiles
+cd ~/.dotfiles
+
+# 2. On lance nvim
+launch nvim
+

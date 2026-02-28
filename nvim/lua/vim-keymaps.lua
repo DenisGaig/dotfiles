@@ -19,6 +19,10 @@ map("n", "N", "Nzzv", { desc = "Resultat precedent centré" }) -- résultat pré
 -- SPLITTING & RESIZING
 map("n", "<leader>sv", ":vsplit<CR>", { desc = "Split window vertically" })
 map("n", "<leader>sh", ":split<CR>", { desc = "Split window horizontally" })
+map("n", "<M-,>", "<C-w>5<", { desc = "Resize window to the left" })
+map("n", "<M-;>", "<C-w>5>", { desc = "Resize window to the right" })
+map("n", "<M-t>", "<C-w>+", { desc = "Resize window to the top" })
+map("n", "<M-b>", "<C-w>-", { desc = "Resize window to the bottom" })
 
 -- BETTER PASTE BEHAVIOR
 map("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })

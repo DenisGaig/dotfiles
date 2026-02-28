@@ -1,0 +1,90 @@
+-- dashboard.lua ou directement dans init.lua
+
+local function center(str)
+	local width = vim.api.nvim_get_option("columns")
+	local padding = math.floor((width - vim.fn.strdisplaywidth(str)) / 2)
+	return string.rep(" ", padding) .. str
+end
+
+local function session_exists()
+	-- auto-session sauvegarde dans stdpath("data")/sessions/
+	-- le nom est basé sur le cwd encodé
+	local cwd = vim.fn.getcwd()
+	local session_name = cwd:gsub("/", "%%") .. ".vim"
+	local session_path = vim.fn.stdpath("data") .. "/sessions/" .. session_name
+	return vim.fn.filereadable(session_path) == 1
+end
+
+local function open_dashboard()
+	local buf = vim.api.nvim_create_buf(false, true) -- scratch buffer
+	vim.api.nvim_set_current_buf(buf)
+
+	local lines = {
+		"",
+		center([[                                                                       ]]),
+		center([[                                                                       ]]),
+		center([[                                                                       ]]),
+		center([[                                                                       ]]),
+		center([[                                                                     ]]),
+		center([[       ████ ██████           █████      ██                     ]]),
+		center([[      ███████████             █████                             ]]),
+		center(
+			[[      █████████ ███████████████████ ███   ███████████   ]]
+		),
+		center([[     █████████  ███    █████████████ █████ ██████████████   ]]),
+		center(
+			[[    █████████ ██████████ █████████ █████ █████ ████ █████   ]]
+		),
+		center(
+			[[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]]
+		),
+		center(
+			[[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]]
+		),
+		center([[                                                                       ]]),
+		center([[                                                                       ]]),
+		center("[  DG the sylve guardian  ]"),
+
+		"                   Fichiers récents",
+		"",
+		"                   [f]  Trouver un fichier",
+		"                   [r]  Fichiers récents",
+		"                   [g]  Grep",
+		"                   [q]  Quitter",
+		"",
+	}
+
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+
+	local ns = vim.api.nvim_create_namespace("dashboard")
+
+	-- Coloriser le logo en bleu
+	for i = 5, 13 do
+		vim.api.nvim_buf_add_highlight(buf, ns, "Function", i, 0, -1)
+	end
+
+	-- Coloriser les keymaps en vert
+	for i = 16, 20 do
+		vim.api.nvim_buf_add_highlight(buf, ns, "String", i, 0, -1)
+	end
+
+	vim.api.nvim_buf_add_highlight(buf, ns, "Special", 21, 0, -1)
+
+	vim.bo[buf].modifiable = false
+	vim.bo[buf].buftype = "nofile"
+
+	-- Keymaps locaux au buffer
+	local opts = { noremap = true, silent = true, buffer = buf }
+	vim.keymap.set("n", "f", "<cmd>Telescope find_files<cr>", opts)
+	vim.keymap.set("n", "r", "<cmd>Telescope oldfiles<cr>", opts)
+	vim.keymap.set("n", "g", "<cmd>Telescope live_grep<cr>", opts)
+	vim.keymap.set("n", "q", "<cmd>qa<cr>", opts)
+end
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		if vim.fn.argc() == 0 then -- seulement si aucun fichier en argument
+			open_dashboard()
+		end
+	end,
+})

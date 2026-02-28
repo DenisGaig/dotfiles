@@ -18,7 +18,7 @@ vim.opt.hlsearch = false -- pas de surbrillance persistante après recherche
 
 -- UX
 vim.opt.scrolloff = 10 -- garde 10 lignes visibles au dessus/dessous du curseur
-vim.opt.wrap = false -- pas de retour à la ligne automatique
+vim.opt.wrap = true -- pas de retour à la ligne automatique
 vim.opt.signcolumn = "yes" -- colonne gauche toujours visible (évite les sauts LSP)
 vim.opt.updatetime = 50 -- réactivité plus rapide
 vim.opt.termguicolors = true

@@ -1,0 +1,11 @@
+# Crée un nouvel onglet
+new_tab home
+
+# Aller dans le dossier home
+cd ~
+
+# Ouvrir le terminal
+launch
+
+
+

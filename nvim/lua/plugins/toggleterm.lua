@@ -72,17 +72,6 @@ return {
 			python:toggle()
 		end
 
-		-- Terminal pour htop
-		local htop = Terminal:new({
-			cmd = "btop",
-			hidden = true,
-			direction = "float",
-		})
-
-		function _HTOP_TOGGLE()
-			htop:toggle()
-		end
-
 		-- Fonction pour exécuter le fichier courant
 		function _RUN_CURRENT_FILE()
 			local file_ext = vim.fn.expand("%:e")
@@ -112,37 +101,11 @@ return {
 
 		-- Terminaux dédiés ponctuels
 		-- vim.keymap.set("n", "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "LazyGit", noremap = true, silent = true })
-		vim.keymap.set(
-			"n",
-			"<leader>tn",
-			"<cmd>lua _NODE_TOGGLE()<CR>",
-			{ desc = "Node REPL", noremap = true, silent = true }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>tp",
-			"<cmd>lua _PYTHON_TOGGLE()<CR>",
-			{ desc = "Python REPL", noremap = true, silent = true }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>th",
-			"<cmd>lua _HTOP_TOGGLE()<CR>",
-			{ desc = "Htop", noremap = true, silent = true }
-		)
+		vim.keymap.set("n", "<leader>tn", "<cmd>lua _NODE_TOGGLE()<CR>", { desc = "Node REPL", noremap = true, silent = true })
+		vim.keymap.set("n", "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<CR>", { desc = "Python REPL", noremap = true, silent = true })
 
 		-- Terminal rapide et exécution
-		vim.keymap.set(
-			"n",
-			"<F5>",
-			"<cmd>lua _RUN_CURRENT_FILE()<CR>",
-			{ desc = "Exécuter fichier", noremap = true, silent = true }
-		)
-		vim.keymap.set(
-			"n",
-			"<F12>",
-			":ToggleTerm direction=float<CR>",
-			{ desc = "Terminal flottant", noremap = true, silent = true }
-		)
+		vim.keymap.set("n", "<F5>", "<cmd>lua _RUN_CURRENT_FILE()<CR>", { desc = "Exécuter fichier", noremap = true, silent = true })
+		vim.keymap.set("n", "<F12>", ":ToggleTerm direction=float<CR>", { desc = "Terminal flottant", noremap = true, silent = true })
 	end,
 }

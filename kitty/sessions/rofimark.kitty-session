@@ -1,0 +1,10 @@
+new_tab rofimark
+title rofimark
+cd /data/projets/rofimark
+layout tall
+launch --title "nvim" nvim
+
+new_tab rofimark-git
+cd /data/projets/rofimark
+layout stack
+launch --title "lazygit" lazygit

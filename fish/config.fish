@@ -10,9 +10,10 @@ alias ll="eza -lha --icons=auto --sort=name --group-directories-first"
 alias ls="eza --icons=auto"
 alias zed='zeditor'
 alias code='code --enable-features=UseOzonePlatform --ozone-platform=wayland'
+alias ks="~/.dotfiles/kitty/scripts/ks.sh"
 
-if not string match -q '*MX*' (cat /etc/os-release 2>/dev/null)
-    and type -q neofetch      # s’assure que la commande existe
-    neofetch
-end
+# neofetch pour afficher des infos sur le terminal
+# if not string match -q '*MX*' (cat /etc/os-release 2>/dev/null)
+#     and type -q neofetch      # s’assure que la commande existe
+#     neofetch
 

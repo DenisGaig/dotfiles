@@ -1,0 +1,227 @@
+#!/usr/bin/env bash
+
+# Filename: ~/.config/kitty/scripts/kl.sh
+# Liste les sessions kitty ouvertes et permet de switcher entre elles
+# Modes vim-like :
+#   Normal : j/k naviguer, d fermer, enter ouvrir, i insert, esc quitter
+#   Insert : taper pour filtrer, enter ouvrir, esc retour normal
+
+set -euo pipefail
+
+# ─── Curseur ──────────────────────────────────────────────────────────────────
+# Bascule entre curseur bloc (mode normal) et barre (mode insert)
+set_cursor_block() { printf '\e[2 q' >/dev/tty; }
+set_cursor_bar()  { printf '\e[6 q' >/dev/tty; }
+
+# Restaure le curseur barre quand le script se termine
+trap 'set_cursor_bar' EXIT
+
+# ─── Config ───────────────────────────────────────────────────────────────────
+kitty_bin="$(which kitty)"
+sessions_dir="$HOME/.dotfiles/kitty/sessions"
+
+# ─── Dépendances ──────────────────────────────────────────────────────────────
+if ! command -v fzf >/dev/null 2>&1; then
+  echo "fzf non trouvé. Installe : sudo pacman -S fzf"
+  exit 1
+fi
+
+if ! command -v jq >/dev/null 2>&1; then
+  echo "jq non trouvé. Installe : sudo pacman -S jq"
+  exit 1
+fi
+
+if [[ ! -x "$kitty_bin" ]]; then
+  echo "kitty non trouvé à : $kitty_bin"
+  exit 1
+fi
+
+# ─── Socket kitty ─────────────────────────────────────────────────────────────
+# Kitty expose un socket Unix pour le remote control
+# allow_remote_control yes doit être dans kitty.conf
+sock="$(ls /tmp/kitty-* 2>/dev/null | head -n1 || true)"
+if [[ -z "${sock:-}" ]]; then
+  echo "Aucun socket kitty trouvé dans /tmp."
+  echo "Vérifie que 'allow_remote_control yes' est dans kitty.conf"
+  exit 1
+fi
+
+# ─── Résolution session → fichier ─────────────────────────────────────────────
+# Tente de faire correspondre le titre d'une tab à un fichier .kitty-session
+# Si trouvé : retourne le chemin du fichier, sinon retourne le titre brut
+session_id_for_title() {
+  local title="${1:-}"
+  local file="${sessions_dir}/${title}.kitty-session"
+
+  if [[ -f "$file" ]]; then
+    printf "%s" "$file"
+    return 0
+  fi
+
+  printf "%s" "$title"
+}
+
+# ─── Construction du menu fzf ─────────────────────────────────────────────────
+# Récupère les tabs ouvertes via kitty remote control + jq
+# Format de sortie : raw_title<TAB>affichage_coloré
+# build_menu_lines() {
+#   local tabs_tsv=""
+#   tabs_tsv="$(
+#     "$kitty_bin" @ --to "unix:${sock}" ls 2>/dev/null | jq -r '
+#       .[].tabs[]
+#       | [(.title|tostring), (.is_focused|tostring)]
+#       | @tsv
+#     ' | sort -u
+#   )"
+#
+#   if [[ -z "${tabs_tsv:-}" ]]; then
+#     return 1
+#   fi
+#
+#   # Marque la tab active en rouge avec [current]
+#   printf "%s\n" "$tabs_tsv" | awk -F'\t' '{
+#     title=$1
+#     focused=$2
+#     if (focused == "true") {
+#       printf "%s\t\033[31m[current]\033[0m %s\n", title, title
+#     } else {
+#       printf "%s\t          %s\n", title, title
+#     }
+#   }'
+# }
+
+build_menu_lines() {
+  local tabs_json
+  tabs_json="$("$kitty_bin" @ --to "unix:${sock}" ls 2>/dev/null)"
+
+  if [[ -z "${tabs_json:-}" ]]; then return 1; fi
+
+  # On récupère l'ID de l'onglet ET son titre
+  echo "$tabs_json" | jq -r '
+    .[].tabs[]
+    | [ (.id|tostring), (.title // .windows[0].title), (.is_focused|tostring) ]
+    | @tsv' | awk -F'\t' '{
+      id=$1
+      title=$2
+      focused=$3
+      if (focused == "true") {
+        printf "%s\t\033[31m[current]\033[0m %s\n", id, title
+      } else {
+        printf "%s\t          %s\n", id, title
+      }
+    }'
+}
+
+# ─── Boucle principale ────────────────────────────────────────────────────────
+mode="normal"
+
+while true; do
+  menu_lines="$(build_menu_lines || true)"
+  if [[ -z "${menu_lines:-}" ]]; then
+    echo "Aucune session ouverte."
+    exit 1
+  fi
+
+  fzf_out=""
+  fzf_rc=0
+
+  if [[ "$mode" == "normal" ]]; then
+    # Mode normal : navigation j/k, pas de filtre par frappe
+    set_cursor_block
+    set +e
+    fzf_out="$(
+      printf "%s\n" "$menu_lines" |
+        fzf --ansi --height=100% --reverse \
+          --header="Normal: j/k naviguer | d fermer | enter ouvrir | i insert | esc quitter" \
+          --prompt="Kitty > " \
+          --no-multi --disabled \
+          --with-nth=2.. \
+          --expect=enter,d,i,esc \
+          --bind 'j:down,k:up' \
+          --bind 'enter:accept,d:accept,i:accept' \
+          --bind 'esc:abort' \
+          --no-clear \
+          --bind 'start:execute-silent(printf "\033[2 q" > /dev/tty)'
+    )"
+    fzf_rc=$?
+    set -e
+  else
+    # Mode insert : frappe pour filtrer, esc retour normal
+    set_cursor_bar
+    set +e
+    fzf_out="$(
+      printf "%s\n" "$menu_lines" |
+        fzf --ansi --height=100% --reverse \
+          --header="Insert: filtrer | enter ouvrir | esc normal" \
+          --prompt="Kitty (insert) > " \
+          --no-multi \
+          --with-nth=2.. \
+          --expect=enter,esc \
+          --bind 'enter:accept' \
+          --bind 'esc:abort' \
+          --no-clear \
+          --bind 'start:execute-silent(printf "\033[6 q" > /dev/tty)'
+    )"
+    fzf_rc=$?
+    set -e
+  fi
+
+  # ─── Lecture du résultat fzf ────────────────────────────────────────────────
+  # fzf retourne : ligne 1 = touche pressée, ligne 2 = sélection
+  if [[ $fzf_rc -ne 0 && -z "${fzf_out:-}" ]]; then
+    key="esc"
+    sel=""
+  else
+    key="$(printf "%s\n" "$fzf_out" | head -n1)"
+    sel="$(printf "%s\n" "$fzf_out" | sed -n '2p' || true)"
+  fi
+
+  # Extrait le raw_title (avant le TAB) depuis la ligne sélectionnée
+  selected_title=""
+  if [[ -n "${sel:-}" ]]; then
+    selected_title="$(printf "%s" "$sel" | awk -F'\t' '{print $1}')"
+  fi
+
+  # ─── Gestion des touches ────────────────────────────────────────────────────
+  # Transitions de mode
+  [[ "$mode" == "insert"  && "$key" == "esc"   ]] && { mode="normal"; continue; }
+  [[ "$mode" == "normal"  && "$key" == "esc"   ]] && exit 0
+  [[ "$mode" == "normal"  && "$key" == "i"     ]] && { mode="insert"; continue; }
+
+  # Rien de sélectionné
+  if [[ -z "${selected_title:-}" ]]; then
+    [[ "$mode" == "normal" ]] && exit 0
+    mode="normal"
+    continue
+  fi
+
+  # d → fermer la session sélectionnée
+  if [[ "$mode" == "normal" && "$key" == "d" ]]; then
+    session_id="$(session_id_for_title "$selected_title")"
+    "$kitty_bin" @ --to "unix:${sock}" action close_session "$session_id" >/dev/null 2>&1 || true
+    continue
+  fi
+
+  # enter → switcher vers la session sélectionnée
+
+  # if [[ "$key" == "enter" ]]; then
+  #   "$kitty_bin" @ --to "unix:${sock}" action goto_session "$selected_title"
+  #   exit 0
+  # fi
+
+ if [[ "$key" == "enter" ]]; then
+    # Ici selected_title contient maintenant l'ID de l'onglet (le premier champ du TSV)
+    tab_id=$(echo "$selected_title" | tr -d '[:space:]')
+
+    if [[ -z "$tab_id" ]]; then exit 0; fi
+
+    # On fait le focus par ID. C'est IMPOSSIBLE à rater pour Kitty,
+    # peu importe le titre ou le shell (Fish/Starship).
+    "$kitty_bin" @ --to "unix:${sock}" focus-tab --match "id:$tab_id"
+    exit 0
+  fi
+
+  # Fallback
+  [[ "$mode" == "insert" ]] && { mode="normal"; continue; }
+  exit 0
+done
