@@ -1,3 +1,22 @@
+-- Active uniquement spell pour markdown
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "Active la spellchecking pour Markdown",
+	pattern = { "markdown", "text" },
+	callback = function()
+		vim.opt_local.spell = true
+		vim.opt_local.spelllang = { "fr", "en" }
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "Active la colorcolumn pour Markdown",
+	pattern = { "markdown", "text" },
+	callback = function()
+		vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#313244" })
+		vim.opt_local.textwidth = 80 -- saut de ligne auto à 80 caractères
+	end,
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),

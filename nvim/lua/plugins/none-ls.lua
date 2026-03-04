@@ -12,14 +12,14 @@ return {
 				null_ls.builtins.formatting.isort,
 				null_ls.builtins.formatting.black,
 
-				null_ls.builtins.diagnostics.ruff,
-				-- null_ls.builtins.diagnostics.mypy,
+				-- null_ls.builtins.diagnostics.ruff,
+        -- null_ls.builtins.diagnostics.mypy,
 
 				-- TypeScript/JavaScript/Astro/HTML/CSS/JSON
 				null_ls.builtins.formatting.prettier,
 
 				-- Linter JavaScript/TypeScript/Astro
-				null_ls.builtins.diagnostics.eslint_d,
+				-- null_ls.builtins.diagnostics.eslint_d,
 			},
 			-- Configuration de l'auto-formatage à la sauvegarde
 			on_attach = function(client, bufnr)

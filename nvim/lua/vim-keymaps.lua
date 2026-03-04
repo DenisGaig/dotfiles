@@ -13,8 +13,8 @@ map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Déplacer une ligne vers le haut en 
 -- GARDER LE CURSEUR CENTRÉ
 map("n", "<C-d>", "<C-d>zz", { desc = "Descendre d'une demi-page" }) -- descendre demi-page
 map("n", "<C-u>", "<C-u>zz", { desc = "Monter d'une demi-page" }) -- monter demi-page
-map("n", "n", "nzzv", { desc = "Resultat suivant centré" }) -- résultat de recherche suivant centré
-map("n", "N", "Nzzv", { desc = "Resultat precedent centré" }) -- résultat précédent centré
+map("n", "n", "nzz", { desc = "Resultat suivant centré" }) -- résultat de recherche suivant centré
+map("n", "N", "Nzz", { desc = "Resultat precedent centré" }) -- résultat précédent centré
 
 -- SPLITTING & RESIZING
 map("n", "<leader>sv", ":vsplit<CR>", { desc = "Split window vertically" })

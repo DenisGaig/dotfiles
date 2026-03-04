@@ -24,6 +24,7 @@ require("vim-autocommand")
 require("lazy").setup("plugins")
 require("rofidex")
 require("dashboard")
+require("config.keymaps")
 
 -- DIAGNOSTICS
 vim.diagnostic.config({

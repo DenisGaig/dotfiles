@@ -17,3 +17,5 @@ alias ks="~/.dotfiles/kitty/scripts/ks.sh"
 #     and type -q neofetch      # s’assure que la commande existe
 #     neofetch
 
+# NEOFETCH n'est plus maintenu: script perso pour le remplacer
+/usr/local/bin/motd

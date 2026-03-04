@@ -3,35 +3,35 @@ local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
-local f = ls.function_node
 
 return {
 	s("daily", {
-		t("---"),
-		t({ "", "" }),
-		t("date: "),
-		f(function()
-			return os.date("%Y-%m-%d")
-		end, {}),
-		t({ "", "" }),
-		t("titre: "),
-		i(1, "Titre de la note"),
-		t({ "", "" }),
-		t("humeur: "),
-		i(2, "😊"),
-		t({ "", "" }),
-		t("meteo: "),
-		i(3, "☀️"),
-		t({ "", "" }),
-		t("---"),
+		-- Apprentissages
+		t("### 🧠 Apprentissages"),
 		t({ "", "", "" }),
-		t("## 📓 Journal"),
+		i(1, "Ce que j'ai découvert ou pratiqué..."),
 		t({ "", "", "" }),
-		i(4, "Ce que j'ai vécu aujourd'hui..."),
+
+		-- Todos
+		t("### ✅ Todos"),
 		t({ "", "", "" }),
-		t("## 📝 Notes libres"),
+		t("- [ ] "),
+		i(2, ""),
+		t({ "", "" }),
+		t("- [ ] "),
+		i(3, ""),
 		t({ "", "", "" }),
-		i(5, "Idées, réflexions, liens..."),
+
+		-- Idées
+		t("### 💡 Idées"),
+		t({ "", "", "" }),
+		i(4, "Idées, réflexions, liens utiles..."),
+		t({ "", "", "" }),
+
+		-- Journal / humeur
+		t("### 🌡️ Journal de bord"),
+		t({ "", "", "" }),
+		i(0, "Humeur, ressenti, ce qui m'a marqué..."),
 		t({ "", "", "" }),
 	}),
 }

@@ -21,14 +21,25 @@ return {
 				end,
 			},
 
-			-- Fenêtre flottante
 			float = {
 				padding = 2,
-				max_width = 100,
-				max_height = 30,
-				border = "rounded", -- Plus joli que "none"
-			},
+				max_width = 60, -- Réduit pour être plus "slim" (style sidebar)
+				max_height = 20, -- Réduit un peu pour ne pas prendre tout l'écran
+				border = "rounded",
 
+				-- C'est ici que la magie opère pour le positionnement
+				override = function(conf)
+					-- On s'assure que la position est relative à l'éditeur entier
+					conf.relative = "editor"
+
+					-- On place la fenêtre tout en haut (row = 0)
+					-- et à droite (col = largeur écran - largeur fenêtre - marge)
+					conf.row = 0
+					conf.col = vim.o.columns - conf.width - 2 -- Le -2 ajoute une petite marge à droite
+
+					return conf
+				end,
+			},
 			-- Comportement
 			delete_to_trash = true, -- Sécurité : corbeille au lieu de suppression définitive
 			skip_confirm_for_simple_edits = false, -- Pas de confirmation pour renommages simples

@@ -95,4 +95,16 @@ return {
 			})
 		end,
 	},
+	-- 4. Le lien Mason <-> None-ls (formatters/linters)
+	{
+		"jay-babu/mason-null-ls.nvim",
+		dependencies = {
+			"mason-org/mason.nvim",
+			"nvimtools/none-ls.nvim",
+		},
+		opts = {
+			ensure_installed = { "stylua", "black", "isort", "ruff", "prettier", "eslint_d" },
+			automatic_installation = true,
+		},
+	},
 }
