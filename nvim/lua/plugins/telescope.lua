@@ -58,6 +58,29 @@ return {
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
+
+			-- =========================================================
+			-- RECHERCHE DE TÂCHES MARKDOWN
+			-- <leader>tt : tâches en cours (- [ ])
+			-- <leader>tc : tâches complétées (- [x])
+			-- =========================================================
+
+			local function search_tasks(done)
+				-- local builtin = require("telescope.builtin")
+				builtin.grep_string({
+					prompt_title = done and "Tâches complétées" or "Tâches en cours",
+					search = done and "- [x]" or "- [ ]", -- Sans regex, texte littéral
+					use_regex = false,
+					glob_pattern = "*.md",
+				})
+			end
+			vim.keymap.set("n", "<leader>tt", function()
+				search_tasks(false)
+			end, { desc = "Lister tâches en cours" })
+
+			vim.keymap.set("n", "<leader>tc", function()
+				search_tasks(true)
+			end, { desc = "Lister tâches complétées" })
 		end,
 	},
 	{

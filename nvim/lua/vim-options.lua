@@ -46,10 +46,10 @@ vim.diagnostic.config({
 -- SPELL : spell checking
 -- Désactive globalement mais voir autocommand dans vim-autocommand.lua
 vim.opt.spell = false
--- vim.opt.spellfile = vim.fn.expand("~/.dotfiles/nvim/spell/fr.utf-8.add")
--- vim.opt.runtimepath:prepend(vim.fn.expand("~/.dotfiles/nvim"))
 
--- vim.env.PATH = vim.env.PATH .. ":" .. vim.fn.expand("~/.local/share/nvim/mason/bin")
+-- AFFICHE LE CHEMIN DANS LA WINBAR EN HAUT A DROITE
+vim.opt.winbar = "%=%{%fnamemodify(expand('%:p:h'), ':~')%}  "
+-- Le %= pousse le contenu vers la droite.
 
 -- FOLD CONFIG pour treesitter (ouvrir et fermer les blocs de code ou markdown)
 vim.opt.foldmethod = "expr"
@@ -58,3 +58,16 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99 -- tout ouvert par défaut
 vim.opt.foldcolumn = "1" -- Affiche une petite colonne à gauche pour visualiser les folds
+
+-- OPTIONS POUR SKITTY NOTES
+if vim.g.neovim_mode == "skitty" then
+	vim.opt.number = false
+	vim.opt.relativenumber = false
+	vim.opt.signcolumn = "no"
+	vim.opt.laststatus = 0 -- Cache complètement la statusline
+	vim.opt.foldcolumn = "0"
+	vim.opt.conceallevel = 2
+	-- Affiche le chemin relatif (~/brain/...) ET le nom du fichier
+	-- %f : chemin relatif, %m : indicateur de modification [+]
+	vim.opt.winbar = "%=%{%fnamemodify(expand('%:p'), ':~')%} %m "
+end

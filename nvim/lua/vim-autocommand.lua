@@ -14,6 +14,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#313244" })
 		vim.opt_local.textwidth = 80 -- saut de ligne auto à 80 caractères
+		-- 't' : Auto-wrap pendant la frappe
+		-- 'c' : Auto-wrap des commentaires
+		-- 'q' : Permet le formatage avec gq/gw
+		vim.opt_local.formatoptions = "tcq"
+
+		-- On vide l'expression pour être sûr que gw/gq restent internes
+		vim.opt_local.formatexpr = ""
 	end,
 })
 
