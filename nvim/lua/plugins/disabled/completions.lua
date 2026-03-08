@@ -1,9 +1,12 @@
 return {
 	{
 		"hrsh7th/cmp-nvim-lsp",
+		enabled = false,
 	},
 	{
 		"L3MON4D3/LuaSnip",
+		enabled = true,
+
 		dependencies = {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
@@ -14,6 +17,8 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		enabled = false,
+
 		config = function()
 			-- Set up nvim-cmp.
 			local cmp = require("cmp")

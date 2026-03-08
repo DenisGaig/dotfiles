@@ -34,8 +34,8 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			-- vim.lsp.enable("lua_ls") -- vim.les.enable est fait automatiquement maintenant
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			-- Si tu as besoin de paramètres spécifiques (ex: pour Lua)
 			vim.lsp.config("lua_ls", {

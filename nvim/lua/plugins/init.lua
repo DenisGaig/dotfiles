@@ -22,7 +22,7 @@ return {
 	-- 4. LSP & COMPLÉTION (dans cet ordre)
 	require("plugins.lsp-config"),
 	require("plugins.none-ls"),
-	require("plugins.completions"),
+	-- require("lua.plugins.disabled.completions"),
 
 	-- 5. IA & OUTILS EXTERNES
 	require("plugins.codeium"),

@@ -3,6 +3,7 @@ return {
 	"L3MON4D3/LuaSnip",
 	dependencies = {
 		"benfowler/telescope-luasnip.nvim",
+		"rafamadriz/friendly-snippets", -- snippet de blink-cmp
 	},
 	config = function()
 		local luasnip = require("luasnip")
@@ -18,20 +19,8 @@ return {
 		-- Enregistre l'extension telescope-luasnip
 		require("telescope").load_extension("luasnip")
 
-		-- Navigation entre les champs du snippet avec Tab / Shift-Tab
-		vim.keymap.set({ "i", "s" }, "<Tab>", function()
-			if luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
-			end
-		end, { silent = true })
-
-		vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-			if luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			end
-		end, { silent = true })
+		-- Blink gère Tab/S-Tab pour la navigation dans les snippets
+		-- On garde uniquement le picker Telescope
 
 		-- ; en mode normal → picker Telescope des snippets du filetype courant
 		vim.keymap.set("n", ";", "<cmd>Telescope luasnip<cr>", { desc = "Snippets" })
