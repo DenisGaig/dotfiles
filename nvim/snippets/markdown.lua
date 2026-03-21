@@ -6,6 +6,13 @@ local i = ls.insert_node
 
 return {
 	s("daily", {
+		-- Emotions et besoins
+		t({ "", "", "" }),
+		t("- 😢 Emotions: "),
+		t({ "", "" }),
+		t("- 💙 Besoins: "),
+		t({ "", "", "" }),
+
 		-- Apprentissages
 		t("### 🧠 Apprentissages"),
 		t({ "", "", "" }),
@@ -17,21 +24,18 @@ return {
 		t({ "", "", "" }),
 		t("- [ ] "),
 		i(2, ""),
-		t({ "", "" }),
-		t("- [ ] "),
-		i(3, ""),
 		t({ "", "", "" }),
 
 		-- Idées
 		t("### 💡 Idées"),
 		t({ "", "", "" }),
-		i(4, "Idées, réflexions, liens utiles..."),
+		i(3, "Idées, réflexions, liens utiles..."),
 		t({ "", "", "" }),
 
 		-- Journal / humeur
 		t("### 🌡️ Journal de bord"),
 		t({ "", "", "" }),
-		i(0, "Humeur, ressenti, ce qui m'a marqué..."),
+		i(4, "Humeur, ressenti, ce qui m'a marqué..."),
 		t({ "", "", "" }),
 	}),
 }

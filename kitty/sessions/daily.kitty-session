@@ -2,4 +2,4 @@ new_tab daily
 # kitty_session_cd_line
 cd /home/denis/brain/daily/2026/03-mars
 # kitty_session_launch_line
-launch --title "2026-03-08-dimanche" fish -i -c 'nvim +cd\ "/home/denis/brain/daily" +norm\ G "/home/denis/brain/daily/2026/03-mars/2026-03-08-dimanche.md"'
+launch --title "2026-03-21-samedi" fish -i -c 'nvim +cd\ "/home/denis/brain/daily" +norm\ G "/home/denis/brain/daily/2026/03-mars/2026-03-21-samedi.md"'

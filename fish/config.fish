@@ -11,6 +11,7 @@ alias ls="eza --icons=auto"
 alias zed='zeditor'
 alias code='code --enable-features=UseOzonePlatform --ozone-platform=wayland'
 alias ks="~/.dotfiles/kitty/scripts/ks.sh"
+alias wall='~/.dotfiles/hypr/scripts/random-wallpaper.sh'
 
 # neofetch pour afficher des infos sur le terminal
 # if not string match -q '*MX*' (cat /etc/os-release 2>/dev/null)

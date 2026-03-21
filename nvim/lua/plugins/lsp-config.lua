@@ -75,6 +75,16 @@ return {
 
 			vim.lsp.config("cssls", {
 				capabilities = capabilities,
+				settings = {
+					css = {
+						validate = true,
+						lint = {
+							-- C'est ici que la magie opère pour Waybar/GTK-CSS
+							unknownAtRules = "ignore",
+							invalidPropertyValue = "ignore",
+						},
+					},
+				},
 			})
 
 			-- OPTIONNEL: Seulement si tu veux personnaliser les keybindings

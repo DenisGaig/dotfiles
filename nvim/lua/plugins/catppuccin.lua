@@ -19,9 +19,9 @@ return {
 				--   gitsigns = true,
 				--   nvimtree = true,
 				--   treesitter = true,
-				--   telescope = {
-				--     enabled = true,
-				--   },
+				-- telescope = {
+				-- 	enabled = true,
+				-- },
 			},
 		})
 		vim.cmd.colorscheme("catppuccin")

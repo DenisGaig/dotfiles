@@ -28,6 +28,7 @@ require("lazy").setup("plugins")
 require("rofidex")
 require("dashboard")
 require("config.keymaps")
+require("emotions")
 
 -- DIAGNOSTICS
 vim.diagnostic.config({
@@ -44,6 +45,13 @@ for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+-- FILETYPE DETECTION
+vim.filetype.add({
+	extension = {
+		tcss = "css", -- ou créer un filetype custom "tcss"
+	},
+})
 
 -- vim.api.nvim_create_autocmd("VimEnter", {
 -- 	callback = function()

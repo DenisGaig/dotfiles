@@ -1,0 +1,3 @@
+new_tab imgtools
+cd /data/projets/imgtools/
+launch nvim

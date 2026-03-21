@@ -65,7 +65,7 @@ return {
 		local python = Terminal:new({
 			cmd = "python",
 			hidden = true,
-			direction = "float",
+			-- direction = "float",
 		})
 
 		function _PYTHON_TOGGLE()
@@ -76,10 +76,22 @@ return {
 		function _RUN_CURRENT_FILE()
 			local file_ext = vim.fn.expand("%:e")
 			local file_name = vim.fn.expand("%:t")
+			local file_path = vim.fn.expand("%:p:h") -- Récupère le chemin du dossier courant du fichier
 			local cmd = ""
 
+			-- Détection du Virtual Environment (.venv)
+			local venv_path = file_path .. "/.venv"
+			local activate_cmd = ""
+
+			-- Si .venv existe, on crée la commande d'activation pour Fish
+			if vim.fn.isdirectory(venv_path) == 1 then
+				-- On utilise ';' pour chaîner les commandes (séparateur shell)
+				-- On source l'activate, puis on lance la commande
+				activate_cmd = "source " .. venv_path .. "/bin/activate.fish; "
+			end
+
 			if file_ext == "py" then
-				cmd = "python " .. file_name
+				cmd = activate_cmd .. "python " .. file_name
 			elseif file_ext == "js" then
 				cmd = "node " .. file_name
 			elseif file_ext == "sh" then
@@ -106,6 +118,7 @@ return {
 
 		-- Terminal rapide et exécution
 		vim.keymap.set("n", "<F5>", "<cmd>lua _RUN_CURRENT_FILE()<CR>", { desc = "Exécuter fichier", noremap = true, silent = true })
-		vim.keymap.set("n", "<F12>", ":ToggleTerm direction=float<CR>", { desc = "Terminal flottant", noremap = true, silent = true })
+		vim.keymap.set("n", "<F12>", ":ToggleTerm direction=horizontal<CR>", { desc = "Terminal flottant", noremap = true, silent = true })
+		-- vim.keymap.set("n", "<F12>", ":ToggleTerm direction=float<CR>", { desc = "Terminal flottant", noremap = true, silent = true })
 	end,
 }

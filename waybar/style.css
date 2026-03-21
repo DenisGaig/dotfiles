@@ -1,79 +1,30 @@
+/* 1. L'IMPORTATION CRUCIALE AU DÉBUT */
+@import "/home/denis/.cache/wal/colors-waybar.css";
+
 * {
-  font-family: "FiraCodeNerdFont"; 
+  font-family: "FiraCodeNerdFont";
   font-weight: bold;
   font-size: 13px;
-  /* color: #dcdfe1; */
   margin: 0px;
   padding: 0px;
   border: none;
 }
 
-/*  Waybar */
+/* Waybar */
 #waybar {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   box-shadow: none;
 }
 
-
+/* Utilisation de @background pour tes capsules */
 #workspaces,
 #window,
-#tray{
-  /*background-color: rgba(29,31,46, 0.95);*/
-  background-color: rgba(15,27,53,0.9);
-  padding: 4px 6px; 
-  margin-top: 6px; 
-  margin-left: 6px; 
-  margin-right: 6px; 
-  border-radius: 15px;
-  border-width: 0px;
-}
-
-#clock{
-  background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; 
-  margin-right: 6px;
-  /*margin-bottom: 4px;*/
-  padding: 4px 2px; 
-  border-radius: 0 10px 10px 0;
-  border-width: 0px;
-}
-
-#custom-power{
-  background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; 
-  margin-right: 6px;
-  /*margin-bottom: 4px;*/
-  padding: 4px 2px; 
-  border-radius: 10px;
-  border-width: 0px;
-}
-
-#custom-media {
-    margin: 0px 2px 0px 2px;
-    padding: 4px 8px 4px 8px;
-}
-
-#custom-media {
-    margin-top: 6px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 400;
-    color: #1DB954;
-    background-color: #1e1d0d;
-}
-
+#tray,
+#clock,
+#custom-power,
 #pulseaudio,
-#custom-lock{
-  background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; 
-  margin-left: 6px;
-  /*margin-bottom: 4px;*/
-  padding: 4px 2px; 
-  border-radius: 10px 0 0 10px;
-  border-width: 0px;
-}
-
+#custom-lock,
 #custom-reboot,
 #bluetooth,
 #battery,
@@ -81,24 +32,45 @@
 #backlight,
 #custom-temperature,
 #memory,
-#cpu{
-  background-color: rgba(15,27,53,0.9);
-  margin-top: 6px; 
-  /*margin-bottom: 4px;*/
-  padding: 4px 2px; 
-  border-width: 0px;
+#cpu {
+  opacity: 0.9;
+  background-color: @background;
+  color: @foreground;
+  margin-top: 6px;
 }
 
-#custpm-temperature.critical,
-#pulseaudio.muted {
-  color: #FF0000;
-  padding-top: 0;
+#workspaces,
+#window,
+#tray {
+  padding: 4px 6px;
+  margin-left: 6px;
+  margin-right: 6px;
+  border-radius: 15px;
 }
 
+#clock {
+  margin-right: 6px;
+  padding: 4px 10px;
+  border-radius: 0 10px 10px 0;
+}
 
+#pulseaudio,
+#custom-lock {
+  margin-left: 6px;
+  padding: 4px 2px;
+  border-radius: 10px 0 0 10px;
+}
+
+/* Boutons de la barre de puissance et autres modules */
+#custom-power,
+#custom-media {
+  border-radius: 10px;
+  padding: 4px 8px;
+}
+
+/* --- HOVER DYNAMIQUE --- */
 #bluetooth:hover,
 #network:hover,
-/*#tray:hover,*/
 #backlight:hover,
 #battery:hover,
 #pulseaudio:hover,
@@ -109,86 +81,72 @@
 #custom-lock:hover,
 #custom-reboot:hover,
 #custom-power:hover,
-/*#workspaces:hover,*/
 #window:hover {
   background-color: rgba(70, 75, 90, 0.9);
 }
 
-/* --- STYLE GLOBAL DES BOUTONS --- */
+/* --- WORKSPACES --- */
 #workspaces button {
-    background: transparent;
-    border: none;
-    color: #dcdfe1; /* Important : Couleur par défaut gris pour les workspaces vides/inactifs */
-    padding: 2px 8px;
-    margin: 0 2px;
-    font-weight: bold;
-    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background: transparent;
+  border: none;
+  color: @foreground; /* Couleur adaptative */
+  padding: 2px 8px;
+  margin: 0 2px;
+  /* transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */
+  transition:
+    background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* --- État AU DESSUS (Hover) --- */
 #workspaces button:hover {
-    background-color: rgba(97, 175, 239, 0.2);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(97, 175, 239, 0.4);
-  }
+  /* background-color: rgba(97, 175, 239, 0.2); */
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
 
-/* --- État ACTIF (Le fond bleu) --- */
+/* --- ETAT ACTIF --- */
 #workspaces button.active {
-    background-color: rgba(36,48,78,0.9);
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(36, 48, 78, 0.4);
+  /* background-color: @color2; */
+  background-color: rgba(255, 255, 255, 0.2);
+  color: @color2;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
-/* --- COLORATION PAR NUMÉRO (Solution infaillible) --- */
-/* On utilise :nth-child(n) qui cible le 1er bouton, le 2ème, etc. */
-
-/* WS 1 (Le 1er bouton) */
+/* --- COLORATION PAR NUMÉRO (Version Pywal) --- */
+/* On remplace tes codes fixes par la palette générée par l'image */
 #workspaces button:nth-child(1) {
-    color: #fab387; 
+  color: @color1;
 }
-
-/* WS 2 (Le 2ème bouton) */
 #workspaces button:nth-child(2) {
-    color: #a6e3a1; 
+  color: @color2;
 }
-
-/* WS 3 (Le 3ème bouton) */
 #workspaces button:nth-child(3) {
-    color: #89b4fa; 
+  color: @color3;
 }
-
-/* WS 4 (Le 4ème bouton) */
 #workspaces button:nth-child(4) {
-    color: #cdd6f4; 
+  color: @color4;
 }
-
-/* WS 5 (Le 5ème bouton) */
 #workspaces button:nth-child(5) {
-    color: #cba6f7; 
+  color: @color5;
 }
-
-/* WS 6 (Le 6ème bouton) */
 #workspaces button:nth-child(6) {
-    color: #b4befe; 
+  color: @color6;
 }
-
-/* WS 7 (Le 7ème bouton) */
 #workspaces button:nth-child(7) {
-    color: #f38ba8; 
+  color: @color7;
 }
-
-/* WS 8 (Le 8ème bouton) */
 #workspaces button:nth-child(8) {
-    color: #a6e3a1; 
+  color: @color8;
 }
-
-/* WS 9 (Le 9ème bouton) */
 #workspaces button:nth-child(9) {
-    color: #f9e2af; 
+  color: @color9;
 }
 
 #window {
   font-weight: 500;
   font-style: italic;
+  color: @color3;
 }

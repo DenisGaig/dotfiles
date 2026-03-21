@@ -32,6 +32,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- Supprime les espaces en fin de ligne
 vim.api.nvim_create_autocmd("BufWritePre", {
 	desc = "Supprime les espaces en fin de ligne au moment de la sauvegarde",
 	pattern = "*",
@@ -42,6 +43,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
+-- Retourne à la dernière position du curseur
 vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "Retourne à la dernière position du curseur lors de l'ouverture d'un fichier",
 	callback = function()

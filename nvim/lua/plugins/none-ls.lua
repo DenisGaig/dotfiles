@@ -13,10 +13,13 @@ return {
 				null_ls.builtins.formatting.black,
 
 				-- null_ls.builtins.diagnostics.ruff,
-        -- null_ls.builtins.diagnostics.mypy,
+				-- null_ls.builtins.diagnostics.mypy,
 
 				-- TypeScript/JavaScript/Astro/HTML/CSS/JSON
-				null_ls.builtins.formatting.prettier,
+				null_ls.builtins.formatting.prettier.with({
+					filetypes = { "css", "tcss" },
+					extra_args = { "--parser", "css" },
+				}),
 
 				-- Linter JavaScript/TypeScript/Astro
 				-- null_ls.builtins.diagnostics.eslint_d,
