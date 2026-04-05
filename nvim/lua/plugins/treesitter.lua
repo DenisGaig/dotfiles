@@ -2,8 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	config = function()
-		local config = require("nvim-treesitter")
-		config.setup({
+		require("nvim-treesitter").setup({
 			ensure_installed = { "lua", "astro", "javascript", "python", "vim", "typescript", "markdown", "markdown_inline", "yaml", "mdx" },
 			-- sync_install = false,
 			auto_install = true,

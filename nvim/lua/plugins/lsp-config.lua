@@ -117,7 +117,7 @@ return {
 					local opts = { buffer = event.buf }
 					local builtin = require("telescope.builtin")
 
-					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts, { desc = "Find definitions" })
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = event.buf, desc = "Find definitions" })
 					vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts, { desc = "Find code actions" })
 
 					-- Raccourci pour les keybindings de telescope
