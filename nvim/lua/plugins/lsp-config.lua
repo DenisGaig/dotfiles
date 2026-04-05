@@ -1,14 +1,22 @@
+-- Setup des LSP (Language Server Protocol) qui permettent de faire de l'auto-completion,
+-- de l'auto-formatage, de l'auto-diagnostics, etc.
+
 return {
 	-- 1. Le gestionnaire (Mason)
 	{
 		"mason-org/mason.nvim",
-		opts = {},
+		opts = {
+			ensure_installed = {
+				"markdown-oxide", -- ← nom avec tirets pour Mason
+				"astro-language-server",
+			},
+		},
 	},
 	-- 2. Le lien automatique (Mason-LspConfig)
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			-- Liste des serveurs que tu veux installer automatiquement
+			-- Liste des serveurs que je veux installer automatiquement
 			ensure_installed = {
 				-- LSP server
 				"lua_ls",
@@ -16,6 +24,7 @@ return {
 				"basedpyright",
 				"html",
 				"cssls",
+				"astro",
 				-- Formatters (pour none-ls)
 				--"stylua", "black", "isort", "prettier"
 			},
@@ -85,6 +94,21 @@ return {
 						},
 					},
 				},
+			})
+
+			vim.lsp.config("astro", {
+				capabilities = capabilities,
+			})
+
+			-- markdown-oxide: LSP pour les notes Obsidian/markdown
+			vim.lsp.config("markdown_oxide", {
+				capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require("blink.cmp").get_lsp_capabilities(), {
+					workspace = {
+						didChangeWatchedFiles = {
+							dynamicRegistration = true,
+						},
+					},
+				}),
 			})
 
 			-- OPTIONNEL: Seulement si tu veux personnaliser les keybindings

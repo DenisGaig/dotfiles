@@ -13,7 +13,7 @@ generate_thumbnail() {
 
   # Only regenerate if thumbnail doesn't exist or source is newer
   if [[ ! -f "$dest" ]] || [[ "$source" -nt "$dest" ]]; then
-    convert "$source" -resize 300x200^ -gravity center -extent 300x200 "$dest" 2>/dev/null
+    magick "$source" -resize 300x200^ -gravity center -extent 300x200 "$dest" 2>/dev/null
   fi
 }
 

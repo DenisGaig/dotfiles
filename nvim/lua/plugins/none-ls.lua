@@ -17,8 +17,11 @@ return {
 
 				-- TypeScript/JavaScript/Astro/HTML/CSS/JSON
 				null_ls.builtins.formatting.prettier.with({
-					filetypes = { "css", "tcss" },
-					extra_args = { "--parser", "css" },
+					filetypes = { "css", "tcss", "javascript", "typescript", "javascriptreact", "typescriptreact", "astro", "html", "json", "yaml", "markdown", "mdx" },
+					-- extra_args = { "--parser", "css" },
+					-- IMPORTANT : On ne force PAS de parser ici pour laisser .prettierrc décider
+					-- On force null-ls à utiliser le binaire du projet s'il existe
+					prefer_local = "node_modules/.bin",
 				}),
 
 				-- Linter JavaScript/TypeScript/Astro

@@ -1,5 +1,6 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
+	ft = { "markdown", "mdx" },
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter", -- Requis pour la structure
 		"nvim-tree/nvim-web-devicons", -- Optionnel : pour les jolies icônes
@@ -7,6 +8,12 @@ return {
 	---@module 'render-markdown'
 	---@type render_markdown.Config
 	opts = {
+		file_types = { "markdown", "mdx" },
+		yaml = {
+			enabled = false,
+		},
+		html = { enabled = false },
+		latex = { enabled = false },
 
 		-- Personnalisation pour ton projet de snippets
 		heading = {

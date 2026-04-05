@@ -50,8 +50,11 @@ end
 vim.filetype.add({
 	extension = {
 		tcss = "css", -- ou créer un filetype custom "tcss"
+		mdx = "mdx",
 	},
 })
+
+vim.treesitter.language.register("markdown", "mdx")
 
 -- vim.api.nvim_create_autocmd("VimEnter", {
 -- 	callback = function()
