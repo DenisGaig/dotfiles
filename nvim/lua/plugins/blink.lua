@@ -1,10 +1,11 @@
 return {
 	"saghen/blink.cmp",
 	-- On utilise "build" pour compiler localement avec ton cargo
-	build = "cargo build --release",
+	-- build = "cargo build --release",
 	-- Pas besoin de version spécifique si on compile depuis la source
 	-- mais on peut laisser la version stable par sécurité
-	version = "v0.*",
+	version = "v1.*",
+
 	dependencies = {
 		"Exafunction/codeium.nvim",
 		"tpope/vim-dadbod",
@@ -84,6 +85,7 @@ return {
 			list = {
 				selection = {
 					preselect = true,
+					auto_insert = true,
 				},
 			},
 		},

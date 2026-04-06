@@ -43,10 +43,43 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			-- 0. Configuration de l'auto-completion avec blink
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			-- Si tu as besoin de paramètres spécifiques (ex: pour Lua)
+			-- 1. Configuration des diagnostics avec les icones
+			local icons = require("icons")
+
+			-- On définit les signes pour l'UI globale
+			local levels = {
+				Error = icons.diagnostics.ERROR,
+				Warn = icons.diagnostics.WARN,
+				Hint = icons.diagnostics.HINT,
+				Info = icons.diagnostics.INFO,
+			}
+
+			for type, icon in pairs(levels) do
+				local name = "DiagnosticSign" .. type
+				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+			end
+
+			-- On configure le moteur de diagnostics
+			vim.diagnostic.config({
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = icons.diagnostics.ERROR,
+						[vim.diagnostic.severity.WARN] = icons.diagnostics.WARN,
+						[vim.diagnostic.severity.HINT] = icons.diagnostics.HINT,
+						[vim.diagnostic.severity.INFO] = icons.diagnostics.INFO,
+					},
+				},
+				virtual_text = { prefix = "●" },
+				update_in_insert = false,
+				severity_sort = true,
+			})
+
+			-- 2. Configuration des serveurs
+			-- Si j'ai besoin de paramètres spécifiques (ex: pour Lua)
 			vim.lsp.config("lua_ls", {
 				capabilities = capabilities,
 				settings = {
@@ -111,7 +144,7 @@ return {
 				}),
 			})
 
-			-- OPTIONNEL: Seulement si tu veux personnaliser les keybindings
+			-- OPTIONNEL: Seulement si je veux personnaliser les keybindings
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(event)
 					local opts = { buffer = event.buf }

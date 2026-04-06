@@ -30,22 +30,6 @@ require("dashboard")
 require("config.keymaps")
 require("emotions")
 
--- DIAGNOSTICS
-vim.diagnostic.config({
-	virtual_text = true,
-	signs = true,
-	update_in_insert = false,
-	underline = true,
-	severity_sort = true,
-})
-
--- Icônes de diagnostic
-local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 -- FILETYPE DETECTION
 vim.filetype.add({
 	extension = {
@@ -55,12 +39,3 @@ vim.filetype.add({
 })
 
 vim.treesitter.language.register("markdown", "mdx")
-
--- vim.api.nvim_create_autocmd("VimEnter", {
--- 	callback = function()
--- 		vim.defer_fn(function()
--- 			-- Force Neovim à relire les dimensions du terminal
--- 			vim.cmd("mode")
--- 		end, 500)
--- 	end,
--- })
