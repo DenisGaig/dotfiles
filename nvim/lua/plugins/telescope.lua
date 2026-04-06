@@ -3,6 +3,7 @@ return {
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			-- fzf native en C meilleur que celui de lua
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		config = function()
@@ -21,7 +22,9 @@ return {
 			})
 			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("ui-select")
+			require("telescope").load_extension("yank_history")
 
+			-- 🔑 Liste des raccourcis
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>sc", builtin.commands, { desc = "[S]earch [C]ommands" })
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
@@ -36,7 +39,9 @@ return {
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
-			-- Override default behavior and theme when searching
+			vim.keymap.set("n", "<leader>sy", "<cmd>Telescope yank_history<cr>", { desc = "[S]earch [Y]ank history" })
+
+			-- 🔑 Ouvre un picker sur le contenu du buffer actuel pour effectuer une recherche
 			vim.keymap.set("n", "<leader>/", function()
 				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
 				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
@@ -45,7 +50,7 @@ return {
 				}))
 			end, { desc = "[/] Fuzzily search in current buffer" })
 
-			-- It's also possible to pass additional configuration options.
+			-- 🔑 Recherche dans les fichiers ouverts
 			--  See `:help telescope.builtin.live_grep()` for information about particular keys
 			vim.keymap.set("n", "<leader>s/", function()
 				builtin.live_grep({
@@ -54,13 +59,13 @@ return {
 				})
 			end, { desc = "[S]earch [/] in Open Files" })
 
-			-- Shortcut for searching your Neovim configuration files
+			-- 🔑 Recherche des fichiers de configuration de Neovim
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
 
 			-- =========================================================
-			-- RECHERCHE DE TÂCHES MARKDOWN
+			-- 🔑 RECHERCHE DE TÂCHES MARKDOWN
 			-- <leader>tt : tâches en cours (- [ ])
 			-- <leader>tc : tâches complétées (- [x])
 			-- =========================================================
@@ -84,6 +89,7 @@ return {
 		end,
 	},
 	{
+		-- Plugin qui permet à Telescope de remplacer les menus natifs de Neovim par une interface Telescope
 		"nvim-telescope/telescope-ui-select.nvim",
 	},
 }

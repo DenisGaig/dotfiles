@@ -1,5 +1,4 @@
 local map = vim.keymap.set
-
 -- NAVIGATION ENTRE SPLITS
 map("n", "<C-h>", "<C-w>h", { desc = "Aller dans la split de gauche" })
 map("n", "<C-l>", "<C-w>l", { desc = "Aller dans la split de droite" })
@@ -18,7 +17,7 @@ map("n", "N", "Nzz", { desc = "Resultat precedent centré" }) -- résultat préc
 
 -- SPLITTING & RESIZING
 map("n", "<leader>sv", ":vsplit<CR>", { desc = "Split window vertically" })
-map("n", "<leader>sh", ":split<CR>", { desc = "Split window horizontally" })
+map("n", "<leader>h", ":split<CR>", { desc = "Split window horizontally" })
 map("n", "<M-,>", "<C-w>5<", { desc = "Resize window to the left" })
 map("n", "<M-;>", "<C-w>5>", { desc = "Resize window to the right" })
 map("n", "<M-t>", "<C-w>+", { desc = "Resize window to the top" })

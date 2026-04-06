@@ -117,6 +117,20 @@ return {
 
 			vim.lsp.config("cssls", {
 				capabilities = capabilities,
+
+				on_attach = function(client, bufnr)
+					-- 1. Activation de la coloration native (les petits carrés)
+					if client.supports_method("textDocument/documentColor") then
+						vim.lsp.document_color.enable(true, { buf = bufnr }, { style = "virtual" })
+
+						-- 2. Ajout du raccourci 'grc' pour changer le format (Hex, RGB, etc.)
+						vim.keymap.set("n", "grc", function()
+							-- On utilise le nom de fonction de la v0.12
+							vim.lsp.document_color.color_presentation()
+						end, { buffer = bufnr, desc = "LSP: Color Presentation" })
+					end
+				end,
+
 				settings = {
 					css = {
 						validate = true,

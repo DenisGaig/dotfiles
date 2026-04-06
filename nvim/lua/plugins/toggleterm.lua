@@ -112,7 +112,7 @@ return {
 		-- ========== KEYMAPS ==========
 
 		-- Terminaux dédiés ponctuels
-		vim.keymap.set("n", "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "LazyGit", noremap = true, silent = true })
+		-- vim.keymap.set("n", "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "LazyGit", noremap = true, silent = true })
 		vim.keymap.set("n", "<leader>tn", "<cmd>lua _NODE_TOGGLE()<CR>", { desc = "Node REPL", noremap = true, silent = true })
 		vim.keymap.set("n", "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<CR>", { desc = "Python REPL", noremap = true, silent = true })
 

@@ -32,7 +32,7 @@ return {
 	-- require("plugins.lazygit"),
 
 	-- 7. CONCENTRATION & UX
-	require("plugins.colorizer"),
+	-- require("lua.plugins.disabled.colorizer"),
 	-- require("todo-comments"),
 	-- require("plugins.true-zen"),
 }
