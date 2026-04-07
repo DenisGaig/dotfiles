@@ -40,4 +40,5 @@ vim.filetype.add({
 
 vim.treesitter.language.register("markdown", "mdx")
 
-
+-- OPTIONS: Line de commande cachée sans action
+vim.opt.cmdheight = 0

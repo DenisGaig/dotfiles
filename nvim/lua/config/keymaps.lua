@@ -1,5 +1,5 @@
 -- ========================================================
--- Open Daily Note
+-- 🔑 Open Daily Note
 -- ========================================================
 
 vim.keymap.set("n", "<leader>dn", function()
@@ -94,7 +94,7 @@ local function update_markdown_toc(heading2, heading3)
 	vim.cmd("loadview")
 end
 
--- Keymaps pour déclencher la génération de TOC
+-- 🔑 Keymaps pour déclencher la génération de TOC
 -- <leader>ctt : TOC en anglais
 vim.keymap.set("n", "<leader>ctt", function()
 	update_markdown_toc("## Contents", "### Table of contents")
@@ -104,7 +104,7 @@ end, { desc = "Insert/update Markdown TOC (English)" })
 -- MARKDOWN TASKS - inspiré de Linkarzu
 -- ============================================================
 
--- Alt+l : créer un bullet task sur la ligne courante (mode normal et insert)
+-- 🔑 Alt+l : créer un bullet task sur la ligne courante (mode normal et insert)
 vim.keymap.set("n", "<M-l>", function()
 	local line = vim.api.nvim_get_current_line()
 	if line:match("^%s*$") then
@@ -122,7 +122,7 @@ vim.keymap.set("i", "<M-l>", function()
 end, { desc = "Créer un bullet task (insert)" })
 
 -- ============================================================
--- Alt+x : toggle task → envoie dans ## Completed tasks avec timestamp
+-- 🔑 Alt+x : toggle task → envoie dans ## Completed tasks avec timestamp
 -- ============================================================
 vim.keymap.set("n", "<M-x>", function()
 	local label_done = "done:"

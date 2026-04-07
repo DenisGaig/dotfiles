@@ -25,6 +25,8 @@ return {
 				"html",
 				"cssls",
 				"astro",
+				"jsonls",
+				"yamlls",
 				-- Formatters (pour none-ls)
 				--"stylua", "black", "isort", "prettier"
 			},
@@ -156,6 +158,31 @@ return {
 						},
 					},
 				}),
+			})
+
+			-- JSON Configuration
+			vim.lsp.config("jsonls", {
+				capabilities = capabilities,
+				settings = {
+					json = {
+						schemas = require("schemastore").json.schemas(),
+						validate = { enable = true },
+					},
+				},
+			})
+
+			-- YAML Configuration
+			vim.lsp.config("yamlls", {
+				capabilities = capabilities,
+				settings = {
+					yaml = {
+						schemaStore = {
+							enable = false,
+							url = "",
+						},
+						schemas = require("schemastore").yaml.schemas(),
+					},
+				},
 			})
 
 			-- OPTIONNEL: Seulement si je veux personnaliser les keybindings

@@ -13,13 +13,14 @@ end
 return {
 	s("daily", {
 		-- Emotions et besoins
+		t({ "", "", "" }),
 		t("- 😢 Emotions: "),
 		t({ "", "" }),
 		t("- 💙 Besoins: "),
 		t({ "", "", "" }),
 
 		-- Apprentissages
-		t("### 🧠 Apprentissages"),
+		t("### 🧠 Apprentissages / Réalisations"),
 		t({ "", "", "" }),
 		i(1, "Ce que j'ai découvert ou pratiqué..."),
 		t({ "", "", "" }),
@@ -32,7 +33,7 @@ return {
 		t({ "", "", "" }),
 
 		-- Idées
-		t("### 💡 Idées"),
+		t("### 💡 Idées / Réflexions "),
 		t({ "", "", "" }),
 		i(3, "Idées, réflexions, liens utiles..."),
 		t({ "", "", "" }),

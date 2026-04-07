@@ -8,24 +8,28 @@ return {
 	config = function()
 		require("noice").setup({
 			presets = {
+				-- command_palette = true,
+				long_message_to_split = true,
 				bottom_search = false,
 				lsp_doc_border = true,
 			},
 			messages = {
-				enabled = true,
+				enabled = false,
 				view = "mini", -- style mini discret
 				view_error = "notify",
 				view_warn = "notify",
 			},
 			notify = {
-				enabled = true,
-				-- view = "mini",
+				enabled = false,
 			},
 			lsp = {
 				message = {
-					enabled = true,
+					enabled = false,
 					view = "notify",
 				},
+				progress = { enabled = false },
+				hover = { enabled = false },
+				signature = { enabled = false },
 			},
 			views = {
 				cmdline_popup = {
