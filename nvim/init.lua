@@ -20,6 +20,9 @@ vim.opt.rtp:prepend(lazypath)
 -- NEOVIM MODE pour les skitty-notes
 vim.g.neovim_mode = vim.env.NEOVIM_MODE or "default"
 
+-- CHARGE LE THEME
+vim.cmd.colorscheme("miss-dracula")
+
 -- PLUGINS
 require("vim-options")
 require("vim-keymaps")

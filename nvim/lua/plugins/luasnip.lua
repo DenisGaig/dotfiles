@@ -7,7 +7,7 @@ return {
 	},
 	config = function()
 		local luasnip = require("luasnip")
-
+		luasnip.filetype_extend("mdx", { "markdown" })
 		-- Charge les snippets friendly-snippets (VSCode style)
 		require("luasnip.loaders.from_vscode").lazy_load()
 

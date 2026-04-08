@@ -1,7 +1,7 @@
 -- lua/plugins/init.lua
 return {
 	-- 1. APPARENCE & THÈME (charger tôt pour éviter les flashes)
-	require("plugins.catppuccin"),
+	-- require("plugins.catppuccin"),
 	require("plugins.lualine"),
 	--  require("plugins.illuminate"),
 	--  require("plugins.alpha"),
