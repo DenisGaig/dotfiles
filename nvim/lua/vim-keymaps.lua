@@ -34,3 +34,7 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- OPEN DIAGNOSTIC LIST
 map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+
+-- TERMINAL
+map("t", "<esc>", [[<C-\><C-n>]], { desc = "Mode normal terminal" })
+map("n", "<F12>", "<cmd>botright split | term<cr>", { desc = "Terminal horizontal bas" })

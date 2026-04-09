@@ -17,6 +17,7 @@ local colors = {
 	pink = "#E48CC1",
 	fuchsia = "#E11299",
 	green = "#87E58E",
+	lilac = "#6D5978",
 	cyan = "#A7DFEF",
 	yellow = "#E8EDA2",
 	orange = "#FFBFA9",
@@ -35,26 +36,126 @@ local colors = {
 	visual = "#3E4452",
 }
 
+-- Terminal colors.
+vim.g.terminal_color_0 = colors.transparent_black
+vim.g.terminal_color_1 = colors.red
+vim.g.terminal_color_2 = colors.green
+vim.g.terminal_color_3 = colors.yellow
+vim.g.terminal_color_4 = colors.purple
+vim.g.terminal_color_5 = colors.pink
+vim.g.terminal_color_6 = colors.cyan
+vim.g.terminal_color_7 = colors.white
+vim.g.terminal_color_8 = colors.selection
+vim.g.terminal_color_9 = colors.bright_red
+vim.g.terminal_color_10 = colors.bright_green
+vim.g.terminal_color_11 = colors.bright_yellow
+vim.g.terminal_color_12 = colors.bright_blue
+vim.g.terminal_color_13 = colors.bright_magenta
+vim.g.terminal_color_14 = colors.bright_cyan
+vim.g.terminal_color_15 = colors.bright_white
+vim.g.terminal_color_background = colors.bg
+vim.g.terminal_color_foreground = colors.fg
+
 local groups = {
 	-- === INTERFACE DE BASE ===
-	Normal = { fg = colors.fg, bg = colors.bg },
-	NormalFloat = { fg = colors.fg, bg = colors.transparent_black }, -- Fond légèremement différent pour les popups
-	FloatBorder = { fg = colors.purple },
+	Boolean = { fg = colors.cyan },
+	Character = { fg = colors.green },
 	Comment = { fg = colors.comment, italic = true },
-	LineNr = { fg = colors.purple },
 	CursorLine = { bg = colors.selection },
-	CursorLineNr = { fg = colors.pink, bold = true },
-	Visual = { bg = colors.visual },
+	CursorLineNr = { fg = colors.lilac, bold = true },
+	CurSearch = { fg = colors.black, bg = colors.fuchsia },
 	EndOfBuffer = { fg = colors.bg }, -- Cache les '~'
+	Error = { fg = colors.bright_red },
+	ErrorMsg = { fg = colors.bright_red },
+	FloatBorder = { fg = colors.purple },
+	IncSearch = { fg = colors.bg, bg = colors.orange, bold = true },
+	LineNr = { fg = colors.purple },
+	-- Normal = { fg = colors.fg }, -- Pour avoir de la transparence sur le fond
+	Normal = { fg = colors.fg, bg = colors.bg }, -- Sans transparence sur le fond
+	NormalFloat = { fg = colors.fg, bg = colors.transparent_black }, -- Fond légèremement différent pour les popups
 	Pmenu = { bg = colors.transparent_black, fg = colors.fg },
 	PmenuSel = { bg = colors.selection, bold = true },
+	Search = { fg = colors.bg, bg = colors.yellow },
+	Visual = { bg = colors.visual },
+	WinBar = { fg = colors.grey, bg = colors.bg },
 
-	-- === TREE-SITTER (Générique) ===
-	["@variable"] = { fg = colors.fg },
-	["@function"] = { fg = colors.yellow },
+	-- === HTML LEGACY (fallback nvim 0.12) ===
+	htmlTag = { fg = colors.pink },
+	htmlEndTag = { fg = colors.pink },
+	htmlTagName = { fg = colors.pink },
+	htmlArg = { fg = colors.green, italic = true },
+	htmlSpecialTagName = { fg = colors.cyan },
+
+	-- === CSS fallback groups ===
+	cssAtRule = { fg = colors.pink },
+	cssAtKeyword = { fg = colors.pink },
+	cssDefinition = { fg = colors.cyan },
+	cssFontProp = { fg = colors.cyan },
+	cssValueNumber = { fg = colors.purple },
+	cssUnitDecorator = { fg = colors.pink },
+	cssColor = { fg = colors.orange },
+	cssIdentifier = { fg = colors.fg },
+
+	-- === ASTRO legacy syntax ===
+	astroJavaScript = { fg = colors.pink },
+	javaScriptReserved = { fg = colors.pink }, -- const, import, export...
+	javaScriptIdentifier = { fg = colors.purple }, -- this, undefined, null...
+	javaScriptOperator = { fg = colors.pink }, -- typeof, instanceof...
+
+	-- === TREESITTER (L'ossature Maria) ===
+	["@attribute"] = { fg = colors.cyan },
+	["@boolean"] = { fg = colors.purple },
+	["@constant"] = { fg = colors.purple },
+	["@constructor"] = { fg = colors.cyan },
+	["@function"] = { fg = colors.green },
+	["@function.builtin"] = { fg = colors.cyan },
+	["@function.method"] = { fg = colors.green },
 	["@keyword"] = { fg = colors.pink },
-	["@string"] = { fg = colors.green },
+	["@keyword.function"] = { fg = colors.cyan },
+	["@keyword.operator"] = { fg = colors.pink },
+	["@keyword.include"] = { fg = colors.pink },
+	["@label"] = { fg = colors.cyan },
+	["@module"] = { fg = colors.orange },
+	["@number"] = { fg = colors.purple },
+	["@operator"] = { fg = colors.pink },
+	["@property"] = { fg = colors.purple },
 	["@punctuation.bracket"] = { fg = colors.cyan },
+	["@punctuation.delimiter"] = { fg = colors.cyan },
+	["@string"] = { fg = colors.green },
+	["@string.escape"] = { fg = colors.cyan },
+	["@tag"] = { fg = colors.pink },
+	["@tag.attribute"] = { fg = colors.green, italic = true },
+	["@tag.delimiter"] = { fg = colors.cyan },
+	["@type"] = { fg = colors.bright_cyan },
+	["@variable"] = { fg = colors.fg },
+	["@variable.member"] = { fg = colors.orange },
+	["@variable.parameter"] = { fg = colors.orange, italic = true },
+
+	-- === SEMANTIC TOKENS (Le Fix pour tes fichiers ouverts) ===
+	["@lsp.type.class"] = { fg = colors.bright_cyan },
+	["@lsp.type.decorator"] = { fg = colors.green },
+	["@lsp.type.enum"] = { fg = colors.cyan },
+	["@lsp.type.enumMember"] = { fg = colors.purple },
+	["@lsp.type.function"] = { fg = colors.green },
+	["@lsp.type.interface"] = { fg = colors.cyan },
+	["@lsp.type.method"] = { fg = colors.green },
+	["@lsp.type.namespace"] = { fg = colors.orange },
+	["@lsp.type.parameter"] = { fg = colors.orange },
+	["@lsp.type.property"] = { fg = colors.purple },
+	["@lsp.type.struct"] = { fg = colors.cyan },
+	["@lsp.type.type"] = { fg = colors.bright_cyan },
+	["@lsp.type.variable"] = { fg = colors.fg },
+	["@lsp.type.tag"] = { fg = colors.pink },
+
+	-- === LSP SEMANTIC TOKENS override TSX/TS ===
+	["@lsp.type.parameter.typescriptreact"] = { fg = colors.orange, italic = false },
+	["@lsp.type.variable.typescriptreact"] = { fg = colors.fg, italic = false },
+	["@lsp.type.parameter.typescript"] = { fg = colors.orange, italic = false },
+
+	-- === CSS SPÉCIFIQUE (Fix .astro et .css) ===
+	["@property.css"] = { fg = colors.cyan },
+	["@type.css"] = { fg = colors.orange },
+	["@unit.css"] = { fg = colors.pink },
 
 	-- === MARKDOWN & MDX ===
 	-- === TITRES GÉNÉRIQUES TREESITTER (Priorité Haute) ===
@@ -72,6 +173,7 @@ local groups = {
 
 	["@markup.strong"] = { fg = colors.orange, bold = true },
 	["@markup.italic"] = { fg = colors.yellow, italic = true },
+	["@markup.underline"] = { fg = colors.orange },
 	["@markup.link.label.markdown"] = { fg = colors.bright_blue },
 	["@markup.list.markdown"] = { fg = colors.purple },
 	["@tag.mdx"] = { fg = colors.bright_magenta },
@@ -83,6 +185,11 @@ local groups = {
 	["@variable.member.yaml"] = { fg = colors.purple }, -- Pour les clés imbriquées
 	["@string.yaml"] = { fg = colors.green },
 	["@punctuation.delimiter.yaml"] = { fg = colors.pink },
+
+	-- === KITTY (kitty.conf syntax) ===
+	kittyOptionName = { fg = colors.cyan }, -- les noms d'options (font_size, background_opacity...)
+	kittyOptionValue = { fg = colors.pink }, -- les valeurs de ces options
+	kittyComment = { fg = colors.comment, italic = true },
 
 	-- === PLUGINS ===
 	-- Lualine / StatusLine
@@ -107,8 +214,15 @@ local groups = {
 	IblIndent = { fg = colors.selection },
 	IblScope = { fg = colors.purple },
 
-	-- RenderMarkdown (Lien vers Treesitter pour éviter les doublons)
+	-- When triggering flash, use a white font and make everything in the backdrop italic.
+	FlashBackdrop = { fg = colors.comment, italic = true }, -- tout le reste du texte
+	FlashMatch = { fg = colors.bg, bg = colors.yellow, bold = true }, -- les matches
+	FlashLabel = { fg = colors.bg, bg = colors.pink, bold = true }, -- LA lettre à sélectionner
+	FlashPrompt = { link = "Normal" },
+	FlashCursor = { fg = colors.bg, bg = colors.cyan },
+
 	-- === FORCE RENDER-MARKDOWN COLORS ===
+	-- RenderMarkdown (Lien vers Treesitter pour éviter les doublons)
 	-- Niveau 1 : Rouge
 	RenderMarkdownH1 = { fg = colors.red, bold = true },
 	RenderMarkdownH1Bg = { fg = colors.red, bg = colors.transparent_red, bold = true },
@@ -141,10 +255,19 @@ local groups = {
 	-- Tableaux (pour ton preset "round")
 	RenderMarkdownTableHead = { fg = colors.purple, bold = true },
 	RenderMarkdownTableFill = { fg = colors.purple },
+
 	-- MiniFiles / Oil
 	MiniFilesBorder = { fg = colors.comment },
 	MiniFilesTitle = { fg = colors.pink, bold = true },
 	OilDir = { fg = colors.cyan, bold = true },
+
+	-- === PLUGINS ===
+	BlinkCmpMenu = { bg = colors.transparent_black },
+	BlinkCmpLabel = { fg = colors.fg },
+	BlinkCmpKindFunction = { fg = colors.green },
+	BlinkCmpKindKeyword = { fg = colors.pink },
+	BlinkCmpKindProperty = { fg = colors.purple },
+	BlinkCmpKindVariable = { fg = colors.fg },
 }
 
 for group, opts in pairs(groups) do

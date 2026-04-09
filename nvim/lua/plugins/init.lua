@@ -28,7 +28,7 @@ return {
 	require("plugins.codeium"),
 
 	-- 6. TERMINAL & GIT
-	require("plugins.toggleterm"),
+	-- require("plugins.toggleterm"),
 	-- require("plugins.lazygit"),
 
 	-- 7. CONCENTRATION & UX

@@ -1,28 +1,44 @@
--- ~/.config/nvim/lua/plugins/luasnip.lua
 return {
 	"L3MON4D3/LuaSnip",
 	dependencies = {
 		"benfowler/telescope-luasnip.nvim",
-		"rafamadriz/friendly-snippets", -- snippet de blink-cmp
+		"rafamadriz/friendly-snippets",
 	},
-	config = function()
+	opts = function()
+		local types = require("luasnip.util.types")
+		return {
+			delete_check_events = "TextChanged",
+			ext_opts = {
+				[types.insertNode] = {
+					unvisited = {
+						virt_text = { { "|", "Comment" } },
+						virt_text_pos = "inline",
+					},
+				},
+				[types.exitNode] = {
+					unvisited = {
+						virt_text = { { "|", "Comment" } },
+						virt_text_pos = "inline",
+					},
+				},
+				[types.choiceNode] = {
+					active = {
+						virt_text = { { "(snippet) choice node", "LspInlayHint" } },
+					},
+				},
+			},
+		}
+	end,
+	config = function(_, opts) -- ← ajout de _, opts
 		local luasnip = require("luasnip")
+		luasnip.setup(opts) -- ← opts passé à setup
 		luasnip.filetype_extend("mdx", { "markdown" })
-		-- Charge les snippets friendly-snippets (VSCode style)
 		require("luasnip.loaders.from_vscode").lazy_load()
-
-		-- Charge tes snippets custom dans ~/.dotfiles/nvim/snippets/
 		require("luasnip.loaders.from_lua").load({
 			paths = vim.fn.expand("~/.dotfiles/nvim/snippets"),
 		})
-
-		-- Enregistre l'extension telescope-luasnip
+		-- Keybindings pour les snippets dans telescope
 		require("telescope").load_extension("luasnip")
-
-		-- Blink gère Tab/S-Tab pour la navigation dans les snippets
-		-- On garde uniquement le picker Telescope
-
-		-- ; en mode normal → picker Telescope des snippets du filetype courant
 		vim.keymap.set("n", ";", "<cmd>Telescope luasnip<cr>", { desc = "Snippets" })
 	end,
 }

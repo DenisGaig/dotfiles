@@ -188,6 +188,12 @@ return {
 			-- OPTIONNEL: Seulement si je veux personnaliser les keybindings
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(event)
+					-- Désactive les semantic tokens, Treesitter suffit
+					-- local client = vim.lsp.get_client_by_id(event.data.client_id)
+					-- if client then
+					-- 	client.server_capabilities.semanticTokensProvider = nil
+					-- end
+
 					local opts = { buffer = event.buf }
 					local builtin = require("telescope.builtin")
 

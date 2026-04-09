@@ -21,7 +21,20 @@ return {
 		end,
 
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "codeium", "dadbod", "emoji", "dictionary" },
+			default = function()
+				-- Base sans snippets
+				local sources = { "lsp", "path", "buffer", "codeium", "dadbod", "emoji", "dictionary" }
+				local ok, node = pcall(vim.treesitter.get_node)
+				if ok and node then
+					if node:type() ~= "string" and not vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
+						table.insert(sources, "snippets")
+					end
+				else
+					-- Treesitter indisponible → on inclut quand même les snippets
+					table.insert(sources, "snippets")
+				end
+				return sources
+			end,
 			providers = {
 				lsp = {
 					name = "lsp",
@@ -85,7 +98,7 @@ return {
 			list = {
 				selection = {
 					preselect = true,
-					auto_insert = true,
+					auto_insert = false,
 				},
 			},
 		},
