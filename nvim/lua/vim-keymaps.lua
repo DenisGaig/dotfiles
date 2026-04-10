@@ -5,6 +5,9 @@ map("n", "<C-l>", "<C-w>l", { desc = "Aller dans la split de droite" })
 map("n", "<C-j>", "<C-w>j", { desc = "Aller dans la split du bas" })
 map("n", "<C-k>", "<C-w>k", { desc = "Aller dans la split du haut" })
 
+-- RESTART NEOVIM
+map("n", "<leader>R", "<cmd>restart<cr>", { desc = "Restart Neovim" })
+
 -- DÉPLACER DES LIGNES en mode visuel
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Déplacer une ligne vers le bas en mode visuel" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Déplacer une ligne vers le haut en mode visuel" })
@@ -23,6 +26,9 @@ map("n", "<M-;>", "<C-w>5>", { desc = "Resize window to the right" })
 map("n", "<M-t>", "<C-w>+", { desc = "Resize window to the top" })
 map("n", "<M-b>", "<C-w>-", { desc = "Resize window to the bottom" })
 
+-- Quickly go to the end of the line while in insert mode.
+map({ "i", "c" }, "<C-l>", "<C-o>A", { desc = "Go to the end of the line" })
+
 -- BETTER PASTE BEHAVIOR
 map("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
 
@@ -38,3 +44,7 @@ map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]ui
 -- TERMINAL
 map("t", "<esc>", [[<C-\><C-n>]], { desc = "Mode normal terminal" })
 map("n", "<F12>", "<cmd>botright split | term<cr>", { desc = "Terminal horizontal bas" })
+-- Lance un terminal python pour le REPL(Read Eval Print Loop)
+map("n", "<leader>tp", function()
+	vim.cmd("20split | term python")
+end, { desc = "Python REPL" })
