@@ -119,6 +119,7 @@ local groups = {
 	TypeDef = { fg = colors.yellow },
 	Underlined = { fg = colors.cyan, underline = true },
 	VertSplit = { fg = colors.white },
+	VirtColumn = { fg = colors.lilac },
 	Visual = { bg = colors.visual },
 	VisualNOS = { fg = colors.visual },
 	WarningMsg = { fg = colors.yellow },
@@ -361,7 +362,9 @@ local groups = {
 
 	-- Nicer yanky highlights.
 	YankyPut = { link = "Visual" },
-	YankyYanked = { link = "Visual" },
+	YankyYanked = { bg = colors.lavender, fg = colors.black },
+	-- YankyYanked = { link = "Visual" },
+	-- YankyPut = { bg = colors.lavender, fg = colors.black },
 
 	-- === FORCE RENDER-MARKDOWN COLORS ===
 	-- RenderMarkdown (Lien vers Treesitter pour éviter les doublons)

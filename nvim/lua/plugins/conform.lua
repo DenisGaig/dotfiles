@@ -1,3 +1,4 @@
+-- Permet de formater automatiquement sur la sauvegarde avec les bons formatters
 return {
 	{
 		"stevearc/conform.nvim",

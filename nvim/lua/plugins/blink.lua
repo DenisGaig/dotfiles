@@ -1,9 +1,9 @@
+local trigger_text = ";"
+
 return {
 	"saghen/blink.cmp",
 	-- On utilise "build" pour compiler localement avec ton cargo
 	-- build = "cargo build --release",
-	-- Pas besoin de version spécifique si on compile depuis la source
-	-- mais on peut laisser la version stable par sécurité
 	version = "v1.*",
 
 	dependencies = {
@@ -22,11 +22,14 @@ return {
 
 		sources = {
 			default = function()
-				-- Base sans snippets
+				-- Base sans snippets hors string ou commentaire
 				local sources = { "lsp", "path", "buffer", "codeium", "dadbod", "emoji", "dictionary" }
 				local ok, node = pcall(vim.treesitter.get_node)
 				if ok and node then
-					if node:type() ~= "string" and not vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
+					if
+						node:type() ~= "string"
+						and not vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type())
+					then
 						table.insert(sources, "snippets")
 					end
 				else
@@ -53,8 +56,46 @@ return {
 					name = "snippets",
 					module = "blink.cmp.sources.snippets",
 					score_offset = 85,
-					min_keyword_length = 2,
+					min_keyword_length = 1,
 					max_items = 15,
+
+					-- Active les snippets en Markdown et autres fichiers de prose après le trigger
+					should_show_items = function()
+						local prose_filetypes = { "markdown", "mdx", "text", "org", "rst" }
+						if vim.tbl_contains(prose_filetypes, vim.bo.filetype) then
+							local col = vim.api.nvim_win_get_cursor(0)[2]
+							local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
+							return before_cursor:match(trigger_text .. "%w*$") ~= nil
+						end
+						return true
+					end,
+
+					-- Supprime le trigger et remplace par le snippet
+					transform_items = function(_, items)
+						local prose_filetypes = { "markdown", "mdx", "text", "org", "rst" }
+						if not vim.tbl_contains(prose_filetypes, vim.bo.filetype) then
+							return items
+						end
+						local line = vim.api.nvim_get_current_line()
+						local col = vim.api.nvim_win_get_cursor(0)[2]
+						local before_cursor = line:sub(1, col)
+						local start_pos, end_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
+						if start_pos then
+							for _, item in ipairs(items) do
+								if not item.trigger_text_modified then
+									item.trigger_text_modified = true
+									item.textEdit = {
+										newText = item.insertText or item.label,
+										range = {
+											start = { line = vim.fn.line(".") - 1, character = start_pos - 1 },
+											["end"] = { line = vim.fn.line(".") - 1, character = end_pos },
+										},
+									}
+								end
+							end
+						end
+						return items
+					end,
 				},
 				buffer = {
 					name = "Buffer",

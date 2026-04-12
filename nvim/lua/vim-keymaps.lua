@@ -38,6 +38,9 @@ map({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
 -- CLEAR HIGHLIGHT WHEN PRESSING ESC IN NORMAL MODE
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- OPEN LAST OPEN BUFFER
+map("n", "<leader>bp", "<C-^>", { desc = "Open last open buffer" })
+
 -- OPEN DIAGNOSTIC LIST
 map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 

@@ -26,6 +26,7 @@ vim.cmd.colorscheme("miss-dracula")
 -- PLUGINS
 require("vim-options")
 require("vim-keymaps")
+require("vim-commands")
 require("vim-autocommand")
 require("lazy").setup("plugins")
 require("rofidex")

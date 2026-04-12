@@ -19,6 +19,7 @@ end, { desc = "Open Daily Note" })
 --
 -- @param heading2 string : ex. "## Contents"
 -- @param heading3 string : ex. "### Table of contents"
+
 local function update_markdown_toc(heading2, heading3)
 	local path = vim.fn.expand("%") -- Chemin complet du fichier courant
 	local bufnr = 0 -- 0 = buffer actif courant
