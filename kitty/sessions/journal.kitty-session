@@ -1,0 +1,5 @@
+new_tab journal
+# kitty_session_cd_line
+cd /home/denis/brain/journal//2026/04-avril
+# kitty_session_launch_line
+launch --title "2026-04-14-mardi" fish -i -c 'nvim +cd\ "/home/denis/brain/journal/" +norm\ G "/home/denis/brain/journal//2026/04-avril/2026-04-14-mardi.md"'

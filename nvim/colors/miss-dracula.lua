@@ -343,8 +343,12 @@ local groups = {
 
 	-- Todo-Comments
 	TodoBgTODO = { fg = colors.black, bg = colors.yellow, bold = true },
-	TodoBgFIX = { fg = colors.black, bg = colors.red, bold = true },
-	TodoFgNOTE = { fg = colors.bright_cyan },
+	TodoBgFIX = { fg = colors.black, bg = colors.bright_red, bold = true },
+	TodoBgWARN = { fg = colors.black, bg = colors.orange, bold = true },
+	TodoBgHACK = { fg = colors.black, bg = colors.fuchsia, bold = true },
+	TodoBgNOTE = { fg = colors.black, bg = colors.bright_cyan, bold = true },
+	TodoBgPERF = { fg = colors.black, bg = colors.bright_blue, bold = true },
+	TodoBgTEST = { fg = colors.black, bg = colors.bright_green, bold = true },
 
 	-- IBL (Indent)
 	IblIndent = { fg = colors.selection },

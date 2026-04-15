@@ -2,15 +2,42 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	lazy = false,
 	build = ":TSUpdate",
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter-context",
+		"nvim-treesitter/nvim-treesitter-textobjects",
+	},
 	config = function()
 		require("nvim-treesitter").setup({
-			ensure_installed = { "lua", "astro", "css", "html", "javascript", "python", "vim", "typescript", "markdown", "markdown_inline", "yaml", "mdx", "tsx", "json" },
+			ensure_installed = {
+				"lua",
+				"astro",
+				"css",
+				"html",
+				"javascript",
+				"python",
+				"vim",
+				"typescript",
+				"markdown",
+				"markdown_inline",
+				"yaml",
+				"mdx",
+				"tsx",
+				"json",
+			},
 			auto_install = true,
 			highlight = {
 				enable = true,
 				additional_vim_regex_highlighting = false,
 			},
 			indent = { enable = true },
+
+			-- Utile pour miniai.lua
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true, -- Saute automatiquement au prochain objet
+				},
+			},
 		})
 
 		vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {

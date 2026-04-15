@@ -6,6 +6,14 @@ vim.keymap.set("n", "<leader>dn", function()
 	vim.fn.jobstart({ os.getenv("HOME") .. "/.dotfiles/scripts/daily-note.sh" }, { detach = true })
 end, { desc = "Open Daily Note" })
 
+-- ========================================================
+-- 🔑 Open Daily Journal
+-- ========================================================
+
+vim.keymap.set("n", "<leader>dj", function()
+	vim.fn.jobstart({ os.getenv("HOME") .. "/.dotfiles/scripts/daily-journal.sh" }, { detach = true })
+end, { desc = "Open Daily Journal" })
+
 -- =========================================================
 -- TABLE DES MATIÈRES MARKDOWN (markdown-toc)
 -- Dépendance : pacman -S markdown-toc
@@ -182,4 +190,4 @@ vim.keymap.set("n", "<M-x>", function()
 	end
 
 	vim.cmd("silent! write")
-end, { desc = "Toggle task markdown + déplace dans Completed" })
+end, { desc = "Toggle task markdown + déplace dans Completed - Skitty Note" })

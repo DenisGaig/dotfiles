@@ -17,25 +17,13 @@ local function clipboard()
 end
 
 return {
+	-- Snippet pour ma daily note
 	s("daily", {
-		-- Emotions et besoins
-		t({ "", "", "" }),
-		t("- 😢 Emotions: "),
-		t({ "", "" }),
-		t("- 💙 Besoins: "),
-		t({ "", "", "" }),
 
 		-- Apprentissages
 		t("### Apprentissages / Réalisations"),
 		t({ "", "", "" }),
 		i(1, "Ce que j'ai découvert ou pratiqué..."),
-		t({ "", "", "" }),
-
-		-- Todos
-		t("### Todos"),
-		t({ "", "", "" }),
-		t("- [ ] "),
-		i(2, ""),
 		t({ "", "", "" }),
 
 		-- Idées
@@ -44,17 +32,32 @@ return {
 		i(3, "Idées, réflexions, liens utiles..."),
 		t({ "", "", "" }),
 
-		-- Journal / humeur
-		t("### Journal de bord"),
+		-- Todos
+		t("### Todos"),
 		t({ "", "", "" }),
-		i(4, "Humeur, ressenti, ce qui m'a marqué..."),
+		t("- [ ] "),
+		i(2, ""),
 		t({ "", "", "" }),
 	}),
 
+	-- Snippet pour mon journal project
+	s("journal", {
+		-- Emotions et besoins
+		t({ "", "", "" }),
+		t("- 😢 Emotions: "),
+		i(1, "Je me sens..."),
+		t({ "", "" }),
+		t("- 💙 Besoins: "),
+		i(2, "J'ai besoin..."),
+		t({ "", "", "" }),
+	}),
+
+	-- Snippet pour mes notes obsidian
 	s("obsidian", {
 		-- Titre
 		t({ "", "", "" }),
-		t("# Note sur ... "),
+		t("# Note sur "),
+		i(1, "Titre"),
 		t({ "", "", "" }),
 
 		-- Date (automatisée)
@@ -70,6 +73,7 @@ return {
 		i(3, "Références:"),
 		t({ "", "", "" }),
 	}),
+
 	-- Snippet pour le frontmatter des cours
 	s("cours", {
 		t("---"),
@@ -121,6 +125,7 @@ return {
 		i(3, "légende avec $LaTex$"),
 		t({ "</span>", "</Formula>" }),
 	}),
+
 	-- Formula KaTeX inline (petite formule)
 	s("formi", {
 		t("$"),
@@ -138,7 +143,8 @@ return {
 			local script = project_root .. "/scripts/paste-img.sh"
 			local mdx_path = vim.fn.expand("%:p")
 
-			local result = vim.fn.system("bash --norc --noprofile " .. vim.fn.shellescape(script) .. " " .. vim.fn.shellescape(mdx_path))
+			local result =
+				vim.fn.system("bash --norc --noprofile " .. vim.fn.shellescape(script) .. " " .. vim.fn.shellescape(mdx_path))
 
 			-- Prendre uniquement la dernière ligne non vide
 			local chemin = ""

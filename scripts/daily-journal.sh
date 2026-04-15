@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-main_note_dir=~/brain/daily
+main_note_dir=~/brain/journal/
 
 current_year=$(date +"%Y")
 current_month_num=$(date +"%m")
@@ -22,16 +22,16 @@ fi
 if [ ! -f "$full_path" ]; then
   cat <<EOF >"$full_path"
 # ${note_name}
-## Daily Note
+## Daily Journal
 EOF
 fi
 
 ###############################################################################
-#                      Daily note with Kitty Sessions
+#                      Daily journal with Kitty Sessions
 ###############################################################################
-kitty_sess_file="$HOME/.dotfiles/kitty/sessions/daily.kitty-session"
+kitty_sess_file="$HOME/.dotfiles/kitty/sessions/journal.kitty-session"
 
-# Si la note d'aujourd'hui est déjà dans le fichier de session, on y saute
+# Si le journal d'aujourd'hui est déjà dans le fichier de session, on y saute
 if grep -Fq "${note_name}.md" "$kitty_sess_file"; then
   kitten @ action goto_session "$kitty_sess_file"
   exit 0
@@ -49,6 +49,7 @@ awk -v dir="$note_dir" -v launch="$launch_cmd" '
 ' "$kitty_sess_file" >"${kitty_sess_file}.tmp" && mv "${kitty_sess_file}.tmp" "$kitty_sess_file"
 
 # Fermeture de la session et réouverture de la session au cas où la session d'hier reste ouverte
-kitten @ action close_session "$HOME/.dotfiles/kitty/sessions/daily.kitty-session"
+kitten @ action close_session "$HOME/.dotfiles/kitty/sessions/journal.kitty-session"
 sleep 0.5
 kitten @ action goto_session "$kitty_sess_file"
+

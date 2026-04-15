@@ -26,6 +26,10 @@ map("n", "<M-;>", "<C-w>5>", { desc = "Resize window to the right" })
 map("n", "<M-t>", "<C-w>+", { desc = "Resize window to the top" })
 map("n", "<M-b>", "<C-w>-", { desc = "Resize window to the bottom" })
 
+-- QUICK FIX
+map("n", "<A-k>", "<cmd>cnext<cr>zz", { desc = "Next quickfix item" })
+map("n", "<A-j>", "<cmd>cprev<cr>zz", { desc = "Previous quickfix item" })
+
 -- Quickly go to the end of the line while in insert mode.
 map({ "i", "c" }, "<C-l>", "<C-o>A", { desc = "Go to the end of the line" })
 

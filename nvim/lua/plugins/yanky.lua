@@ -1,11 +1,22 @@
 -- Better copy/pasting.
+---@diagnostic disable: undefined-global
+
 return {
 	"gbprod/yanky.nvim",
+	dependencies = { "folke/snacks.nvim" },
 	opts = {
 		ring = { history_length = 20 },
 		highlight = { timer = 250 },
 	},
 	keys = {
+		{
+			"<leader>sy",
+			function()
+				Snacks.picker.yanky()
+			end,
+			mode = { "n", "x" },
+			desc = "Open Yank History",
+		},
 		{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after cursor" },
 		{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put yanked text before cursor" },
 		{ "=p", "<Plug>(YankyPutAfterLinewise)", desc = "Put yanked text in line below" },

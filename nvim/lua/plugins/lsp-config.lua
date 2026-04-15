@@ -47,7 +47,6 @@ return {
 		config = function()
 			-- 0. Configuration de l'auto-completion avec blink
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
-			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			-- 1. Configuration des diagnostics avec les icones
 			local icons = require("icons")
@@ -137,7 +136,6 @@ return {
 					css = {
 						validate = true,
 						lint = {
-							-- C'est ici que la magie opère pour Waybar/GTK-CSS
 							unknownAtRules = "ignore",
 							invalidPropertyValue = "ignore",
 						},
@@ -151,13 +149,31 @@ return {
 
 			-- markdown-oxide: LSP pour les notes Obsidian/markdown
 			vim.lsp.config("markdown_oxide", {
-				capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require("blink.cmp").get_lsp_capabilities(), {
-					workspace = {
-						didChangeWatchedFiles = {
-							dynamicRegistration = true,
-						},
-					},
-				}),
+				capabilities = vim.tbl_deep_extend(
+					"force",
+					vim.lsp.protocol.make_client_capabilities(),
+					require("blink.cmp").get_lsp_capabilities(),
+					{ workspace = { didChangeWatchedFiles = { dynamicRegistration = true } } }
+				),
+				-- Permet d'afficher les références des liens dans les fichiers enfants
+				on_attach = function(client, bufnr)
+					vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "BufEnter" }, {
+						buffer = bufnr,
+						callback = function()
+							-- vim.lsp.codelens.refresh({ bufnr = bufnr })
+							if vim.api.nvim_buf_is_loaded(bufnr) then
+								vim.lsp.codelens.refresh({ bufnr = bufnr })
+							end
+						end,
+					})
+					vim.lsp.codelens.refresh({ bufnr = bufnr })
+
+					-- rename / change reference
+					vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, {
+						buffer = bufnr,
+						desc = "LSP rename reference",
+					})
+				end,
 			})
 
 			-- JSON Configuration
