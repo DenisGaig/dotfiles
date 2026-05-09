@@ -20,3 +20,7 @@ alias wall='~/.dotfiles/hypr/scripts/random-wallpaper.sh'
 
 # NEOFETCH n'est plus maintenu: script perso pour le remplacer
 /usr/local/bin/motd
+
+# zoxide et atuin
+zoxide init fish | source
+atuin init fish | source

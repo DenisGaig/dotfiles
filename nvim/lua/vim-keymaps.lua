@@ -24,7 +24,6 @@ map("n", "<leader>h", ":split<CR>", { desc = "Split window horizontally" })
 map("n", "<M-,>", "<C-w>5<", { desc = "Resize window to the left" })
 map("n", "<M-;>", "<C-w>5>", { desc = "Resize window to the right" })
 map("n", "<M-t>", "<C-w>+", { desc = "Resize window to the top" })
-map("n", "<M-b>", "<C-w>-", { desc = "Resize window to the bottom" })
 
 -- QUICK FIX
 map("n", "<A-k>", "<cmd>cnext<cr>zz", { desc = "Next quickfix item" })

@@ -12,6 +12,11 @@ return {
 				-- On garde globalstatus actif pour les autres modes si tu aimes ça
 				globalstatus = true,
 			},
+			sections = {
+				lualine_b = {
+					{ "macro_recording" }, -- Lualine cherche dans lualine/components/
+				},
+			},
 		})
 
 		-- Forcer la disparition si on est en mode skitty

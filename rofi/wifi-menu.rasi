@@ -1,0 +1,62 @@
+@import "shared/mocha.rasi"
+@import "shared/fonts.rasi"
+
+
+* {
+  bg:         #1e1e2e;
+  bg-alt:     #2a2a3e;
+  fg:         #cdd6f4;
+  accent:     #BF00FF;
+  urgent:     #FF4040;
+  selected:   #BF00FF;
+
+  background-color: transparent;
+  text-color:       @fg;
+  border:           0;
+  margin:           0;
+  padding:          0;
+  spacing:          0;
+}
+
+window {
+  background-color: @bg;
+  border:           1px solid;
+  border-color:     @accent;
+  border-radius:    8px;
+  width:            400px;
+}
+
+mainbox {
+  padding: 8px;
+}
+
+inputbar {
+  enabled: false;
+}
+
+listview {
+  lines:        8;
+  scrollbar:    false;
+  border:       0;
+  padding:      4px 0;
+}
+
+element {
+  padding:      6px 12px;
+  border-radius: 4px;
+}
+
+element normal.normal {
+  background-color: transparent;
+  text-color:       @fg;
+}
+
+element selected.normal {
+  background-color: @accent;
+  text-color:       @bg;
+}
+
+element alternate.normal {
+  background-color: @bg-alt;
+  text-color:       @fg;
+}

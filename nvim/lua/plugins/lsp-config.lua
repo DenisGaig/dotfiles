@@ -157,7 +157,7 @@ return {
 				),
 				-- Permet d'afficher les références des liens dans les fichiers enfants
 				on_attach = function(client, bufnr)
-					vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "BufEnter" }, {
+					vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "BufEnter", "WinEnter" }, {
 						buffer = bufnr,
 						callback = function()
 							-- vim.lsp.codelens.refresh({ bufnr = bufnr })

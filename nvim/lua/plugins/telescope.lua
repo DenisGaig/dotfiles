@@ -24,7 +24,7 @@ return {
 					layout_strategy = "bottom_pane",
 					layout_config = {
 						height = 0.4,
-						preview_width = 0.4,
+						preview_width = 0.5,
 					},
 					border = true,
 					sorting_strategy = "ascending",
@@ -52,12 +52,24 @@ return {
 			-- vim.keymap.set("n", "<leader>sy", "<cmd>Telescope yank_history<cr>", { desc = "[S]earch [Y]ank history" })
 
 			-- 🔑 Ouvre un picker sur le contenu du buffer actuel pour effectuer une recherche
+			-- Mode flottant avec transparence (winblend)
+			-- vim.keymap.set("n", "<leader>/", function()
+			-- 	-- You can pass additional configuration to Telescope to change the theme, layout, etc.
+			-- 	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+			-- 		winblend = 10,
+			-- 		previewer = false,
+			-- 	}))
+			-- end, { desc = "[/] Fuzzily search in current buffer" })
+
+			-- 🔑 Ouvre un picker sur le contenu du buffer actuel pour effectuer une recherche
 			vim.keymap.set("n", "<leader>/", function()
-				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-					winblend = 10,
+				builtin.current_buffer_fuzzy_find({
 					previewer = false,
-				}))
+					-- Hérite du bottom_pane de base, mais on peut affiner la hauteur juste pour ça
+					layout_config = {
+						height = 0.3,
+					},
+				})
 			end, { desc = "[/] Fuzzily search in current buffer" })
 
 			-- 🔑 Recherche dans les fichiers ouverts

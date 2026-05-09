@@ -29,14 +29,14 @@ return {
 		-- Idées
 		t("### Idées / Réflexions "),
 		t({ "", "", "" }),
-		i(3, "Idées, réflexions, liens utiles..."),
+		i(2, "Idées, réflexions, liens utiles..."),
 		t({ "", "", "" }),
 
 		-- Todos
 		t("### Todos"),
 		t({ "", "", "" }),
 		t("- [ ] "),
-		i(2, ""),
+		i(3, ""),
 		t({ "", "", "" }),
 	}),
 
@@ -55,22 +55,34 @@ return {
 	-- Snippet pour mes notes obsidian
 	s("obsidian", {
 		-- Titre
-		t({ "", "", "" }),
-		t("# Note sur "),
-		i(1, "Titre"),
-		t({ "", "", "" }),
-
+		t("--- "),
+		t({ "", "" }),
 		-- Date (automatisée)
-		t("**Date:** "),
+		t("date: "),
 		f(current_date),
-		t({ "", "", "" }),
+		t({ "", "" }),
+		t("source: "),
+		i(1, "source url"),
 
-		-- Tags
-		i(2, "**Tags**:"),
+		t({ "", "" }),
+		t("auteur: "),
+		i(2, "auteur.e"),
+
+		t({ "", "" }),
+		t("titre: "),
+		i(3, "titre"),
+		t({ "", "" }),
+		t("--- "),
+
 		t({ "", "", "" }),
+		-- Tags
+		t("**tags**: "),
+		i(4, ""),
+		t({ "", "" }),
 
 		-- Références
-		i(3, "Références:"),
+		t("**references**: "),
+		i(5, "lien vers une autre note"),
 		t({ "", "", "" }),
 	}),
 

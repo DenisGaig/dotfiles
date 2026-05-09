@@ -59,7 +59,20 @@ return {
 		anti_conceal = {
 			enabled = true,
 		},
+		link = {
+			enabled = true,
+			highlight = "RenderMarkdownLink",
+			-- hyperlink = "🔗",
+		},
 	},
-	-- Keymaps pour toggle Markdown Render
-	vim.keymap.set("n", "<leader>mt", "<cmd>RenderMarkdown toggle<cr>", { desc = "Toggle Markdown Render" }),
+	config = function(_, opts)
+		require("render-markdown").setup(opts)
+
+		-- vim.api.nvim_set_hl(0, "RenderMarkdownLink", {
+		-- 	fg = "#89b4fa",
+		-- 	underline = true,
+		-- })
+		-- Keymap ici aussi
+		vim.keymap.set("n", "<leader>mt", "<cmd>RenderMarkdown toggle<cr>", { desc = "Toggle Markdown Render" })
+	end,
 }

@@ -22,7 +22,7 @@ return {
 							{
 								box = "horizontal",
 								{ win = "list", border = "rounded" },
-								{ win = "preview", title = "{preview}", width = 0.6, border = "rounded" },
+								{ win = "preview", title = "{preview}", width = 0.55, border = "rounded" },
 							},
 							{ win = "input", height = 1, border = "bottom" },
 						},
@@ -132,6 +132,13 @@ return {
 					Snacks.picker.buffers()
 				end,
 				desc = "Find existing buffers",
+			},
+			{
+				"<leader>gr",
+				function()
+					Snacks.picker.lsp_references()
+				end,
+				desc = "Find LSP references",
 			},
 		},
 	},

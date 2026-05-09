@@ -21,7 +21,7 @@
 #workspaces,
 #window,
 #tray,
-#clock,
+#custom-clock,
 #custom-power,
 #pulseaudio,
 #custom-lock,
@@ -48,14 +48,20 @@
   border-radius: 15px;
 }
 
-#clock {
+#memory,
+#cpu,
+#battery,
+#bluetooth {
+  padding: 4px 2px;
+}
+
+#custom-clock {
   margin-right: 6px;
-  padding: 4px 10px;
+  padding: 4px 8px 4px 4px;
   border-radius: 0 10px 10px 0;
 }
 
-#pulseaudio,
-#custom-lock {
+#pulseaudio {
   margin-left: 6px;
   padding: 4px 2px;
   border-radius: 10px 0 0 10px;
@@ -68,6 +74,14 @@
   padding: 4px 8px;
 }
 
+#network {
+  color: #cdd6f4;
+  padding: 0 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
 /* --- HOVER DYNAMIQUE --- */
 #bluetooth:hover,
 #network:hover,
@@ -77,7 +91,7 @@
 #custom-temperature:hover,
 #memory:hover,
 #cpu:hover,
-#clock:hover,
+#custom-clock:hover,
 #custom-lock:hover,
 #custom-reboot:hover,
 #custom-power:hover,
@@ -85,11 +99,25 @@
   background-color: rgba(70, 75, 90, 0.9);
 }
 
+/* --- TOOLTIP --- */
+tooltip {
+  background-color: #1e1e2e;
+  /* ta couleur de fond */
+  border: 1px solid #BF00FF;
+  border-radius: 8px;
+}
+
+tooltip label {
+  color: #cdd6f4;
+  /* couleur du texte */
+}
+
 /* --- WORKSPACES --- */
 #workspaces button {
   background: transparent;
   border: none;
-  color: @foreground; /* Couleur adaptative */
+  color: @foreground;
+  /* Couleur adaptative */
   padding: 2px 8px;
   margin: 0 2px;
   /* transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); */
@@ -120,27 +148,35 @@
 #workspaces button:nth-child(1) {
   color: @color1;
 }
+
 #workspaces button:nth-child(2) {
   color: @color2;
 }
+
 #workspaces button:nth-child(3) {
   color: @color3;
 }
+
 #workspaces button:nth-child(4) {
   color: @color4;
 }
+
 #workspaces button:nth-child(5) {
   color: @color5;
 }
+
 #workspaces button:nth-child(6) {
   color: @color6;
 }
+
 #workspaces button:nth-child(7) {
   color: @color7;
 }
+
 #workspaces button:nth-child(8) {
   color: @color8;
 }
+
 #workspaces button:nth-child(9) {
   color: @color9;
 }

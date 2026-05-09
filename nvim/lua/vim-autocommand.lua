@@ -17,7 +17,7 @@
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("denis/active_spell", { clear = true }),
 	desc = "Active la spellchecking pour Markdown",
-	pattern = { "markdown", "text" },
+	pattern = { "markdown", "text", "mdx" },
 	callback = function()
 		vim.opt_local.spell = true
 		vim.opt_local.spelllang = { "fr", "en" }
@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("denis/active_colorcolumn", { clear = true }),
 	desc = "Active la colorcolumn pour Markdown",
-	pattern = { "markdown", "text" },
+	pattern = { "markdown", "text", "mdx" },
 	callback = function()
 		vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#313244" })
 		vim.opt_local.textwidth = 80 -- saut de ligne auto à 80 caractères

@@ -1,4 +1,4 @@
-new_tab astro-cours
+new_tab cours
 cd /data/projets/astro-cours
 launch nvim
 

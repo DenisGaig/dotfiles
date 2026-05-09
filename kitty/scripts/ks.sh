@@ -16,6 +16,8 @@ while true; do
     tabs_json=$($KITTY_BIN @ --to "$SOCK" ls)
     tabs_open=$(echo "$tabs_json" | jq -r '.[].tabs[] | "\(.id)|\(.title)"')
     open_names=$(echo "$tabs_json" | jq -r '.[].tabs[].title')
+    # tabs_open=$(echo "$tabs_json" | jq -r '[.[].tabs[] | {id: .id, title: .title, last_focused_at: (.windows | map(.last_focused_at) | max)}] | sort_by(-.last_focused_at) | .[] | "\(.id)|\(.title)"')
+    # open_names=$(echo "$tabs_json" | jq -r '[.[].tabs[] | {title: .title, last_focused_at: (.windows | map(.last_focused_at) | max)}] | sort_by(-.last_focused_at) | .[].title')
 
     # 2. Récupérer les fichiers de session et FILTRER
     list_to_show=""
