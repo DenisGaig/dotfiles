@@ -1,4 +1,4 @@
-local trigger_text = ";"
+-- local trigger_text = ";"
 
 return {
 	"saghen/blink.cmp",
@@ -38,6 +38,12 @@ return {
 				end
 				return sources
 			end,
+			-- per_filetype est une option blink qui court-circuite complètement la
+			-- fonction default au dessus pour les filetypes listés et utilise seulement la liste passée en argument
+			per_filetype = {
+				markdown = { "snippets", "buffer", "path", "emoji", "dictionary" },
+				mdx = { "snippets", "buffer", "path", "emoji", "dictionary" },
+			},
 			providers = {
 				lsp = {
 					name = "lsp",
@@ -53,49 +59,14 @@ return {
 					fallbacks = { "snippets", "buffer" }, -- snippets/buffer seulement si pas de résultat path
 				},
 				snippets = {
+					should_show_items = function()
+						return vim.g.snippets_enabled
+					end,
 					name = "snippets",
 					module = "blink.cmp.sources.snippets",
 					score_offset = 85,
-					min_keyword_length = 1,
-					max_items = 15,
-
-					-- Active les snippets en Markdown et autres fichiers de prose après le trigger
-					should_show_items = function()
-						local prose_filetypes = { "markdown", "mdx", "text", "org", "rst" }
-						if vim.tbl_contains(prose_filetypes, vim.bo.filetype) then
-							local col = vim.api.nvim_win_get_cursor(0)[2]
-							local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
-							return before_cursor:match(trigger_text .. "%w*$") ~= nil
-						end
-						return true
-					end,
-
-					-- Supprime le trigger et remplace par le snippet
-					transform_items = function(_, items)
-						local prose_filetypes = { "markdown", "mdx", "text", "org", "rst" }
-						if not vim.tbl_contains(prose_filetypes, vim.bo.filetype) then
-							return items
-						end
-						local line = vim.api.nvim_get_current_line()
-						local col = vim.api.nvim_win_get_cursor(0)[2]
-						local before_cursor = line:sub(1, col)
-						local start_pos, end_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
-						if start_pos then
-							for _, item in ipairs(items) do
-								if not item.trigger_text_modified then
-									item.trigger_text_modified = true
-									item.textEdit = {
-										newText = item.insertText or item.label,
-										range = {
-											start = { line = vim.fn.line(".") - 1, character = start_pos - 1 },
-											["end"] = { line = vim.fn.line(".") - 1, character = end_pos },
-										},
-									}
-								end
-							end
-						end
-						return items
-					end,
+					min_keyword_length = 2,
+					max_items = 10,
 				},
 				buffer = {
 					name = "Buffer",
@@ -165,4 +136,12 @@ return {
 		-- 4. On garde le moteur de snippets interne de Blink
 		snippets = { preset = "luasnip" },
 	},
+	config = function(_, opts)
+		vim.g.snippets_enabled = true
+		require("blink.cmp").setup(opts)
+		vim.keymap.set("n", "<leader>ms", function()
+			vim.g.snippets_enabled = not vim.g.snippets_enabled
+			vim.notify("Snippets " .. (vim.g.snippets_enabled and "ON" or "OFF"), vim.log.levels.INFO)
+		end, { desc = "Toggle Snippets" })
+	end,
 }

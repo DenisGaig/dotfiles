@@ -191,3 +191,11 @@ vim.keymap.set("n", "<M-x>", function()
 
 	vim.cmd("silent! write")
 end, { desc = "Toggle task markdown + déplace dans Completed - Skitty Note" })
+
+-- ======== 🔑 Search cword in next split ========
+vim.keymap.set("n", "<leader>cw", function()
+	local word = vim.fn.expand("<cword>")
+	vim.cmd("wincmd w") -- focus le split suivant
+	vim.fn.setreg("/", "\\<" .. word .. "\\>")
+	vim.cmd("normal! n")
+end, { desc = "Search cword in next split" })

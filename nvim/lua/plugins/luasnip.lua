@@ -44,7 +44,9 @@ return {
 		require("luasnip.loaders.from_lua").load({
 			paths = vim.fn.expand("~/.dotfiles/nvim/snippets"),
 		})
-
+		require("luasnip").setup({
+			enable_autosnippets = true,
+		})
 		-- Keybindings pour les snippets dans telescope
 		require("telescope").load_extension("luasnip")
 		vim.keymap.set("n", "<leader>fs", "<cmd>Telescope luasnip<cr>", { desc = "Snippets" })

@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+
 -- NAVIGATION ENTRE SPLITS
 map("n", "<C-h>", "<C-w>h", { desc = "Aller dans la split de gauche" })
 map("n", "<C-l>", "<C-w>l", { desc = "Aller dans la split de droite" })
@@ -25,6 +26,9 @@ map("n", "<M-,>", "<C-w>5<", { desc = "Resize window to the left" })
 map("n", "<M-;>", "<C-w>5>", { desc = "Resize window to the right" })
 map("n", "<M-t>", "<C-w>+", { desc = "Resize window to the top" })
 
+-- Make U opposite to u.
+map("n", "U", "<C-r>", { desc = "Redo" })
+
 -- QUICK FIX
 map("n", "<A-k>", "<cmd>cnext<cr>zz", { desc = "Next quickfix item" })
 map("n", "<A-j>", "<cmd>cprev<cr>zz", { desc = "Previous quickfix item" })
@@ -43,6 +47,8 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- OPEN LAST OPEN BUFFER
 map("n", "<leader>bp", "<C-^>", { desc = "Open last open buffer" })
+map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Open next open buffer" })
+map("n", "<leader>bb", "<cmd>b#<cr>", { desc = "Alternate buffer" })
 
 -- OPEN DIAGNOSTIC LIST
 map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })

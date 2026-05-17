@@ -13,7 +13,7 @@ return {
 			enabled = false,
 		},
 		html = { enabled = false },
-		latex = { enabled = false },
+		latex = { enabled = true },
 
 		-- Personnalisation pour ton projet de snippets
 		heading = {

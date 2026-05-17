@@ -16,15 +16,19 @@ image = [
 images = [
     { run = 'imv-dir "$@"', desc = "View images", mime = ["image/*"], for = "unix" },
 ]
+spreadsheet = [
+    { run = 'libreoffice "$@"', desc = "Open with LibreOffice", for = "unix" },
+]
+pdf = [
+    { run = 'zathura "$@"', desc = "Open with zathura", for = "unix" },
+]
 
 [open]
 rules = [
-    # Ouvre les fichiers texte avec nvim
-    { mime = "text/*", use = "edit" },
-    # Ouvre les images avec imv (fichier unique)
-    { mime = "image/*", use = "image" },
-    # Ouvre les dossiers ou plusieurs images avec imv-dir
-    { name = "*/", use = "images" },  # Pour les dossiers
-    { name = "*.{jpg,jpeg,png,gif,webp,bmp,tiff}", use = "images" },  # Pour les extensions d'images
+    { url = "*.csv", use = "spreadsheet" },
+    { mime = "text/*", use = "edit" }, # Ouvre les fichiers texte avec nvim
+    { mime = "image/*", use = "image" }, # Ouvre les images avec imv (fichier unique)
+    { mime = "inode/directory", use = "images" },  # Pour les dossiers
+    #{ name = "*.{jpg,jpeg,png,gif,webp,bmp,tiff}", use = "images" },  # Pour les extensions d'images
+    { mime = "application/pdf", use = "pdf" },
 ]
-

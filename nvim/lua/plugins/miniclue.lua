@@ -86,7 +86,7 @@ return {
 					{ mode = { "n", "x" }, keys = "<leader>s", desc = "+search" },
 					{ mode = { "n", "x" }, keys = "<leader>t", desc = "+task" },
 					{ mode = { "n", "x" }, keys = "<leader>c", desc = "+code" },
-					-- { mode = { "n", "x" }, keys = "<leader>f", desc = "+find" },
+					{ mode = { "n", "x" }, keys = "<leader>f", desc = "+find" },
 					{ mode = "n", keys = "<leader>b", desc = "+buffers" },
 					{ mode = "n", keys = "<leader>d", desc = "+debug" },
 					-- { mode = "n", keys = "<leader>t", desc = "+tabs" },

@@ -4,6 +4,8 @@ local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
+local c = ls.choice_node
+local d = ls.dynamic_node
 local rep = require("luasnip.extras").rep
 
 -- Fonction pour générer la date actuelle (format: 2026-03-26)
@@ -14,6 +16,11 @@ end
 -- Fonction pour récupérer le presse-papier
 local function clipboard()
 	return vim.fn.getreg("+")
+end
+
+local function get_title(args)
+	-- args[1][1] va chercher le contenu du jump point passé en paramètre
+	return args[1][1]
 end
 
 return {
@@ -54,7 +61,6 @@ return {
 
 	-- Snippet pour mes notes obsidian
 	s("obsidian", {
-		-- Titre
 		t("--- "),
 		t({ "", "" }),
 		-- Date (automatisée)
@@ -68,6 +74,7 @@ return {
 		t("auteur: "),
 		i(2, "auteur.e"),
 
+		-- Titre
 		t({ "", "" }),
 		t("titre: "),
 		i(3, "titre"),
@@ -84,6 +91,36 @@ return {
 		t("**references**: "),
 		i(5, "lien vers une autre note"),
 		t({ "", "", "" }),
+	}),
+
+	s("notes", {
+		-- Titre
+		t("--- "),
+		t({ "", "" }),
+		-- Date (automatisée)
+		t("date: "),
+		f(current_date),
+		t({ "", "" }),
+		t("titre: "),
+		i(1, "titre"),
+		t({ "", "" }),
+		t("--- "),
+
+		t({ "", "", "" }),
+		-- Tags
+		t("**tags**: "),
+		i(2, ""),
+		t({ "", "" }),
+
+		-- Références
+		t("**references**: "),
+		i(3, "lien vers une autre note"),
+		t({ "", "", "" }),
+
+		-- Titre principal (Appel de la fonction propre)
+		t("# "),
+		f(get_title, { 1 }), -- On passe {1} en argument à la fonction
+		t(" "),
 	}),
 
 	-- Snippet pour le frontmatter des cours
@@ -126,24 +163,6 @@ return {
 	-- Snippet : Lien YouTube (ou web) depuis le presse-papier
 	-- Usage : tapez "linkc" + Tab
 	s("linkc", { t("["), i(1, "Titre"), t("]("), f(clipboard, {}), t(")") }),
-
-	-- Snippet : Formula KaTeX pour mdx astro
-	s("formula", {
-		t({ "<Formula", '  title="' }),
-		i(1, "Titre de la formule"),
-		t({ '">', '  <span slot="formula">$$ ' }),
-		i(2, "formule"),
-		t({ " $$</span>", '  <span slot="legend">' }),
-		i(3, "légende avec $LaTex$"),
-		t({ "</span>", "</Formula>" }),
-	}),
-
-	-- Formula KaTeX inline (petite formule)
-	s("formi", {
-		t("$"),
-		i(1, "formule"),
-		t("$"),
-	}),
 
 	-- Snippet : Coller une image depuis le clipboard (wl-paste) et générer l'import Astro Image
 	s("imga", {

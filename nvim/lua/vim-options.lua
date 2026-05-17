@@ -1,6 +1,10 @@
 -- CURSOR
 vim.opt.cursorline = true
 
+-- TIMING
+-- Le temps en ms avant que la touche soit considérée comme appuyée
+vim.o.timeoutlen = 300 -- Utile pour distinguer ff (déplacement) et ff (fff finder)
+
 -- NUMBERS
 vim.opt.nu = true
 vim.opt.relativenumber = true
