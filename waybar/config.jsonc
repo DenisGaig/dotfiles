@@ -28,7 +28,7 @@
       "escape": true,
       "exec": "$HOME/.config/waybar/music.sh --title",
       "interval": 2,
-      "on-click": "hyprctl dispatch workspace 8",
+      "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 8 })'",
       "tooltip": false
     },
 
@@ -42,7 +42,7 @@
     },
     "format-icons": {
         "1": " ", // code  ou \uF121"
-        "2": "", // terminal
+        "2": "", // terminal 
         "3": "󱓞 ", // Net "\ue745" 󰖟
         "4": "󰣇", // PC portable "\uf109"
         "5": "󰜡", // Claude \uf4f5
