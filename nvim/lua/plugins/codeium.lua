@@ -1,3 +1,4 @@
+-- Nécessite l'inscription sur https://windsurf.com/ et l'activation de l'extension Codeium
 return {
 	"Exafunction/codeium.nvim",
 	dependencies = {

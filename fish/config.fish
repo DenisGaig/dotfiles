@@ -19,6 +19,7 @@ alias nv="nvim"
 alias ks="~/.dotfiles/kitty/scripts/ks.sh"
 alias wall='~/.dotfiles/hypr/scripts/random-wallpaper.sh'
 alias ya="yazi"
+alias nvim-pack="NVIM_APPNAME=nvim-pack nvim"
 
 # Git alias
 alias g="git"

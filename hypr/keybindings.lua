@@ -53,22 +53,83 @@ hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("[float] thunar"))
 
 -- =============================================================================
--- DÉPLACEMENT DANS GROUPE
+-- FOCUS DES FENÊTRES DANS LE WORKSPACE
 -- =============================================================================
 
-hl.bind(mainMod .. " + SHIFT + left", hl.dsp.group.move_window("l"))
-hl.bind(mainMod .. " + SHIFT + right", hl.dsp.group.move_window("r"))
-hl.bind(mainMod .. " + SHIFT + down", hl.dsp.group.move_window("d"))
-hl.bind(mainMod .. " + SHIFT + up", hl.dsp.group.move_window("u"))
+-- Test si on est dans un layout "scrolling"
+local function workspaceIsScrolling()
+	return hl.get_active_workspace().tiled_layout == "scrolling"
+end
+
+-- Focus suivant le type de layout avec h/j/k/l type VIM
+hl.bind(mainMod .. " + l", function()
+	if workspaceIsScrolling() then
+		hl.dispatch(hl.dsp.layout("focus r"))
+	else
+		hl.dispatch(hl.dsp.focus({ direction = "right" }))
+	end
+end)
+
+hl.bind(mainMod .. " + h", function()
+	if workspaceIsScrolling() then
+		hl.dispatch(hl.dsp.layout("focus l"))
+	else
+		hl.dispatch(hl.dsp.focus({ direction = "left" }))
+	end
+end)
+
+local function workspaceIsMonocle()
+	return hl.get_active_workspace().tiled_layout == "monocle"
+end
+
+hl.bind(mainMod .. " + j", function()
+	if workspaceIsMonocle() then
+		hl.dispatch(hl.dsp.layout("cyclenext"))
+	else
+		hl.dispatch(hl.dsp.focus({ direction = "down" }))
+	end
+end)
+
+hl.bind(mainMod .. " + k", function()
+	if workspaceIsMonocle() then
+		hl.dispatch(hl.dsp.layout("cycleprev"))
+	else
+		hl.dispatch(hl.dsp.focus({ direction = "up" }))
+	end
+end)
+
+-- hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
+-- hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+-- hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
+-- hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- =============================================================================
--- FOCUS
+-- DÉPLACEMENT DES FENÊTRES DANS LE WORKSPACE
 -- =============================================================================
 
-hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
+-- hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({ direction = "left" }))
+-- hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
+-- hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({ direction = "down" }))
+-- hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({ direction = "up" }))
+
+hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + j", hl.dsp.window.move({ direction = "down" }))
+
+hl.bind(mainMod .. " + SHIFT + l", function()
+	if workspaceIsScrolling() then
+		hl.dispatch(hl.dsp.layout("swapcol r"))
+	else
+		hl.dispatch(hl.dsp.window.move({ direction = "right" }))
+	end
+end)
+
+hl.bind(mainMod .. " + SHIFT + h", function()
+	if workspaceIsScrolling() then
+		hl.dispatch(hl.dsp.layout("swapcol l"))
+	else
+		hl.dispatch(hl.dsp.window.move({ direction = "left" }))
+	end
+end)
 
 -- =============================================================================
 -- WORKSPACES — boucle comme dans l'exemple officiel

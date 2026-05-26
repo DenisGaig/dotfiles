@@ -33,19 +33,25 @@ hl.config({
 		force_default_wallpaper = 0,
 		disable_hyprland_logo = true,
 	},
+
+	-- LAYOUTS --
 	dwindle = {
 		preserve_split = true,
 		force_split = 2,
 	},
 	master = {
-		new_status = "master",
-		orientation = "right",
+		new_status = "slave",
+		orientation = "left",
 	},
+	scrolling = {
+		fullscreen_on_one_column = true,
+	},
+
 	input = {
 		kb_layout = "fr",
 		kb_variant = "",
 		kb_model = "",
-		kb_options = "ctrl:nocaps",
+		kb_options = "ctrl:nocaps", -- Remappement clavier Majuscule en CTRL
 		kb_rules = "",
 		follow_mouse = 1,
 		sensitivity = 0,

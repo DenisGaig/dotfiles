@@ -41,7 +41,7 @@ return {
 			-- per_filetype est une option blink qui court-circuite complètement la
 			-- fonction default au dessus pour les filetypes listés et utilise seulement la liste passée en argument
 			per_filetype = {
-				markdown = { "snippets", "buffer", "path", "emoji", "dictionary" },
+				markdown = { "lsp", "snippets", "buffer", "path", "emoji", "dictionary" },
 				mdx = { "snippets", "buffer", "path", "emoji", "dictionary" },
 			},
 			providers = {
@@ -136,6 +136,8 @@ return {
 		-- 4. On garde le moteur de snippets interne de Blink
 		snippets = { preset = "luasnip" },
 	},
+
+	--Création d'un commande pour activer/déactiver les snippets utile pour rédiger sans friction dans mes .md ou .mdx
 	config = function(_, opts)
 		vim.g.snippets_enabled = true
 		require("blink.cmp").setup(opts)

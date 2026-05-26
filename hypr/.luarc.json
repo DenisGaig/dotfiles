@@ -1,4 +1,9 @@
 {
+  "workspace": {
+    "library": [
+      "/usr/share/hypr/stubs"
+    ]
+  },
   "globals": [
     "hl"
   ]

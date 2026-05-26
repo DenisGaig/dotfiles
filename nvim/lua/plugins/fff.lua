@@ -4,11 +4,9 @@ return {
 		-- downloads a prebuilt binary or falls back to cargo build
 		require("fff.download").download_or_build_binary()
 	end,
-	-- for nixos:
-	-- build = "nix run .#release",
 	opts = {
 		debug = {
-			enabled = true,
+			enabled = false, -- show the file info panel next to the preview
 			show_scores = true,
 		},
 	},

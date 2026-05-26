@@ -29,6 +29,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "Active la colorcolumn pour Markdown",
 	pattern = { "markdown", "text", "mdx" },
 	callback = function()
+		-- Couleur de la colonne virtuelle moins visible
 		vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#313244" })
 		vim.opt_local.textwidth = 80 -- saut de ligne auto à 80 caractères
 		-- 't' : Auto-wrap pendant la frappe

@@ -1,3 +1,4 @@
+-- Tout est disable sauf la Command Line Popup au centre de l'écran
 return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
