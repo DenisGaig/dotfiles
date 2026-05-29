@@ -207,7 +207,7 @@ local groups = {
 	["@lsp.type.method"] = { fg = colors.green },
 	["@lsp.type.namespace"] = { fg = colors.orange },
 	["@lsp.type.parameter"] = { fg = colors.orange },
-	["@lsp.type.property"] = { fg = colors.orange },
+	["@lsp.type.property"] = { fg = colors.purple },
 	["@lsp.type.struct"] = { fg = colors.cyan },
 	["@lsp.type.type"] = { fg = colors.bright_cyan },
 	["@lsp.type.variable"] = { fg = colors.fg },
