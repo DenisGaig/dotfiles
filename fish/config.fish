@@ -19,7 +19,7 @@ alias nv="nvim"
 alias ks="~/.dotfiles/kitty/scripts/ks.sh"
 alias wall='~/.dotfiles/hypr/scripts/random-wallpaper.sh'
 alias ya="yazi"
-alias nvim-pack="NVIM_APPNAME=nvim-pack nvim"
+alias nvim-pack="NVIM_APPNAME=nvim-pack nvim" # variable pour changer les chemins XDG pour nvim-pack
 
 # Git alias
 alias g="git"
