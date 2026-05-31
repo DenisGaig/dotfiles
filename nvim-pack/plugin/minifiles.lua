@@ -79,7 +79,7 @@ add {
             },
         },
         on_setup = function()
-            -- LSP rename/move handler (de ton ancienne config)
+            -- LSP rename/move handler
             vim.api.nvim_create_autocmd("User", {
                 desc = "Notify LSPs that a file was renamed",
                 pattern = { "MiniFilesActionRename", "MiniFilesActionMove" },
@@ -120,7 +120,7 @@ add {
                 end,
             })
 
-            -- Keymap d'ouverture — tu utilisais <leader>fm, Maria utilisait <leader>e
+            -- Keymap d'ouverture
             vim.keymap.set("n", "<leader>fm", function()
                 local bufname = vim.api.nvim_buf_get_name(0)
                 local path = vim.fn.fnamemodify(bufname, ":p")
