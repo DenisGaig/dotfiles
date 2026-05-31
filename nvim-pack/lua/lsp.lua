@@ -59,25 +59,25 @@ local function on_attach(client, bufnr)
 
     if client:supports_method "textDocument/typeDefinition" then
         keymap("grt", function()
-            require("pick.builtin").lsp_type_definitions()
+            require("mini.extra").pickers.lsp { scope = "type_definition" }
         end, "Type definitions (MiniPick)")
     end
 
     if client:supports_method "textDocument/implementation" then
         keymap("gri", function()
-            require("pick.builtin").lsp_implementations()
+            require("mini.extra").pickers.lsp { scope = "implementation" }
         end, "Implémentations (MiniPick)")
     end
 
     if client:supports_method "textDocument/references" then
         keymap("grr", function()
-            require("pick.builtin").lsp_references()
+            require("mini.extra").pickers.lsp { scope = "references" }
         end, "Références (MiniPick)")
     end
 
     if client:supports_method "textDocument/documentSymbol" then
         keymap("gO", function()
-            require("pick.builtin").lsp_document_symbols()
+            require("mini.extra").pickers.lsp { scope = "document_symbol" }
         end, "Symboles du document (MiniPick)")
     end
 
