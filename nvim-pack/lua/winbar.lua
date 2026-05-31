@@ -1,4 +1,4 @@
-local folder_icon = require('icons').symbol_kinds.Folder
+local folder_icon = require("icons").symbol_kinds.Folder
 
 local M = {}
 
@@ -6,17 +6,17 @@ local M = {}
 ---@return string
 function M.render()
     -- Get the path and expand variables.
-    local path = vim.fs.normalize(vim.fn.expand '%:p' --[[@as string]])
+    local path = vim.fs.normalize(vim.fn.expand "%:p" --[[@as string]])
 
     -- No special styling for diff views.
-    if vim.startswith(path, 'diffview') then
-        return string.format('%%#Winbar#%s', path)
+    if vim.startswith(path, "diffview") then
+        return string.format("%%#Winbar#%s", path)
     end
 
     -- Replace slashes by arrows.
-    local separator = ' %#WinbarSeparator# '
+    local separator = " %#WinbarSeparator# "
 
-    local prefix, prefix_path = '', ''
+    local prefix, prefix_path = "", ""
 
     -- If the window gets too narrow, shorten the path and drop the prefix.
     if vim.api.nvim_win_get_width(0) < math.floor(vim.o.columns / 3) then
@@ -37,38 +37,49 @@ function M.render()
                 prefix, prefix_path = dir_name, dir_path
             end
         end
-        if prefix ~= '' then
-            path = path:gsub('^' .. vim.pesc(prefix_path), '')
-            prefix = string.format('%%#WinBarDir#%s %s%s', folder_icon, prefix, separator)
+        if prefix ~= "" then
+            path = path:gsub("^" .. vim.pesc(prefix_path), "")
+            prefix = string.format("%%#WinBarDir#%s %s%s", folder_icon, prefix, separator)
         end
     end
 
     -- Remove leading slash.
-    path = path:gsub('^/', '')
+    path = path:gsub("^/", "")
 
+    -- NEW: Affichage du chemin du fichier avec color finale
+    local segments = vim.split(path, "/")
+    local styled = {}
+    for i, segment in ipairs(segments) do
+        -- Ternaire lua: condition and valeur_si_vrai or valeur_si_faux
+        local hl = (i == #segments) and "WinbarFilename" or "Winbar"
+        table.insert(styled, string.format("%%#%s#%s", hl, segment))
+    end
+    -- Fin nouvel ajout
     return table.concat {
-        '%=', -- Force l'alignement à droite
-        ' ',
+        "%=", -- Force l'alignement à droite
+        " ",
         prefix,
-        table.concat(
-            vim.iter(vim.split(path, '/'))
-                :map(function(segment)
-                    return string.format('%%#Winbar#%s', segment)
-                end)
-                :totable(),
-            separator
-        ),
+        table.concat(styled, separator),
+        -- table.concat(
+        --     vim
+        --         .iter(vim.split(path, "/"))
+        --         :map(function(segment)
+        --             return string.format('%%#Winbar#%s', segment)
+        --         end)
+        --         :totable(),
+        --     separator
+        -- ),
     }
 end
 
-vim.api.nvim_create_autocmd('BufWinEnter', {
-    group = vim.api.nvim_create_augroup('denis/winbar', { clear = true }),
-    desc = 'Attach winbar',
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    group = vim.api.nvim_create_augroup("denis/winbar", { clear = true }),
+    desc = "Attach winbar",
     callback = function(args)
         if
             not vim.api.nvim_win_get_config(0).zindex -- Not a floating window
-            and vim.bo[args.buf].buftype == '' -- Normal buffer
-            and vim.api.nvim_buf_get_name(args.buf) ~= '' -- Has a file name
+            and vim.bo[args.buf].buftype == "" -- Normal buffer
+            and vim.api.nvim_buf_get_name(args.buf) ~= "" -- Has a file name
             and not vim.wo[0].diff -- Not in diff mode
         then
             vim.wo.winbar = "%{%v:lua.require'winbar'.render()%}"
