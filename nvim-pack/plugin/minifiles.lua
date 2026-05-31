@@ -121,13 +121,17 @@ add {
             })
 
             -- Keymap d'ouverture
-            vim.keymap.set("n", "<leader>fm", function()
+            vim.keymap.set("n", "<leader>e", function()
                 local bufname = vim.api.nvim_buf_get_name(0)
                 local path = vim.fn.fnamemodify(bufname, ":p")
                 if path and vim.uv.fs_stat(path) then
                     require("mini.files").open(bufname, false)
                 end
             end, { desc = "File explorer" })
+
+            vim.keymap.set("n", "<leader>E", function()
+                require("mini.files").open(vim.fn.getcwd(), false)
+            end, { desc = "File explorer (cwd)" })
         end,
     },
 }
