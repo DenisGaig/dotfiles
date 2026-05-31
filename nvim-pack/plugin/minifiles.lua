@@ -1,33 +1,33 @@
 -- lua/plugins/minifiles.lua
-local add = require('vim-pack').add
+local add = require("vim-pack").add
 
 local function map_split(buf_id, lhs, direction)
-    local minifiles = require 'mini.files'
+    local minifiles = require "mini.files"
     local function rhs()
         local window = minifiles.get_explorer_state().target_window
-        if window == nil or minifiles.get_fs_entry().fs_type == 'directory' then
+        if window == nil or minifiles.get_fs_entry().fs_type == "directory" then
             return
         end
         local new_target_window
         vim.api.nvim_win_call(window, function()
-            vim.cmd(direction .. ' split')
+            vim.cmd(direction .. " split")
             new_target_window = vim.api.nvim_get_current_win()
         end)
         minifiles.set_target_window(new_target_window)
         minifiles.go_in { close_on_file = true }
     end
-    vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = 'Split ' .. string.sub(direction, 12) })
+    vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = "Split " .. string.sub(direction, 12) })
 end
 
 add {
     {
-        src = 'nvim-mini/mini.files',
+        src = "nvim-mini/mini.files",
         --module_name = 'mini.files',
         opts = {
             mappings = {
-                show_help = '?',
-                go_in_plus = '<cr>',
-                go_out_plus = '<tab>',
+                show_help = "?",
+                go_in_plus = "<cr>",
+                go_out_plus = "<tab>",
             },
             windows = {
                 preview = true,
@@ -41,26 +41,32 @@ add {
             },
             content = {
                 filter = function(entry)
-                    return entry.fs_type ~= 'file' or entry.name ~= '.DS_Store'
+                    return entry.fs_type ~= "file" or entry.name ~= ".DS_Store"
                 end,
                 sort = function(entries)
                     local function compare_alphanumerically(e1, e2)
-                        if e1.is_dir and not e2.is_dir then return true end
-                        if not e1.is_dir and e2.is_dir then return false end
+                        if e1.is_dir and not e2.is_dir then
+                            return true
+                        end
+                        if not e1.is_dir and e2.is_dir then
+                            return false
+                        end
                         if e1.pre_digits == e2.pre_digits and e1.digits ~= nil and e2.digits ~= nil then
                             return e1.digits < e2.digits
                         end
                         return e1.lower_name < e2.lower_name
                     end
                     local sorted = vim.tbl_map(function(entry)
-                        local pre_digits, digits = entry.name:match '^(%D*)(%d+)'
-                        if digits ~= nil then digits = tonumber(digits) end
+                        local pre_digits, digits = entry.name:match "^(%D*)(%d+)"
+                        if digits ~= nil then
+                            digits = tonumber(digits)
+                        end
                         return {
                             fs_type = entry.fs_type,
                             name = entry.name,
                             path = entry.path,
                             lower_name = entry.name:lower(),
-                            is_dir = entry.fs_type == 'directory',
+                            is_dir = entry.fs_type == "directory",
                             pre_digits = pre_digits,
                             digits = digits,
                         }
@@ -74,9 +80,9 @@ add {
         },
         on_setup = function()
             -- LSP rename/move handler (de ton ancienne config)
-            vim.api.nvim_create_autocmd('User', {
-                desc = 'Notify LSPs that a file was renamed',
-                pattern = { 'MiniFilesActionRename', 'MiniFilesActionMove' },
+            vim.api.nvim_create_autocmd("User", {
+                desc = "Notify LSPs that a file was renamed",
+                pattern = { "MiniFilesActionRename", "MiniFilesActionMove" },
                 callback = function(args)
                     local changes = {
                         files = {
@@ -86,8 +92,8 @@ add {
                             },
                         },
                     }
-                    local will_rename = 'workspace/willRenameFiles'
-                    local did_rename = 'workspace/didRenameFiles'
+                    local will_rename = "workspace/willRenameFiles"
+                    local did_rename = "workspace/didRenameFiles"
                     for _, client in ipairs(vim.lsp.get_clients()) do
                         if client:supports_method(will_rename) then
                             local res = client:request_sync(will_rename, changes, 1000, 0)
@@ -105,23 +111,23 @@ add {
             })
 
             -- Splits dans minifiles (de Maria)
-            vim.api.nvim_create_autocmd('User', {
-                pattern = 'MiniFilesBufferCreate',
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "MiniFilesBufferCreate",
                 callback = function(args)
                     local buf_id = args.data.buf_id
-                    map_split(buf_id, '<C-w>s', 'belowright horizontal')
-                    map_split(buf_id, '<C-w>v', 'belowright vertical')
+                    map_split(buf_id, "<C-w>s", "belowright horizontal")
+                    map_split(buf_id, "<C-w>v", "belowright vertical")
                 end,
             })
 
             -- Keymap d'ouverture — tu utilisais <leader>fm, Maria utilisait <leader>e
-            vim.keymap.set('n', '<leader>fm', function()
+            vim.keymap.set("n", "<leader>fm", function()
                 local bufname = vim.api.nvim_buf_get_name(0)
-                local path = vim.fn.fnamemodify(bufname, ':p')
+                local path = vim.fn.fnamemodify(bufname, ":p")
                 if path and vim.uv.fs_stat(path) then
-                    require('mini.files').open(bufname, false)
+                    require("mini.files").open(bufname, false)
                 end
-            end, { desc = 'File explorer' })
+            end, { desc = "File explorer" })
         end,
     },
 }
