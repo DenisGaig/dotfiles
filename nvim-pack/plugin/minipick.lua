@@ -2,24 +2,24 @@ local add = require("vim-pack").add
 
 add {
     {
-        src = "echasnovski/mini.pick",
+        src = "nvim-mini/mini.pick",
         module_name = "mini.pick",
         opts = {
             window = {
                 config = function()
-                    local width = math.floor(vim.o.columns * 0.5)
+                    local width = math.floor(vim.o.columns * 0.65)
                     local height = math.floor(vim.o.lines * 0.35)
                     return {
                         width = width,
                         height = height,
-                        col    = math.floor((vim.o.columns - width) ),
+                        col = math.floor((vim.o.columns - width)),
                     }
                 end,
             },
         },
     },
     {
-        src = "echasnovski/mini.extra",
+        src = "nvim-mini/mini.extra",
         module_name = "mini.extra",
         opts = {},
         on_setup = function()
