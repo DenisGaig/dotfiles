@@ -158,6 +158,7 @@ local groups = {
     WinBarNC = { bg = colors.transparent_black },
     WinBarDir = { fg = colors.bright_magenta, bg = colors.transparent_black, italic = true },
     WinBarSeparator = { fg = colors.green, bg = colors.transparent_black },
+    WinbarFilename = { fg = colors.green, bold = true },
 
     -- === HTML LEGACY (fallback nvim 0.12) ===
     htmlTag = { fg = colors.pink },
