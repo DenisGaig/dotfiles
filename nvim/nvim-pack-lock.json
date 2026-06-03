@@ -32,6 +32,10 @@
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "fff.nvim": {
       "rev": "030a583b37802416ce9108295b209d2e6b9d0079",
       "src": "https://github.com/dmtrKovalenko/fff.nvim"
@@ -43,6 +47,10 @@
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "gitsigns.nvim": {
+      "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "indent-blankline.nvim": {
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
@@ -111,6 +119,10 @@
     "nvim-web-devicons": {
       "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "oil.nvim": {
+      "rev": "b91ee5a77a6a9605d9c1aaf4fda74b66082c8297",
+      "src": "https://github.com/stevearc/oil.nvim"
     },
     "render-markdown.nvim": {
       "rev": "5adf0895310c1904e5abfaad40a2baad7fe44a07",

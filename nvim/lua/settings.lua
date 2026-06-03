@@ -16,7 +16,6 @@ vim.o.et = true
 
 --i Show whitespace.
 vim.opt.list = true
--- vim.opt.listchars = { space = "⋅", trail = "⋅", tab = "  " }
 vim.opt.listchars = { space = "⋅", trail = "⋅", tab = "  ↦" }
 
 -- NUMBERS
@@ -26,7 +25,7 @@ vim.opt.relativenumber = true
 -- RECHERCHE
 vim.opt.ignorecase = true -- recherche insensible à la casse
 vim.opt.smartcase = true -- sauf si tu tapes une majuscule
-vim.opt.hlsearch = false -- pas de surbrillance persistante après recherche
+-- vim.opt.hlsearch = false -- pas de surbrillance persistante après recherche
 
 -- UX
 vim.opt.scrolloff = 10 -- garde 10 lignes visibles au dessus/dessous du curseur
@@ -35,9 +34,15 @@ vim.opt.signcolumn = "yes" -- colonne gauche toujours visible (évite les sauts 
 vim.opt.updatetime = 50 -- réactivité plus rapide
 vim.opt.termguicolors = true
 
--- Status line
+-- STATUS LINE
 vim.opt.cmdheight = 1 -- 0 pour pas de command line avec plugin noice.lua
 vim.o.laststatus = 3
+
+-- COMPLETION.
+vim.opt.wildignore:append { ".DS_Store" }
+vim.o.completeopt = "menuone,noselect,noinsert"
+vim.o.pumheight = 15
+vim.o.pumborder = "rounded"
 
 -- CLIPBOARD
 vim.opt.clipboard = "unnamedplus" -- partage le clipboard système

@@ -1,15 +1,15 @@
-local add_on_event = require('vim-pack').add_on_event
+local add_on_event = require("vim-pack").add_on_event
 
 -- Remember my mappings.
-add_on_event('UIEnter', {
+add_on_event("UIEnter", {
     {
-        src = 'nvim-mini/mini.clue',
+        src = "nvim-mini/mini.clue",
         opts = function()
-            local miniclue = require 'mini.clue'
+            local miniclue = require "mini.clue"
 
             -- Some builtin keymaps that I don't use and that I don't want mini.clue to show.
-            for _, lhs in ipairs { '[%', ']%', 'g%' } do
-                vim.keymap.del('n', lhs)
+            for _, lhs in ipairs { "[%", "]%", "g%" } do
+                vim.keymap.del("n", lhs)
             end
 
             -- Add a-z/A-Z marks.
@@ -23,7 +23,7 @@ add_on_event('UIEnter', {
                         local key = mark.mark:sub(2, 2)
 
                         -- Just look at letter marks.
-                        if not string.match(key, '^%a') then
+                        if not string.match(key, "^%a") then
                             return nil
                         end
 
@@ -31,17 +31,17 @@ add_on_event('UIEnter', {
                         -- For local marks, use the line number and content.
                         local desc
                         if mark.file then
-                            desc = vim.fn.fnamemodify(mark.file, ':p:~:.')
+                            desc = vim.fn.fnamemodify(mark.file, ":p:~:.")
                         elseif mark.pos[1] and mark.pos[1] ~= 0 then
                             local line_num = mark.pos[2]
                             local lines = vim.fn.getbufline(mark.pos[1], line_num)
                             if lines and lines[1] then
-                                desc = string.format('%d: %s', line_num, lines[1]:gsub('^%s*', ''))
+                                desc = string.format("%d: %s", line_num, lines[1]:gsub("^%s*", ""))
                             end
                         end
 
                         if desc then
-                            return { mode = 'n', keys = string.format('`%s', key), desc = desc }
+                            return { mode = "n", keys = string.format("`%s", key), desc = desc }
                         end
                     end)
                     :totable()
@@ -50,14 +50,14 @@ add_on_event('UIEnter', {
             -- Clues for recorded macros.
             local function macro_clues()
                 local res = {}
-                for _, register in ipairs(vim.split('abcdefghijklmnopqrstuvwxyz', '')) do
+                for _, register in ipairs(vim.split("abcdefghijklmnopqrstuvwxyz", "")) do
                     local keys = string.format('"%s', register)
                     local ok, desc = pcall(vim.fn.getreg, register)
-                    if ok and desc ~= '' then
+                    if ok and desc ~= "" then
                         ---@cast desc string
-                        desc = string.format('register: %s', desc:gsub('%s+', ' '))
-                        table.insert(res, { mode = 'n', keys = keys, desc = desc })
-                        table.insert(res, { mode = 'v', keys = keys, desc = desc })
+                        desc = string.format("register: %s", desc:gsub("%s+", " "))
+                        table.insert(res, { mode = "n", keys = keys, desc = desc })
+                        table.insert(res, { mode = "v", keys = keys, desc = desc })
                     end
                 end
 
@@ -67,31 +67,32 @@ add_on_event('UIEnter', {
             return {
                 triggers = {
                     -- Builtins.
-                    { mode = { 'n', 'x' }, keys = 'g' },
-                    { mode = { 'n', 'x' }, keys = '`' },
-                    { mode = { 'n', 'x' }, keys = '"' },
-                    { mode = { 'i', 'c' }, keys = '<C-r>' },
-                    { mode = 'n', keys = '<C-w>' },
-                    { mode = 'i', keys = '<C-x>' },
-                    { mode = 'n', keys = 'z' },
+                    { mode = { "n", "x" }, keys = "g" },
+                    { mode = { "n", "x" }, keys = "`" },
+                    { mode = { "n", "x" }, keys = '"' },
+                    { mode = { "i", "c" }, keys = "<C-r>" },
+                    { mode = "n", keys = "<C-w>" },
+                    { mode = "i", keys = "<C-x>" },
+                    { mode = "n", keys = "z" },
                     -- Leader triggers.
-                    { mode = { 'n', 'x' }, keys = '<leader>' },
+                    { mode = { "n", "x" }, keys = "<leader>" },
                     -- Moving between stuff.
-                    { mode = 'n', keys = '[' },
-                    { mode = 'n', keys = ']' },
+                    { mode = "n", keys = "[" },
+                    { mode = "n", keys = "]" },
                 },
                 clues = {
                     -- Leader/movement groups.
-                    { mode = { 'n', 'x' }, keys = '<leader>a', desc = '+ai' },
-                    { mode = { 'n', 'x' }, keys = '<leader>c', desc = '+code' },
-                    { mode = { 'n', 'x' }, keys = '<leader>f', desc = '+find' },
-                    { mode = 'n', keys = '<leader>b', desc = '+buffers' },
-                    { mode = 'n', keys = '<leader>d', desc = '+debug' },
-                    { mode = 'n', keys = '<leader>p', desc = '+package manager' },
-                    { mode = 'n', keys = '<leader>t', desc = '+tabs' },
-                    { mode = 'n', keys = '<leader>x', desc = '+loclist/quickfix' },
-                    { mode = 'n', keys = '[', desc = '+prev' },
-                    { mode = 'n', keys = ']', desc = '+next' },
+                    { mode = { "n", "x" }, keys = "<leader>a", desc = "+ai" },
+                    { mode = { "n", "x" }, keys = "<leader>c", desc = "+code" },
+                    { mode = { "n", "x" }, keys = "<leader>f", desc = "+find" },
+                    { mode = { "n", "x" }, keys = "<leader>l", desc = "+launch" },
+                    { mode = "n", keys = "<leader>b", desc = "+buffers" },
+                    { mode = "n", keys = "<leader>d", desc = "+debug" },
+                    { mode = "n", keys = "<leader>p", desc = "+package manager" },
+                    { mode = "n", keys = "<leader>t", desc = "+tabs" },
+                    { mode = "n", keys = "<leader>x", desc = "+loclist/quickfix" },
+                    { mode = "n", keys = "[", desc = "+prev" },
+                    { mode = "n", keys = "]", desc = "+next" },
                     -- Builtins.
                     miniclue.gen_clues.g(),
                     miniclue.gen_clues.marks(),
@@ -104,8 +105,8 @@ add_on_event('UIEnter', {
                 },
                 window = {
                     delay = 500,
-                    scroll_down = '<C-f>',
-                    scroll_up = '<C-b>',
+                    scroll_down = "<C-f>",
+                    scroll_up = "<C-b>",
                     config = function(bufnr)
                         local max_width = 0
                         for _, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)) do

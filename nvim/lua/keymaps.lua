@@ -1,5 +1,9 @@
 local map = vim.keymap.set
 
+-- Remap for dealing with word wrap and adding jumps to the jumplist.to use with <C-o>
+map("n", "j", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'j']], { expr = true })
+map("n", "k", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'k']], { expr = true })
+
 -- NAVIGATION ENTRE SPLITS
 map("n", "<C-h>", "<C-w>h", { desc = "Aller dans la split de gauche" })
 map("n", "<C-l>", "<C-w>l", { desc = "Aller dans la split de droite" })
@@ -14,13 +18,13 @@ map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Déplacer une ligne vers le bas en m
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Déplacer une ligne vers le haut en mode visuel" })
 
 -- GARDER LE CURSEUR CENTRÉ
-map("n", "<C-d>", "<C-d>zz", { desc = "Descendre d'une demi-page" }) -- descendre demi-page
-map("n", "<C-u>", "<C-u>zz", { desc = "Monter d'une demi-page" }) -- monter demi-page
-map("n", "n", "nzz", { desc = "Resultat suivant centré" }) -- résultat de recherche suivant centré
-map("n", "N", "Nzz", { desc = "Resultat precedent centré" }) -- résultat précédent centré
+map("n", "<C-d>", "<C-d>zz", { desc = "Descendre d'une demi-page" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Monter d'une demi-page" })
+map("n", "n", "nzz", { desc = "Resultat suivant centré" })
+map("n", "N", "Nzz", { desc = "Resultat precedent centré" })
 
 -- SPLITTING & RESIZING
-map("n", "<leader>sv", ":vsplit<CR>", { desc = "Split window vertically" })
+map("n", "<leader>v", ":vsplit<CR>", { desc = "Split window vertically" })
 map("n", "<leader>h", ":split<CR>", { desc = "Split window horizontally" })
 map("n", "<M-,>", "<C-w>5<", { desc = "Resize window to the left" })
 map("n", "<M-;>", "<C-w>5>", { desc = "Resize window to the right" })
@@ -28,6 +32,13 @@ map("n", "<M-t>", "<C-w>+", { desc = "Resize window to the top" })
 
 -- Make U opposite to u.
 map("n", "U", "<C-r>", { desc = "Redo" })
+
+-- Escape and save changes.
+map({ "s", "i", "n", "v" }, "<C-s>", "<esc>:w<cr>", { desc = "Exit insert mode and save changes" })
+map({ "s", "i", "n", "v" }, "<C-S-s>", function()
+    vim.g.skip_formatting = true
+    return "<esc>:w<cr>"
+end, { desc = "Exit insert mode and save changes (without formatting)", expr = true })
 
 -- QUICK FIX
 map("n", "<A-k>", "<cmd>cnext<cr>zz", { desc = "Next quickfix item" })
@@ -55,9 +66,13 @@ map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]ui
 
 -- TERMINAL
 map("t", "<esc>", [[<C-\><C-n>]], { desc = "Mode normal terminal" })
-map("n", "<F12>", "<cmd>botright split | term<cr>", { desc = "Terminal horizontal bas" })
+map("n", "<leader>lt", "<cmd>botright split | term<cr>", { desc = "Terminal horizontal bas" })
+
+-- SCRATCH BUFFERS FOR NOTES AND LUA TESTS
+map("n", "<leader>ls", "<cmd>:Scratch<cr>", { desc = "Scratch buffer for notes" })
+map("n", "<leader>ll", "<cmd>:Scratch lua<cr>", { desc = "Lua Scratch buffer for tests" })
+
 -- Lance un terminal python pour le REPL(Read Eval Print Loop)
 map("n", "<leader>tp", function()
-	vim.cmd("20split | term python")
+    vim.cmd "20split | term python"
 end, { desc = "Python REPL" })
-

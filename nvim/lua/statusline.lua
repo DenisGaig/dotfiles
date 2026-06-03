@@ -91,7 +91,7 @@ function M.mode_component()
 
     -- Construct the bubble-like component.
     return table.concat {
-        string.format("%%#StatuslineModeSeparator%s#", hl),
+        string.format("%%#StatuslineModeSeparator%s#", hl), --
         string.format("%%#StatuslineMode%s#%s", hl, mode),
         string.format("%%#StatuslineModeSeparator%s#", hl),
     }

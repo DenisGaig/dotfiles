@@ -49,6 +49,7 @@ return {
 				end
 			end,
 		})
+
 		vim.api.nvim_create_autocmd("FileType", {
 			callback = function(ev)
 				local lang = vim.treesitter.language.get_lang(vim.bo[ev.buf].filetype)
