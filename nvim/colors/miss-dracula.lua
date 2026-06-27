@@ -440,6 +440,18 @@ local groups = {
     RenderMarkdownTableHead = { fg = colors.purple, bold = true },
     RenderMarkdownTableFill = { fg = colors.purple },
 
+    -- Bufferline.
+    -- BufferLineBufferSelected = { bg = colors.bg, underline = true, sp = colors.purple },
+    -- BufferLineFill = { bg = colors.bg },
+
+    TabLine = { fg = colors.comment, bg = colors.bg },
+    TabLineFill = { bg = colors.bg },
+    TabLineSel = { bg = colors.purple },
+
+    -- Make these titles more visible.
+    -- MiniClueTitle = { bold = true, fg = colors.cyan },
+    -- MiniFilesTitleFocused = { bold = true, fg = colors.cyan },
+
     -- MiniFiles / Oil
     MiniFilesBorder = { fg = colors.comment },
     MiniFilesTitle = { fg = colors.pink, bold = true },
