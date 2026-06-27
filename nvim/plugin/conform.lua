@@ -11,9 +11,13 @@ add_on_event({ "BufReadPre", "BufNewFile" }, {
             formatters_by_ft = {
                 astro = { "prettier" },
                 css = { "prettier" },
-                --c = { name = 'clangd', timeout_ms = 500, lsp_format = 'prefer' },
+                -- Via LSP (clang) comme Maria SolOS
+                c = { name = "clangd", timeout_ms = 500, lsp_format = "prefer" },
+                -- direct clang_format — plus fiable, indépendant du LSP
+                -- c = { "clang_format" },
                 --go = { name = 'gopls', timeout_ms = 500, lsp_format = 'prefer' },
                 --java = { 'palantir-java-format' },
+                html = { "prettier" },
                 javascript = { "prettier", name = "dprint", timeout_ms = 500, lsp_format = "fallback" },
                 javascriptreact = { "prettier", name = "dprint", timeout_ms = 500, lsp_format = "fallback" },
                 json = { "prettier", name = "dprint", timeout_ms = 500, lsp_format = "fallback" },
