@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         -- Couleur de la colonne virtuelle moins visible
         vim.api.nvim_set_hl(0, "VirtColumn", { fg = "#313244" })
-        vim.opt_local.textwidth = 80 -- saut de ligne auto à 80 caractères
+        vim.opt_local.textwidth = 85 -- saut de ligne auto à 85 caractères
         -- 't' : Auto-wrap pendant la frappe
         -- 'c' : Auto-wrap des commentaires
         -- 'q' : Permet le formatage avec gq/gw
