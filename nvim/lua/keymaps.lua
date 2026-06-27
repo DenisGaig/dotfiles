@@ -73,6 +73,7 @@ map("n", "<leader>ls", "<cmd>:Scratch<cr>", { desc = "Scratch buffer for notes" 
 map("n", "<leader>ll", "<cmd>:Scratch lua<cr>", { desc = "Lua Scratch buffer for tests" })
 
 -- Lance un terminal python pour le REPL(Read Eval Print Loop)
-map("n", "<leader>tp", function()
+map("n", "<leader>lp", function()
     vim.cmd "20split | term python"
+    vim.cmd "startinsert"
 end, { desc = "Python REPL" })

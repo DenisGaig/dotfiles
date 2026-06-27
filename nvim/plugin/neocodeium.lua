@@ -1,3 +1,5 @@
+-- Auto-completion à lancer avec :Neocodeium auth la prmière fois pour récupérer une clé et l'ajouter
+
 local add_on_event = require("vim-pack").add_on_event
 
 add_on_event("InsertEnter", {

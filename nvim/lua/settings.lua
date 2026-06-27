@@ -5,9 +5,9 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Update times and timeouts.
---vim.o.updatetime = 300
-vim.o.timeoutlen = 300
---vim.o.ttimeoutlen = 10
+vim.o.updatetime = 300
+vim.o.timeoutlen = 500
+vim.o.ttimeoutlen = 10
 
 -- Use an indentation of 4 spaces.
 vim.o.sw = 4
@@ -16,7 +16,11 @@ vim.o.et = true
 
 --i Show whitespace.
 vim.opt.list = true
+-- vim.opt.listchars = { trail = "⋅", tab = "  ↦" }
 vim.opt.listchars = { space = "⋅", trail = "⋅", tab = "  ↦" }
+
+-- SPLIT --
+vim.opt.splitright = true
 
 -- NUMBERS
 vim.opt.nu = true

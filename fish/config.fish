@@ -15,11 +15,12 @@ starship init fish | source
 alias ll="eza -lha --icons=auto --sort=name --group-directories-first"
 alias ls="eza --icons=auto"
 alias zed='zeditor'
-alias nv="nvim"
 alias ks="~/.dotfiles/kitty/scripts/ks.sh"
 alias wall='~/.dotfiles/hypr/scripts/random-wallpaper.sh'
 alias ya="yazi"
-alias nvim-pack="NVIM_APPNAME=nvim-pack nvim" # variable pour changer les chemins XDG pour nvim-pack
+
+alias nv="nvim"
+#alias nvim-pack="NVIM_APPNAME=nvim-pack nvim" # variable pour changer les chemins XDG pour nvim-pack
 
 # Git alias
 alias g="git"
@@ -62,3 +63,12 @@ set -gx FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200'"
 # ==== ZOXIDE ET ATUIN ==========
 zoxide init fish | source
 atuin init fish | source
+
+# ======= PATH NPM ET PNPM ==========
+# pnpm
+set -gx PNPM_HOME "/home/denis/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
+set -x PATH ~/.npm-global/bin $PATH

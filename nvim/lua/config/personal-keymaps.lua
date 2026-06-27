@@ -1,3 +1,33 @@
+-- =======================================================
+-- 🔑 Splits sur commandes de la ligne de commande type
+-- :term, :e, :help et autres suivit de <c-l>, <c-j> et <c-cr>
+-- =======================================================
+local function spltis(mod)
+    local cmd = vim.fn.getcmdline()
+    return string.format("<C-\\>e'%s %s'<CR><CR>", mod, cmd)
+end
+
+--stylua: ignore start
+vim.keymap.set('c', '<c-l>', function() return spltis 'vertical' end, { expr = true })
+vim.keymap.set('c', '<c-j>', function() return spltis 'horizontal' end, { expr = true })
+vim.keymap.set('c', '<c-t>', function() return spltis 'tab' end, { expr = true })
+--stylua: ignore end
+
+-- ========================================================
+-- Compilation et run du fichier courant en C
+-- ========================================================
+-- vim.keymap.set("n", "<leader>cc", function()
+--     vim.cmd "!gcc % -o %:r -Wall -std=c11 && ./%:r"
+-- end, { desc = "Compile & run current file" })
+
+vim.keymap.set("n", "<leader>cc", function()
+    local file = vim.fn.expand "%"
+    local out = vim.fn.expand "%:r"
+    vim.cmd("botright split | terminal gcc " .. file .. " -o " .. out .. " -Wall -std=c11 -lm && ./" .. out)
+    -- -lm pour utiliser la librairie math.h utilisant libm.so
+    vim.cmd "startinsert"
+end, { desc = "Compile & run current C file" })
+
 -- ========================================================
 -- 🔑 Open Daily Note
 -- ========================================================
