@@ -1,4 +1,5 @@
--- Auto-completion à lancer avec :Neocodeium auth la prmière fois pour récupérer une clé et l'ajouter
+-- Auto-completion à lancer avec :Neocodeium auth la première fois pour récupérer une clé et l'ajouter
+-- https://windsurf.com/enterprise/account/login?redirect_uri=vim-show-auth-token
 
 local add_on_event = require("vim-pack").add_on_event
 
