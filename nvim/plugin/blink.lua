@@ -1,5 +1,6 @@
 local add = require("vim-pack").add
 local on_plugin_update = require("vim-pack").on_plugin_update
+local autosnip_enabled = true
 
 -- Auto-completion and snippets.
 add {
@@ -56,6 +57,14 @@ add {
 
             -- Autosnippets
             luasnip.setup { enable_autosnippets = true }
+
+            -- Commande pour activer/déactiver les autosnippets avec un keymap dans personnal-keymaps.lua
+            vim.api.nvim_create_user_command("LuaSnipAutoToggle", function()
+                local ls = require "luasnip"
+                autosnip_enabled = not autosnip_enabled
+                ls.config.set_config { enable_autosnippets = autosnip_enabled }
+                vim.notify("Autosnippets: " .. (autosnip_enabled and "ON" or "OFF"), vim.log.levels.INFO)
+            end, { desc = "Toggle LuaSnip autosnippets" })
 
             -- Load my custom snippets:
             require("luasnip.loaders.from_vscode").lazy_load {
