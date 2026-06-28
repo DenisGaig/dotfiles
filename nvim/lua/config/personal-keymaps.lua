@@ -13,6 +13,28 @@ vim.keymap.set('c', '<c-j>', function() return spltis 'horizontal' end, { expr =
 vim.keymap.set('c', '<c-t>', function() return spltis 'tab' end, { expr = true })
 --stylua: ignore end
 
+-- ============================================================
+-- 🔑 Search cword in next split
+-- Sélectionner un mot dans un split et le chercher dans l'autre
+-- ============================================================
+vim.keymap.set("n", "<leader>cw", function()
+    local word = vim.fn.expand "<cword>"
+    vim.cmd "wincmd w" -- focus le split suivant
+    vim.fn.setreg("/", "\\<" .. word .. "\\>")
+    vim.cmd "normal! n"
+end, { desc = "Search cword in next split" })
+
+-- ============================================================
+-- 🔑 Toggle autosnippets (parfait pour le Markdown)
+-- ============================================================
+vim.keymap.set("n", "<leader>cs", "<cmd>LuaSnipAutoToggle<cr>", { desc = "Toggle autosnippets" })
+
+-- ============================================================
+-- 🔑 AI Toggle NeoCodeium
+-- ============================================================
+vim.keymap.set("n", "<leader>ae", "<cmd>NeoCodeium enable_buffer<cr>", { desc = "Codeium enable buffer" })
+vim.keymap.set("n", "<leader>ad", "<cmd>NeoCodeium disable_buffer<cr>", { desc = "Codeium disable buffer" })
+
 -- ========================================================
 -- Compilation et run du fichier courant en C
 -- ========================================================
@@ -221,11 +243,3 @@ vim.keymap.set("n", "<M-x>", function()
 
     vim.cmd "silent! write"
 end, { desc = "Toggle task markdown + déplace dans Completed - Skitty Note" })
-
--- ======== 🔑 Search cword in next split ========
-vim.keymap.set("n", "<leader>cw", function()
-    local word = vim.fn.expand "<cword>"
-    vim.cmd "wincmd w" -- focus le split suivant
-    vim.fn.setreg("/", "\\<" .. word .. "\\>")
-    vim.cmd "normal! n"
-end, { desc = "Search cword in next split" })
