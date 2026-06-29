@@ -25,6 +25,7 @@ add_on_event({ "BufReadPre", "BufNewFile" }, {
                 less = { "prettier" },
                 lua = { "stylua" },
                 markdown = { "prettier", name = "dprint", timeout_ms = 500, lsp_format = "fallback" },
+                nix = { "alejandra" },
                 python = { "isort", "black" },
                 rust = { name = "rust_analyzer", timeout_ms = 500, lsp_format = "prefer" },
                 --scss = { 'prettier' },
