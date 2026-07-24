@@ -26,6 +26,62 @@ add {
             local pick = require "mini.pick"
             local extra = require "mini.extra"
 
+            -- Picker sur-mesure pour naviguer dans les titres Markdown
+            local function markdown_toc_picker()
+                local bufnr = vim.api.nvim_get_current_buf()
+                local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+                local items = {}
+                local in_code_block = false
+
+                for line_idx, line in ipairs(lines) do
+                    -- Détecte l'entrée ou la sortie d'un bloc de code (```)
+                    if line:match "^%s*```" then
+                        in_code_block = not in_code_block
+                    end
+
+                    -- On ne cherche les titres QUE si l'on est HORS d'un bloc de code
+                    if not in_code_block then
+                        local hashes, title = line:match "^(#+)%s+(.*)$"
+                        if hashes then
+                            local level = #hashes
+                            -- Alignement visuel sous forme d'arbre
+                            local indent = string.rep("  ", level - 1)
+                            local prefix = level == 1 and "󰉫 " or "├─ "
+                            local formatted_text = string.format("%s%s%s", indent, prefix, title)
+
+                            table.insert(items, {
+                                text = formatted_text,
+                                bufnr = bufnr,
+                                lnum = line_idx,
+                                col = 1,
+                            })
+                        end
+                    end
+                end
+
+                if #items == 0 then
+                    vim.notify("Aucun titre Markdown trouvé", vim.log.levels.WARN)
+                    return
+                end
+
+                MiniPick.start {
+                    source = {
+                        name = "Markdown Headings",
+                        items = items,
+                        choose = function(item)
+                            if item then
+                                MiniPick.default_choose(item)
+                            end
+                        end,
+                        preview = function(bufnr_preview, item)
+                            if item then
+                                MiniPick.default_preview(bufnr_preview, item)
+                            end
+                        end,
+                    },
+                }
+            end
+
             vim.keymap.set("n", "<leader>ff", function()
                 pick.builtin.files()
             end, { desc = "[F]ind Files" })
@@ -75,8 +131,17 @@ add {
             end, { desc = "LSP Workspace Symbols" })
 
             vim.keymap.set("n", "<leader>ss", function()
-                extra.pickers.lsp { scope = "document_symbol" }
-            end, { desc = "LSP Symbols" })
+                if vim.bo.filetype == "markdown" then
+                    markdown_toc_picker()
+                else
+                    -- Fallback sur le LSP habituel pour le code source
+                    require("mini.extra").pickers.lsp { scope = "document_symbol" }
+                end
+            end, { desc = "TOC / Document Symbols" })
+
+            -- vim.keymap.set("n", "<leader>ss", function()
+            --     extra.pickers.lsp { scope = "document_symbol" }
+            -- end, { desc = "LSP Symbols" })
 
             vim.keymap.set("n", "<leader>fk", function()
                 local global = vim.api.nvim_get_keymap "n" -- en mode normal
