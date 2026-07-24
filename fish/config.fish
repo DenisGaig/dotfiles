@@ -18,8 +18,23 @@ alias zed='zeditor'
 alias ks="~/.dotfiles/kitty/scripts/ks.sh"
 alias wall='~/.dotfiles/hypr/scripts/random-wallpaper.sh'
 alias ya="yazi"
+alias mkdir="mkdir -pv"
+alias mv="mv -iv"
+alias ln="ln -iv"
+alias ..="cd .."
+alias ...="cd ../../.."
+alias ....="cd ../../../.."
+alias cd..="cd .."
+alias cp="cp -iv"
+
+# alias de sécurité
+alias rm="rm -I --preserve-root"
+alias chown="chown --preserve-root"
+alias chmod="chmod --preserve-root"
+alias chgrp="chgrp --preserve-root"
 
 alias nv="nvim"
+alias za="zathura"
 #alias nvim-pack="NVIM_APPNAME=nvim-pack nvim" # variable pour changer les chemins XDG pour nvim-pack
 
 # Git alias
@@ -35,6 +50,14 @@ alias gco="git checkout"
 alias gb="git branch"
 alias gf="git fetch"
 alias gm="git merge"
+
+
+# Connexion ssh vers Dell ~/projets
+function p
+    ssh dell -t "cd ~/projets/$argv[1] && nvim"
+end
+
+abbr reload 'source ~/.dotfiles/fish/config.fish'
 
 # NEOFETCH n'est plus maintenu: script perso pour le remplacer
 #if status is-interactive && test -z "$FZF_PREVIEW_COLUMNS"
@@ -72,3 +95,9 @@ if not string match -q -- $PNPM_HOME $PATH
 end
 # pnpm end
 set -x PATH ~/.npm-global/bin $PATH
+
+# ===== MISE (gestionnaire de version node, pnpm...) =====
+mise activate fish | source
+
+# ===== CONFIG DE LIBVIRT pour les VMs ======
+set -gx LIBVIRT_DEFAULT_URI qemu:///system
