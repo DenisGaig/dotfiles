@@ -23,8 +23,17 @@ add_on_event("UIEnter", {
             require("nvim-surround").setup {
                 surrounds = {
                     -- alias 'c' pour les backticks triples
+                    -- ["c"] = {
+                    --     add = { "```\n", "\n```" },
+                    -- },
                     ["c"] = {
-                        add = { "```\n", "\n```" },
+                        add = function()
+                            local lang = vim.fn.input "Langage (bash): "
+                            if lang == "" then
+                                lang = "bash"
+                            end
+                            return { { "```" .. lang, "" }, { "", "```" } }
+                        end,
                     },
                 },
             }
