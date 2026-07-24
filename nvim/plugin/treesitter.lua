@@ -21,6 +21,7 @@ local parsers = {
     "markdown",
     "markdown_inline",
     "mdx",
+    "nginx",
     "python",
     "query",
     "rasi",
