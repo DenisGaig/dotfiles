@@ -134,6 +134,17 @@ add {
 
                     return sources
                 end,
+                providers = {
+                    lsp = {
+                        name = "LSP",
+                        module = "blink.cmp.sources.lsp",
+                        opts = {
+                            markdown_oxide = {
+                                keyword_pattern = [[\(\k\| \|\/\|#\)\+]],
+                            },
+                        },
+                    },
+                },
             },
             appearance = {
                 kind_icons = require("icons").symbol_kinds,
