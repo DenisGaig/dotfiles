@@ -16,8 +16,8 @@ vim.o.et = true
 
 --i Show whitespace.
 vim.opt.list = true
--- vim.opt.listchars = { trail = "⋅", tab = "  ↦" }
-vim.opt.listchars = { space = "⋅", trail = "⋅", tab = "  ↦" }
+vim.opt.listchars = { trail = "⋅", tab = "  ↦" }
+-- vim.opt.listchars = { space = "⋅", trail = "⋅", tab = "  ↦" }
 
 -- SPLIT --
 vim.opt.splitright = true
