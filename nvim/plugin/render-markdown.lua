@@ -1,46 +1,60 @@
-local pack = require('vim-pack')
+local pack = require "vim-pack"
 
 -- treesitter et nvim-web-devicons sont déjà installés : pas besoin de les rajouter
-pack.add_on_file_type({ 'markdown', 'mdx' }, {
+pack.add_on_file_type({ "markdown", "mdx" }, {
     {
-        src = 'MeanderingProgrammer/render-markdown.nvim',
+        src = "MeanderingProgrammer/render-markdown.nvim",
         opts = {
-            file_types   = { 'markdown', 'mdx' },
-            yaml         = { enabled = false },
-            html         = { enabled = false },
-            latex        = { enabled = true },
-            heading      = {
-                icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
-                sign  = vim.g.neovim_mode ~= 'skitty',
+            file_types = { "markdown", "mdx" },
+            yaml = { enabled = false },
+            html = { enabled = false },
+            latex = { enabled = true },
+            heading = {
+                icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+                sign = vim.g.neovim_mode ~= "skitty",
             },
-            bullet       = { enabled = true },
-            code         = {
-                sign      = false,
-                width     = 'block',
+            bullet = { enabled = true },
+            code = {
+                sign = false,
+                width = "block",
                 right_pad = 1,
             },
-            checkbox     = {
-                enabled   = true,
+            checkbox = {
+                enabled = true,
                 unchecked = {
-                    icon            = '   󰄱 ',
-                    highlight       = 'RenderMarkdownUnchecked',
+                    icon = "   󰄱 ",
+                    highlight = "RenderMarkdownUnchecked",
                     scope_highlight = nil,
                 },
-                checked   = {
-                    icon            = '   󰱒 ',
-                    highlight       = 'RenderMarkdownChecked',
+                checked = {
+                    icon = "   󰱒 ",
+                    highlight = "RenderMarkdownChecked",
                     scope_highlight = nil,
                 },
             },
-            pipe_table   = { preset = 'round' },
+            pipe_table = { preset = "round" },
             anti_conceal = { enabled = true },
-            link         = {
-                enabled   = true,
-                highlight = 'RenderMarkdownLink',
+            link = {
+                enabled = true,
+                highlight = "RenderMarkdownLink",
+                wiki = {
+                    enabled = true,
+                    icon = "󱗖 ",
+                    body = function(ctx)
+                        -- ctx.text contient le texte brut du lien, ex: "notes/xxx#1. Résolution DNS..."
+                        -- on ne garde que ce qui suit le dernier "#", sinon le nom du fichier après le dernier "/"
+                        local text = ctx.destination
+                        local heading = text:match "#([^#]+)$"
+                        if heading then
+                            return heading
+                        end
+                        return text:match "([^/]+)$" or text
+                    end,
+                },
             },
         },
         on_setup = function()
-            vim.keymap.set('n', '<leader>mt', '<cmd>RenderMarkdown toggle<cr>', { desc = 'Toggle Markdown Render' })
+            vim.keymap.set("n", "<leader>mt", "<cmd>RenderMarkdown toggle<cr>", { desc = "Toggle Markdown Render" })
         end,
     },
 })
