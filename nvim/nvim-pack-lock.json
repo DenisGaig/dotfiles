@@ -124,6 +124,10 @@
       "rev": "b91ee5a77a6a9605d9c1aaf4fda74b66082c8297",
       "src": "https://github.com/stevearc/oil.nvim"
     },
+    "opencode.nvim": {
+      "rev": "7749a034db61258ece828df70a89ff31bb27ff47",
+      "src": "https://github.com/nickjvandyke/opencode.nvim"
+    },
     "render-markdown.nvim": {
       "rev": "5adf0895310c1904e5abfaad40a2baad7fe44a07",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
