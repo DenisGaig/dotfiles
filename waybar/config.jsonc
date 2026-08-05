@@ -15,8 +15,8 @@
     //"backlight",
     "memory",
     "cpu",
-    //"custom/temperature",
-    "bluetooth",
+    "custom/temperature",
+    // "bluetooth",
     "battery",
     "custom/clock"
   ],
@@ -41,7 +41,7 @@
     "*":[1,2,3,4,5,6,7,8]
     },
     "format-icons": {
-        "1": " ", // code  ou \uF121"
+        "1": "󰢩 ", // code  ou \uF121"
         "2": "", // terminal 
         "3": "󱓞 ", // Net "\ue745" 󰖟
         "4": "󰣇", // PC portable "\uf109"

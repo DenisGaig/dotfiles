@@ -3,4 +3,5 @@
 return {
     cmd = { "markdown-oxide" },
     filetypes = { "markdown", "mdx" },
+    -- root_markers = { ".obsidian", ".git" },
 }

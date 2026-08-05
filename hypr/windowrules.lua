@@ -76,7 +76,7 @@ hl.window_rule({ match = { class = "dev.zed.Zed" }, workspace = "1" })
 hl.window_rule({ match = { class = "brave-browser" }, workspace = "3" })
 hl.window_rule({ match = { class = "Alacritty" }, workspace = "4" })
 hl.window_rule({
-	match = { class = "Claude" },
+	match = { class = "com.anthropic.Claude" },
 	workspace = "5",
 	opacity = "0.95 override 0.94 override",
 })

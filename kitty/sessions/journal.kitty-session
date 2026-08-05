@@ -1,5 +1,5 @@
 new_tab journal
 # kitty_session_cd_line
-cd /home/denis/brain/journal//2026/06-juin
+cd /home/denis/brain/journal//2026/07-juil.
 # kitty_session_launch_line
-launch --title "2026-06-22-lundi" fish -i -c 'nvim +cd\ "/home/denis/brain/journal/" +norm\ G "/home/denis/brain/journal//2026/06-juin/2026-06-22-lundi.md"'
+launch --title "2026-07-28-mardi" fish -i -c 'nvim +cd\ "/home/denis/brain/journal/" +norm\ G "/home/denis/brain/journal//2026/07-juil./2026-07-28-mardi.md"'
