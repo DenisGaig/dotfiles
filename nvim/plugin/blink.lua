@@ -120,16 +120,21 @@ add {
             sources = {
                 -- Disable some sources in comments and strings.
                 default = function()
-                    local sources = { "lsp", "buffer" }
+                    local sources = { "lsp", "buffer", "snippets" }
                     local ok, node = pcall(vim.treesitter.get_node)
 
                     if ok and node then
                         if not vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
                             table.insert(sources, "path")
                         end
-                        if node:type() ~= "string" then
-                            table.insert(sources, "snippets")
+                        if node:type() == "string" then
+                            sources = vim.tbl_filter(function(source)
+                                return source ~= "snippets"
+                            end, sources)
                         end
+                        -- if node:type() ~= "string" then
+                        --     table.insert(sources, "snippets")
+                        -- end
                     end
 
                     return sources
