@@ -115,7 +115,7 @@ add {
             end, { desc = "[F]ind Word" })
 
             vim.keymap.set("n", "<leader>sn", function()
-                pick.builtin.files { cwd = vim.fn.stdpath "config" }
+                pick.builtin.files({}, { source = { cwd = vim.fn.stdpath "config" } })
             end, { desc = "[S]earch [N]eovim files" })
 
             vim.keymap.set("n", "<leader><leader>", function()
