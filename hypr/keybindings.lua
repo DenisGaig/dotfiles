@@ -24,7 +24,7 @@ hl.bind(
 	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
 )
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ internal = 3, client = 3 }))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + T", hl.dsp.group.toggle())
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
 
@@ -51,6 +51,19 @@ hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("[float] speedcrunch"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-waybar.sh"))
 hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("[float] thunar"))
+hl.bind(
+	"SUPER + V",
+	hl.dsp.exec_cmd(
+		"bash -c 'cliphist list | head -n 30 | rofi -dmenu -display-columns 2 -theme ~/.config/rofi/cliphist.rasi | cliphist decode | wl-copy'"
+	)
+)
+-- historique images, avec thumbnails
+hl.bind(
+	"SUPER + SHIFT + V",
+	hl.dsp.exec_cmd(
+		"bash -c 'rofi -modi clipboard:~/.local/bin/cliphist-rofi-img -show clipboard -show-icons -theme ~/.config/rofi/cliphist-img.rasi '"
+	)
+)
 
 -- =============================================================================
 -- FOCUS DES FENÊTRES DANS LE WORKSPACE
