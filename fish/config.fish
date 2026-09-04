@@ -11,6 +11,10 @@ fish_config theme choose "Dracula Official"
 # Propmt stylisé du terminal
 starship init fish | source
 
+# Couleurs dans man
+set -gx GROFF_NO_SGR 1
+set -gx MANPAGER "less -R --use-color -Dd+172 -Du+175"
+
 # alias
 alias ll="eza -lha --icons=auto --sort=name --group-directories-first"
 alias ls="eza --icons=auto"
@@ -65,6 +69,9 @@ abbr reload 'source ~/.dotfiles/fish/config.fish'
 #end
 
 # ============ FZF ===========
+# Utilise CTRL+T pour rechercher des fichiers
+# et ATL+C pour rechercher des dossiers et fait automatiquement cd dossier
+# =================================
 
 fzf --fish | source
 bind --erase \cr # désactive la commande par défaut Ctrl+R pour cellede Atuin
