@@ -49,12 +49,17 @@ selected_name=$(printf '%b\n' "${entries[@]}" | rofi -dmenu -i -p "🖼 " \
 # Get the full path that matches the chosen filename
 selected_wallpaper=$(printf '%s\n' "${images[@]}" | grep "/$selected_name$")
 
-# Apply wallpaper with swww
-#if [[ "$selected_wallpaper" == *.gif ]]; then
-#  swww img "$selected_wallpaper" --transition-type none
-#else
-#  swww img "$selected_wallpaper" --transition-type any --transition-fps 60 --transition-duration 1.5
-#fi
+# --- APPLICATION DU FOND D'ÉCRAN ET PYWAL ---
+
+# 1. Lancer pywal pour générer les couleurs et mettre à jour waybar
+# -i : image source
+# -n : ne pas modifier le fond d'écran (on laisse hyprpaper le faire)
+# -q : silencieux
+# -s : ne pas envoyer de séquences d'échappement au terminal
+wal -i "$selected_wallpaper" -n -q -s
+
+# Forcer Waybar à relire le CSS généré par pywal
+killall -SIGUSR2 waybar 2>/dev/null
 
 # Réinitialise hyprpaper pour forcer le rechargement
 hyprctl hyprpaper unload all
@@ -68,7 +73,7 @@ if hyprctl monitors | grep -q "HDMI-A-2"; then
     hyprctl hyprpaper wallpaper "HDMI-A-2, $selected_wallpaper"
 fi
 
-hyprctl hyprpaper preload "$selected_wallpaper"
+# hyprctl hyprpaper preload "$selected_wallpaper"
 
 # Optional: Save current wallpaper to a file for persistence
 echo "$selected_wallpaper" >"$HOME/.cache/current_wallpaper"
