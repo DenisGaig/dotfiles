@@ -117,8 +117,8 @@ local groups = {
     Macro = { fg = colors.purple },
     MatchParen = { sp = colors.fg, underline = true },
     NonText = { fg = colors.nontext },
-    -- Normal = { fg = colors.fg }, -- Pour avoir de la transparence sur le fond
-    Normal = { fg = colors.fg, bg = colors.bg }, -- Sans transparence sur le fond
+    Normal = { fg = colors.fg }, -- Pour avoir de la transparence sur le fond
+    -- Normal = { fg = colors.fg, bg = colors.bg }, -- Sans transparence sur le fond
     NormalFloat = { fg = colors.fg, bg = colors.transparent_black }, -- Fond légèremement différent pour les popups
     Number = { fg = colors.orange },
     Pmenu = { bg = colors.transparent_black, fg = colors.fg },
@@ -130,7 +130,7 @@ local groups = {
     Question = { fg = colors.purple },
     Repeat = { fg = colors.pink },
     Search = { fg = colors.bg, bg = colors.yellow },
-    SignColumn = { bg = colors.bg },
+    -- SignColumn = { bg = colors.bg },
     Special = { fg = colors.green, italic = true },
     SpecialComment = { fg = colors.comment, italic = true },
     SpecialKey = { fg = colors.nontext },
@@ -159,10 +159,13 @@ local groups = {
     DashboardKey = { fg = colors.green },
 
     -- === VIM-WINBAR ===
-    WinBar = { fg = colors.grey, bg = colors.bg },
+    -- WinBar = { fg = colors.grey, bg = colors.bg },
+    WinBar = { fg = colors.grey },
     WinBarNC = { bg = colors.transparent_black },
-    WinBarDir = { fg = colors.bright_magenta, bg = colors.transparent_black, italic = true },
-    WinBarSeparator = { fg = colors.green, bg = colors.transparent_black },
+    -- WinBarDir = { fg = colors.bright_magenta, bg = colors.transparent_black, italic = true },
+    WinBarDir = { fg = colors.bright_magenta, italic = true },
+    -- WinBarSeparator = { fg = colors.green, bg = colors.transparent_black },
+    WinBarSeparator = { fg = colors.green },
     WinbarFilename = { fg = colors.green, bold = true },
 
     -- === HTML LEGACY (fallback nvim 0.12) ===
