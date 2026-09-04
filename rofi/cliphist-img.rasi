@@ -1,0 +1,122 @@
+/* cliphist-img.rasi
+   Emplacement : ~/.config/rofi/cliphist-img.rasi
+*/
+
+* {
+    /* Palette — identique à theme.rasi */
+    main-bg:        #1d1e2fef;
+    main-fg:        #cdd6f4ff;
+    main-br:        #cba6f7ff;
+    main-ex:        #f5e0dcff;
+    select-bg:      #b89dee8a;
+    select-fg:      #11111bff;
+
+    /* Reset */
+    background-color:   transparent;
+    text-color:         @main-fg;
+    border:             0;
+    margin:             0;
+    padding:            0;
+    spacing:            0;
+}
+
+window {
+    background-color:   @main-bg;
+    border:             2px solid;
+    border-color:       @main-br;
+    border-radius:      12px;
+    width:              680px;
+    height:             360px;
+    location:           center;
+}
+
+mainbox {
+    padding:    12px;
+    spacing:    8px;
+}
+
+/* --- Barre de recherche -------------------------------------------------- */
+
+inputbar {
+    background-color:   #2a2b3ddf;
+    border-radius:      8px;
+    padding:            10px 14px;
+    spacing:            8px;
+    children:           [ entry ];
+}
+
+prompt {
+    text-color:     @main-br;
+    font:           "FiraCode Nerd Font 11";
+}
+
+entry {
+    text-color:     @main-fg;
+    font:           "FiraCode Nerd Font 11";
+    placeholder:            "rechercher... ";
+    placeholder-color:      #6c7086ff;
+}
+
+/* --- Séparateur ---------------------------------------------------------- */
+
+separator {
+    background-color:   #313244ff;
+    height:             1px;
+    margin:             4px 0px;
+}
+
+/* --- Liste de résultats -------------------------------------------------- */
+
+listview {
+    lines:          8;
+    fixed-height:   true;
+    scrollbar:      false;
+    spacing:        2px;
+}
+
+element {
+    padding:        0px 12px;
+    border-radius:  6px;
+    spacing:        6px;
+    // children:       [element-icon , element-text];
+}
+
+element normal.normal {
+    background-color:   transparent;
+    text-color:         @main-fg;
+}
+
+element selected.normal {
+    background-color:   @select-bg;
+    text-color:         @select-fg;
+}
+
+element alternate.normal {
+    background-color:   transparent;
+    text-color:         @main-fg;
+}
+
+element-text {
+    font:           "JetBrainsMono Nerd Font 10";
+    vertical-align: 0.5;
+}
+
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        4em;    /* était 120px */
+    cursor:                      inherit;
+    border-radius:               12px 12px 0px 0px;
+    // padding:                     10px;
+}
+
+/* --- Message (aucun résultat) -------------------------------------------- */
+
+message {
+    padding:    6px 12px;
+}
+
+textbox {
+    text-color: @main-ex;
+    font:       "JetBrainsMono Nerd Font 10";
+}
