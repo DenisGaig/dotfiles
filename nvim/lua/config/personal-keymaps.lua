@@ -1,4 +1,16 @@
 -- =======================================================
+-- 🔑 Keymap pour typst edition
+-- =======================================================
+
+vim.keymap.set("n", "<leader>yc", function()
+    require("config.typst").watch()
+end, { desc = "Typst watch" })
+
+vim.keymap.set("n", "<leader>yp", function()
+    require("config.typst").preview()
+end, { desc = "Typst preview" })
+
+-- =======================================================
 -- 🔑 Splits sur commandes de la ligne de commande type
 -- :term, :e, :help et autres suivit de <c-l>, <c-j> et <c-cr>
 -- =======================================================
