@@ -92,6 +92,10 @@
       "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
+    "nvim-chainsaw": {
+      "rev": "78a0e68c59f4e7760f33dacde0ff21b2498c015e",
+      "src": "https://github.com/chrisgrieser/nvim-chainsaw"
+    },
     "nvim-surround": {
       "rev": "2e93e154de9ff326def6480a4358bfc149d5da2c",
       "src": "https://github.com/kylechui/nvim-surround"
