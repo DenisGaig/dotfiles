@@ -74,7 +74,7 @@ abbr reload 'source ~/.dotfiles/fish/config.fish'
 # =================================
 
 fzf --fish | source
-bind --erase \cr # désactive la commande par défaut Ctrl+R pour cellede Atuin
+bind --erase \cr # désactive la commande par défaut Ctrl+R pour celle de Atuin
 bind --erase -M insert \cr
 
 # Options globales SANS preview
