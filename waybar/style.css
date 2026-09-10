@@ -4,7 +4,7 @@
 * {
   font-family: "FiraCode Nerd Font";
   font-weight: bold;
-  font-size: 13px;
+  font-size: 12px;
   margin: 0px;
   padding: 0px;
   border: none;
@@ -31,18 +31,19 @@
 #network,
 #backlight,
 #custom-temperature,
+#custom-media,
 #memory,
 #cpu {
-  opacity: 0.9;
+  opacity: 0.75;
   background-color: @background;
   color: @foreground;
-  margin-top: 6px;
+  margin-top: 3px;
 }
 
 #workspaces,
 #window,
 #tray {
-  padding: 4px 6px;
+  padding: 2px 6px;
   margin-left: 6px;
   margin-right: 6px;
   border-radius: 15px;
@@ -52,7 +53,7 @@
 #cpu,
 #battery,
 #bluetooth {
-  padding: 4px 2px;
+  padding: 2px 2px;
 }
 
 #custom-clock {
@@ -68,10 +69,14 @@
 }
 
 /* Boutons de la barre de puissance et autres modules */
-#custom-power,
+#custom-power{
+  border-radius: 10px;
+  padding: 2px 8px;
+}
+
 #custom-media {
   border-radius: 10px;
-  padding: 4px 8px;
+  padding: 2px 15px;
 }
 
 #network {
