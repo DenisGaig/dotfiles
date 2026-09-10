@@ -10,6 +10,7 @@ require "statusline"
 require "winbar"
 require "lsp"
 require "config.personal-keymaps"
+require "config.typst"
 require "emotions"
 
 vim.treesitter.language.register("markdown", "mdx")
