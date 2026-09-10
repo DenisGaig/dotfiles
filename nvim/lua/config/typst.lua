@@ -74,11 +74,31 @@ function M.preview()
         return
     end
 
-    vim.fn.jobstart({
-        "zathura",
-        "--fork",
-        pdf,
-    }, {
+    -- vim.fn.jobstart({
+    --     "zathura",
+    --     "--fork",
+    --     pdf,
+    -- }, {
+    --     detach = true,
+    -- })
+
+    local viewer
+
+    if vim.fn.has "win32" == 1 then
+        viewer = {
+            "SumatraPDF.exe",
+            "-reuse-instance",
+            pdf,
+        }
+    else
+        viewer = {
+            "zathura",
+            "--fork",
+            pdf,
+        }
+    end
+
+    vim.fn.jobstart(viewer, {
         detach = true,
     })
 end
