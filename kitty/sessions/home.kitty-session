@@ -1,11 +1,8 @@
 # Crée un nouvel onglet
-new_tab home
+new_tab
 
 # Aller dans le dossier home
 cd ~
 
 # Ouvrir le terminal
 launch
-
-
-

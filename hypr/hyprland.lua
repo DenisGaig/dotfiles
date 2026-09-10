@@ -90,5 +90,5 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("sh -c 'sleep 5 && systemctl --user start pacman-last-update.service'")
 	-- watchers cliphist : un par type MIME
 	hl.exec_cmd("wl-paste --type text --watch cliphist store -max-items 30")
-	hl.exec_cmd("wl-paste --type image --watch cliphist store -max-items 30")
+	hl.exec_cmd("wl-paste --type image --watch cliphist store -max-items 31")
 end)

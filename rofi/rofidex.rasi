@@ -101,6 +101,7 @@ element-text {
     vertical-align: 0.5;
 }
 
+
 /* --- Message (aucun résultat) -------------------------------------------- */
 
 message {
