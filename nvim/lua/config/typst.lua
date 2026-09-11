@@ -82,25 +82,25 @@ function M.preview()
     --     detach = true,
     -- })
 
-    local viewer
-
     if vim.fn.has "win32" == 1 then
-        viewer = {
-            "SumatraPDF.exe",
+        local viewer = vim.fn.expand "$LOCALAPPDATA" .. "/SumatraPDF/SumatraPDF.exe"
+
+        vim.fn.jobstart({
+            viewer,
             "-reuse-instance",
             pdf,
-        }
+        }, {
+            detach = true,
+        })
     else
-        viewer = {
+        vim.fn.jobstart({
             "zathura",
             "--fork",
             pdf,
-        }
+        }, {
+            detach = true,
+        })
     end
-
-    vim.fn.jobstart(viewer, {
-        detach = true,
-    })
 end
 
 return M
