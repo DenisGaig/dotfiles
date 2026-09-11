@@ -86,8 +86,11 @@ function M.preview()
         local viewer = vim.fn.expand "$LOCALAPPDATA" .. "/SumatraPDF/SumatraPDF.exe"
 
         vim.fn.jobstart({
+            "cmd.exe",
+            "/c",
+            "start",
+            "",
             viewer,
-            "-reuse-instance",
             pdf,
         }, {
             detach = true,
