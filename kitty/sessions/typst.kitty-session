@@ -1,0 +1,3 @@
+new_tab typst
+cd /data/projets/cours-typst
+launch nvim
