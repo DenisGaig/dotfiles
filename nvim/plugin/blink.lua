@@ -42,7 +42,7 @@ add {
             local luasnip = require "luasnip"
 
             -- Étend les filetypes pour hériter des snippets
-            luasnip.filetype_extend("mdx", { "markdown", "latex" })
+            luasnip.filetype_extend("mdx", { "markdown", "latex", "html" })
             luasnip.filetype_extend("markdown", { "latex" })
             luasnip.filetype_extend("typescriptreact", { "html" })
             luasnip.filetype_extend("jsx", { "html" })
