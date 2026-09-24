@@ -25,6 +25,7 @@ add_on_event({ "BufReadPre", "BufNewFile" }, {
                 less = { "prettier" },
                 lua = { "stylua" },
                 markdown = { "prettier", name = "dprint", timeout_ms = 500, lsp_format = "fallback" },
+                mdx = { "prettier", lsp_format = "fallback" },
                 typst = { "typstyle" },
                 nix = { "alejandra" },
                 python = { "isort", "black" },
