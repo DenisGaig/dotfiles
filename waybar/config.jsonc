@@ -4,6 +4,7 @@
   "height": 30,
   "spacing": 0,
   "modules-left": [
+    "custom/keybinds",
     "hyprland/workspaces",
     "tray",
     "network"
@@ -20,6 +21,13 @@
     "battery",
     "custom/clock"
   ],
+
+  "custom/keybinds": {
+    "format": "<span color='#FFD700'>󰌌</span>",
+    "on-click": "~/.dotfiles/rofi/scripts/rofi-keybinds.sh",
+    "tooltip": true,
+    "tooltip-text": "Afficher les keybinds"
+  },
 
   "custom/media": {
       "format": "{}",

@@ -32,12 +32,19 @@
 #backlight,
 #custom-temperature,
 #custom-media,
+#custom-keybinds,
 #memory,
 #cpu {
   opacity: 0.75;
   background-color: @background;
   color: @foreground;
   margin-top: 3px;
+}
+
+#custom-keybinds {
+  border-radius: 15px;
+  padding: 2px 10px;
+  margin-left: 6px;
 }
 
 #workspaces,
@@ -69,7 +76,8 @@
 }
 
 /* Boutons de la barre de puissance et autres modules */
-#custom-power{
+#custom-power
+{
   border-radius: 10px;
   padding: 2px 8px;
 }
