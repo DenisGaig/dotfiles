@@ -16,53 +16,79 @@ local python = "/data/projets/rofidex/.venv/bin/python"
 -- FENÊTRE / SESSION
 -- =============================================================================
 
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("kitty --session ~/.dotfiles/kitty/sessions/home.kitty-session"))
-hl.bind(mainMod .. " + SHIFT + Return", hl.dsp.exec_cmd('kitty -d "`hypercwd`"'))
-hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(
+	mainMod .. " + Return",
+	hl.dsp.exec_cmd("kitty --session ~/.dotfiles/kitty/sessions/home.kitty-session"),
+	{ description = "Terminal" }
+)
+hl.bind(
+	mainMod .. " + SHIFT + Return",
+	hl.dsp.exec_cmd('kitty -d "`hypercwd`"'),
+	{ description = "Terminal dans le dossier courant" }
+)
+hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Fermer la fenêtre" })
 hl.bind(
 	mainMod .. " + SHIFT + E",
-	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
+	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"),
+	{ description = "Quitter Hyprland" }
 )
-hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ internal = 3, client = 3 }))
-hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + T", hl.dsp.group.toggle())
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
+hl.bind(
+	mainMod .. " + SHIFT + F",
+	hl.dsp.window.fullscreen({ internal = 3, client = 3 }),
+	{ description = "Plein ecran" }
+)
+hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.float({ action = "toggle" }), { description = "Fenêtre flottante" })
+hl.bind(mainMod .. " + T", hl.dsp.group.toggle(), { description = "Grouper fenêtres" })
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"), { description = "Recharger la configuration" })
 
 -- =============================================================================
 -- LANCEURS / APPS
 -- =============================================================================
 
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show drun"))
+hl.bind(
+	mainMod .. " + SHIFT + K",
+	hl.dsp.exec_cmd("~/.dotfiles/rofi/scripts/rofi-keybinds.sh"),
+	{ description = "Keybinds" }
+)
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show drun"), { description = "Lancer Rofi" })
 hl.bind(
 	mainMod .. " + I",
-	hl.dsp.exec_cmd("rofimoji --hidden-descriptions --selector-args='-theme ~/.config/rofi/emoji-theme.rasi'")
+	hl.dsp.exec_cmd("rofimoji --hidden-descriptions --selector-args='-theme ~/.config/rofi/emoji-theme.rasi'"),
+	{ description = "Emoji" }
 )
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("rofimark"))
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.config/rofi/scripts/wallpaper.sh"))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(rofidex .. "/rofidex.sh"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("rofimark"), { description = "Bookmark" })
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.config/rofi/scripts/wallpaper.sh"), { description = "Wallpaper" })
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(rofidex .. "/rofidex.sh"), { description = "Fiches RofiDEX" })
 hl.bind(
 	mainMod .. " + SHIFT + S",
-	hl.dsp.exec_cmd(terminal .. " --class rofidex-capture " .. python .. " " .. rofidex .. "/capture.py")
+	hl.dsp.exec_cmd(terminal .. " --class rofidex-capture " .. python .. " " .. rofidex .. "/capture.py"),
+	{ description = "Capture RofiDEX" }
 )
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("~/.dotfiles/scripts/skitty-note.sh"))
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("geary"))
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("hyprpicker -a"))
-hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("[float] speedcrunch"))
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-waybar.sh"))
-hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("[float] thunar"))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("~/.dotfiles/scripts/skitty-note.sh"), { description = "Note (neovim)" })
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("geary"), { description = "Mail" })
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("hyprpicker -a"), { description = "Picker de Couleur" })
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("[float] speedcrunch"), { description = "Calculatrice" })
+hl.bind(
+	mainMod .. " + SHIFT + B",
+	hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-waybar.sh"),
+	{ description = "Toggle Waybar" }
+)
+hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'), { description = "Screenshot" })
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("[float] thunar"), { description = "Explorateur Thunar" })
 hl.bind(
 	"SUPER + V",
 	hl.dsp.exec_cmd(
 		"bash -c 'cliphist list | head -n 30 | rofi -dmenu -display-columns 2 -theme ~/.config/rofi/cliphist.rasi | cliphist decode | wl-copy'"
-	)
+	),
+	{ description = "Clipboard" }
 )
 -- historique images, avec thumbnails
 hl.bind(
 	"SUPER + SHIFT + V",
 	hl.dsp.exec_cmd(
 		"bash -c 'rofi -modi clipboard:~/.local/bin/cliphist-rofi-img -show clipboard -show-icons -theme ~/.config/rofi/cliphist-img.rasi '"
-	)
+	),
+	{ description = "Clipboard pour images" }
 )
 
 -- =============================================================================
@@ -81,7 +107,7 @@ hl.bind(mainMod .. " + l", function()
 	else
 		hl.dispatch(hl.dsp.focus({ direction = "right" }))
 	end
-end)
+end, { description = "Focus fenêtre à droite" })
 
 hl.bind(mainMod .. " + h", function()
 	if workspaceIsScrolling() then
@@ -89,7 +115,7 @@ hl.bind(mainMod .. " + h", function()
 	else
 		hl.dispatch(hl.dsp.focus({ direction = "left" }))
 	end
-end)
+end, { description = "Focus fenêtre à gauche" })
 
 local function workspaceIsMonocle()
 	return hl.get_active_workspace().tiled_layout == "monocle"
@@ -101,7 +127,7 @@ hl.bind(mainMod .. " + j", function()
 	else
 		hl.dispatch(hl.dsp.focus({ direction = "down" }))
 	end
-end)
+end, { description = "Focus fenêtre en bas" })
 
 hl.bind(mainMod .. " + k", function()
 	if workspaceIsMonocle() then
@@ -109,7 +135,7 @@ hl.bind(mainMod .. " + k", function()
 	else
 		hl.dispatch(hl.dsp.focus({ direction = "up" }))
 	end
-end)
+end, { description = "Focus fenêtre en haut" })
 
 -- hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 -- hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
@@ -125,8 +151,16 @@ end)
 -- hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({ direction = "down" }))
 -- hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({ direction = "up" }))
 
-hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.move({ direction = "up" }))
-hl.bind(mainMod .. " + SHIFT + j", hl.dsp.window.move({ direction = "down" }))
+hl.bind(
+	mainMod .. " + SHIFT + k",
+	hl.dsp.window.move({ direction = "up" }),
+	{ description = "Déplacer la fenêtre vers le haut" }
+)
+hl.bind(
+	mainMod .. " + SHIFT + j",
+	hl.dsp.window.move({ direction = "down" }),
+	{ description = "Déplacer la fenêtre vers le bas" }
+)
 
 hl.bind(mainMod .. " + SHIFT + l", function()
 	if workspaceIsScrolling() then
@@ -134,7 +168,7 @@ hl.bind(mainMod .. " + SHIFT + l", function()
 	else
 		hl.dispatch(hl.dsp.window.move({ direction = "right" }))
 	end
-end)
+end, { description = "Déplacer la fenêtre vers la droite" })
 
 hl.bind(mainMod .. " + SHIFT + h", function()
 	if workspaceIsScrolling() then
@@ -142,7 +176,7 @@ hl.bind(mainMod .. " + SHIFT + h", function()
 	else
 		hl.dispatch(hl.dsp.window.move({ direction = "left" }))
 	end
-end)
+end, { description = "Déplacer la fenêtre vers la gauche" })
 
 -- =============================================================================
 -- WORKSPACES — boucle comme dans l'exemple officiel
@@ -152,23 +186,27 @@ end)
 
 for i = 1, 10 do
 	local key = "code:" .. (i + 9)
-	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }), { description = "Focus workspace " .. i })
+	hl.bind(
+		mainMod .. " + SHIFT + " .. key,
+		hl.dsp.window.move({ workspace = i }),
+		{ description = "Move window to workspace " .. i }
+	)
 end
 
 -- =============================================================================
 -- SCRATCHPAD
 -- =============================================================================
 
-hl.bind(mainMod .. " + O", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + O", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mainMod .. " + O", hl.dsp.workspace.toggle_special("magic"), { description = "Scratchpad" })
+hl.bind(mainMod .. " + SHIFT + O", hl.dsp.window.move({ workspace = "special:magic" }), { description = "Scratchpad" })
 
 -- =============================================================================
 -- SCROLL WORKSPACES
 -- =============================================================================
 
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), { description = "Scroll avec souris droite" })
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }), { description = "Scroll avec souris gauche" })
 
 -- =============================================================================
 -- SOURIS — drag et resize (corrigé depuis l'exemple officiel)
