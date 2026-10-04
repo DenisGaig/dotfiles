@@ -30,6 +30,7 @@ return {
         -- Apprentissages
         t "### Apprentissages / Réalisations",
         t { "", "", "" },
+        t { "#### " },
         i(1, "Ce que j'ai découvert ou pratiqué..."),
         t { "", "", "" },
 
