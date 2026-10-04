@@ -16,7 +16,7 @@ hl.config({
 		},
 		resize_on_border = true,
 		allow_tearing = false,
-		layout = "master", -- "master", "dwindle", "scrolling", "monocle"
+		layout = "scrolling", -- "master", "dwindle", "scrolling", "monocle"
 	},
 
 	decoration = {
