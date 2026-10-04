@@ -42,11 +42,26 @@ format_mods() {
     echo "${mods[*]:-—}"
 }
 
+escape_markup() {
+    local s="$1"
+    s="${s//&/&amp;}"
+    s="${s//</&lt;}"
+    s="${s//>/&gt;}"
+    printf '%s' "$s"
+}
+
 formatted_binds=""
 while IFS=$'\t' read -r mask key desc; do
     mods=$(format_mods "$mask")
-    formatted_binds+="[Hyprland] ${mods} + ${key}  →  ${desc}"$'\n'
+    key_esc=$(escape_markup "$key")
+    desc_esc=$(escape_markup "$desc")
+    formatted_binds+="[Hyprland] <span foreground=\"#f17634\"><b>${mods} + ${key_esc}</b></span>  →  ${desc_esc}"$'\n'
 done <<<"$hypr_binds"
+
+# while IFS=$'\t' read -r mask key desc; do
+#     mods=$(format_mods "$mask")
+#     formatted_binds+="[Hyprland] ${mods} + ${key}  →  ${desc}"$'\n'
+# done <<<"$hypr_binds"
 
 # --- 2. Remaps clavier (maintenus à la main) ------------------------------
 formatted_remaps=""
