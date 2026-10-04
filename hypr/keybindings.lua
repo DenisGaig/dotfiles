@@ -45,11 +45,7 @@ hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"), { descript
 -- LANCEURS / APPS
 -- =============================================================================
 
-hl.bind(
-	mainMod .. " + SHIFT + K",
-	hl.dsp.exec_cmd("~/.dotfiles/rofi/scripts/rofi-keybinds.sh"),
-	{ description = "Keybinds" }
-)
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("~/.dotfiles/rofi/scripts/rofi-keybinds.sh"), { description = "Keybinds" })
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show drun"), { description = "Lancer Rofi" })
 hl.bind(
 	mainMod .. " + I",
@@ -177,6 +173,37 @@ hl.bind(mainMod .. " + SHIFT + h", function()
 		hl.dispatch(hl.dsp.window.move({ direction = "left" }))
 	end
 end, { description = "Déplacer la fenêtre vers la gauche" })
+
+-- =============================================================================
+-- REDIMENSIONNEMENT — SCROLLING LAYOUT
+-- =============================================================================
+
+-- Ajuster progressivement la largeur de la colonne active
+hl.bind(mainMod .. " + CTRL + h", function()
+	if workspaceIsScrolling() then
+		hl.dispatch(hl.dsp.layout("colresize -0.05"))
+	end
+end, { description = "Réduire la largeur de la colonne" })
+
+hl.bind(mainMod .. " + CTRL + l", function()
+	if workspaceIsScrolling() then
+		hl.dispatch(hl.dsp.layout("colresize +0.05"))
+	end
+end, { description = "Augmenter la largeur de la colonne" })
+
+-- Passer aux largeurs prédéfinies
+-- ALT + h/l passe entre les largeurs prédéfinies : 33,3 %, 50 %, 66,7 % et 100 % par défaut.
+hl.bind(mainMod .. " + ALT + h", function()
+	if workspaceIsScrolling() then
+		hl.dispatch(hl.dsp.layout("colresize -conf"))
+	end
+end, { description = "Largeur prédéfinie précédente" })
+
+hl.bind(mainMod .. " + ALT + l", function()
+	if workspaceIsScrolling() then
+		hl.dispatch(hl.dsp.layout("colresize +conf"))
+	end
+end, { description = "Largeur prédéfinie suivante" })
 
 -- =============================================================================
 -- WORKSPACES — boucle comme dans l'exemple officiel
