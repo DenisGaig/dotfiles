@@ -1,5 +1,19 @@
 local add_on_event = require("vim-pack").add_on_event
 
+local function python_project_root()
+    local markers = { "uv.lock", "pyproject.toml" }
+    local file = vim.api.nvim_buf_get_name(0)
+
+    if file == "" then
+        return nil
+    end
+
+    local start = vim.fs.dirname(file)
+    local root = vim.fs.root(start, markers)
+
+    return root
+end
+
 -- add_on_event("BufWritePre", {
 add_on_event({ "BufReadPre", "BufNewFile" }, {
     {
@@ -61,6 +75,40 @@ add_on_event({ "BufReadPre", "BufNewFile" }, {
             formatters = {
                 -- Require a Prettier configuration file to format.
                 prettier = { require_cwd = true },
+
+                -- Utiliser les outils du projet Python courant avec uv.
+                isort = {
+                    command = "uv", -- Utilise uv, disponible globalement, plutôt que de chercher directement black ou isort.
+                    args = {
+                        "run", -- Exécute le formateur dans l'environnement du projet.
+                        "--no-sync", -- Évite que uv tente de synchroniser les dépendances à chaque formatage.
+                        "isort",
+                        "--filename",
+                        "$FILENAME",
+                        "-",
+                    },
+                    stdin = true, -- Transmet le contenu du buffer à formater sur l'entrée standard.
+                    cwd = python_project_root, -- Définit la racine du projet à partir de uv.lock ou pyproject.toml.
+                    require_cwd = true, -- Évite d'exécuter ces formateurs si aucune racine de projet n'est trouvée.
+                    inherit = false, -- Empêche de reprendre les arguments du formateur intégré de Conform
+                },
+
+                black = {
+                    command = "uv",
+                    args = {
+                        "run",
+                        "--no-sync",
+                        "black",
+                        "--stdin-filename",
+                        "$FILENAME",
+                        "--quiet",
+                        "-",
+                    },
+                    stdin = true,
+                    cwd = python_project_root,
+                    require_cwd = true,
+                    inherit = false,
+                },
             },
         },
     },
