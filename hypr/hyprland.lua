@@ -45,6 +45,10 @@ hl.config({
 	},
 	scrolling = {
 		fullscreen_on_one_column = true,
+		direction = "right",
+		column_width = 0.5,
+		focus_fit_method = 1,
+		follow_focus = true,
 	},
 
 	input = {
@@ -83,7 +87,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("~/.dotfiles/hypr/scripts/random-wallpaper.sh")
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-	hl.exec_cmd("wlsunset -l 48.8666 -L 2.33 -t 4500 -T 6000")
+	hl.exec_cmd("wlsunset -l 48.8666 -L 2.33 -t 4201 -T 6000")
 	hl.exec_cmd("env QT_QPA_PLATFORM=wayland keepassxc")
 	hl.exec_cmd("~/.config/hypr/scripts/battery-notify.sh")
 	hl.exec_cmd("~/.config/hypr/scripts/startup.sh")
