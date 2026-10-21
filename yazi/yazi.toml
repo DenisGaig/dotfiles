@@ -5,27 +5,29 @@ show_hidden = true # Afficher les fichiers cachés
 
 [opener]
 edit = [
-    { run = 'nvim "$@"', block = true, for = "unix" },
+    { run = 'nvim %s', block = true, for = "unix" },
 ]
 open = [
-    { run = 'xdg-open "$@"', desc = "Open" },
+    { run = 'xdg-open %s', desc = "Open" },
 ]
 image = [
-    { run = 'imv "$@"', desc = "View image", mime = ["image/*"], for = "unix" },
+    { run = 'imv %s', desc = "View image", mime = ["image/*"], for = "unix" },
 ]
 images = [
-    { run = 'imv-dir "$@"', desc = "View images", mime = ["image/*"], for = "unix" },
+    { run = 'imv-dir %s', desc = "View images", mime = ["image/*"], for = "unix" },
 ]
 spreadsheet = [
-    { run = 'libreoffice "$@"', desc = "Open with LibreOffice", for = "unix" },
+    { run = 'libreoffice %s', desc = "Open with LibreOffice", for = "unix" },
 ]
 pdf = [
-    { run = 'zathura "$@"', desc = "Open with zathura", for = "unix" },
+    { run = 'zathura %s', desc = "Open with zathura", for = "unix" },
 ]
 
 [open]
 rules = [
     { url = "*.csv", use = "spreadsheet" },
+    { url = "*.docx", use = "spreadsheet" },
+    { url = "*.ods", use = "spreadsheet" },
     { mime = "text/*", use = "edit" }, # Ouvre les fichiers texte avec nvim
     { mime = "image/*", use = "image" }, # Ouvre les images avec imv (fichier unique)
     { mime = "inode/directory", use = "images" },  # Pour les dossiers
