@@ -18,6 +18,7 @@ set -gx MANPAGER "less -R --use-color -Dd+172 -Du+175"
 # alias
 alias ll="eza -lha --icons=auto --sort=name --group-directories-first"
 alias ls="eza --icons=auto"
+alias lt="eza --tree --level=2 --long --icons --git"
 alias zed='zeditor'
 alias ks="~/.dotfiles/kitty/scripts/ks.sh"
 alias wall='~/.dotfiles/hypr/scripts/random-wallpaper.sh'
@@ -40,6 +41,9 @@ alias chgrp="chgrp --preserve-root"
 alias nv="nvim"
 alias za="zathura"
 #alias nvim-pack="NVIM_APPNAME=nvim-pack nvim" # variable pour changer les chemins XDG pour nvim-pack
+
+# alias youtube à utilser avec ytmp3 'url'
+alias yt='yt-dlp -x --audio-format mp3 --embed-metadata --embed-thumbnail --sleep-requests 1 --sleep-interval 5 --cookies-from-browser firefox -o "/data/storage/musique/%(title)s.%(ext)s"'
 
 # Git alias
 alias g="git"
@@ -93,6 +97,8 @@ set -gx FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200'"
 # ==== ZOXIDE ET ATUIN ==========
 zoxide init fish | source
 atuin init fish | source
+
+tv init fish | source # active television tv (fuzzy finder) avec ctrl+t à la place de fzf
 
 # ======= PATH NPM ET PNPM ==========
 # pnpm
