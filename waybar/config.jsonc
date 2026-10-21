@@ -49,10 +49,10 @@
     "*":[1,2,3,4,5,6,7,8]
     },
     "format-icons": {
-        "1": "󰢩 ", // code  ou \uF121"
+        "1": " ", // code  ou \uF121"
         "2": "", // terminal 
         "3": "󱓞 ", // Net "\ue745" 󰖟
-        "4": "󰣇", // PC portable "\uf109"
+        "4": "", // PC portable "\uf109"
         "5": "󰜡", // Claude \uf4f5
         "6": "\udb81\ude8b", // notes - Obsidian
         "7": "\uf42f", // mail - Geary
