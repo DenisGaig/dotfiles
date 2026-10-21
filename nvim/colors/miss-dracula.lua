@@ -39,6 +39,12 @@ local colors = {
     transparent_orange = "#2D2420", -- Un orange terreux pour le H2
     transparent_yellow = "#2D2D20", -- Un jaune olive sombre pour le H3
     transparent_purple = "#231B2D", -- Un violet profond:w
+    nontext = "#3B4048",
+    transparent_blue = "#1B2430",
+    transparent_green = "#1B2D20",
+    bright_magenta = "#F5A9D0",
+    bright_yellow = "#F5F0A9",
+    bright_white = "#FFFFFF",
 }
 
 -- === STATUSLINE MODE COLORS ===
@@ -138,7 +144,8 @@ local groups = {
     SpellCap = { sp = colors.yellow, underline = true },
     SpellLocal = { sp = colors.yellow, underline = true },
     SpellRare = { sp = colors.yellow, underline = true },
-    Statement = { fg = colors.purple },
+    -- Statement = { fg = colors.purple },
+    Statement = { fg = colors.pink, bold = true }, -- return, throw, break, continue
     StorageClass = { fg = colors.pink },
     Structure = { fg = colors.yellow },
     Substitute = { fg = colors.fuchsia, bg = colors.orange, bold = true },
@@ -199,7 +206,7 @@ local groups = {
     ["@constructor"] = { fg = colors.cyan },
     ["@error"] = { fg = colors.bright_red },
     ["@function"] = { fg = colors.green },
-    ["@function.builtin"] = { fg = colors.cyan },
+    ["@function.builtin"] = { fg = colors.bright_cyan },
     ["@function.method"] = { fg = colors.green },
     ["@keyword"] = { fg = colors.pink },
     ["@keyword.conditional"] = { fg = colors.pink },
@@ -207,7 +214,9 @@ local groups = {
     ["@keyword.function"] = { fg = colors.cyan },
     ["@keyword.operator"] = { fg = colors.pink },
     ["@keyword.include"] = { fg = colors.pink },
+    ["@keyword.coroutine"] = { fg = colors.orange },
     ["@keyword.repeat"] = { fg = colors.pink },
+    ["@keyword.return"] = { fg = colors.pink, bold = true },
     ["@label"] = { fg = colors.cyan },
     ["@module"] = { fg = colors.orange },
     ["@number"] = { fg = colors.purple },
@@ -240,7 +249,7 @@ local groups = {
     ["@lsp.type.enumMember"] = { fg = colors.purple },
     ["@lsp.type.function"] = { fg = colors.green },
     ["@lsp.type.interface"] = { fg = colors.cyan },
-    ["@lsp.type.method"] = { fg = colors.green },
+    ["@lsp.type.method"] = { fg = colors.bright_green },
     ["@lsp.type.namespace"] = { fg = colors.orange },
     ["@lsp.type.parameter"] = { fg = colors.orange },
     ["@lsp.type.property"] = { fg = colors.purple },
@@ -253,10 +262,41 @@ local groups = {
     ["@struct"] = { fg = colors.cyan },
     ["@typeParameter"] = { fg = colors.cyan },
 
+    -- Distinguer les fonctions async
+    ["@lsp.typemod.function.async"] = { fg = colors.bright_green, italic = true },
+    ["@lsp.typemod.method.async"] = { fg = colors.bright_green, italic = true },
+
+    -- Faire ressortir les déclarations
+    ["@lsp.typemod.function.declaration"] = { bold = true },
+    ["@lsp.typemod.method.declaration"] = { bold = true },
+
     -- === LSP SEMANTIC TOKENS override TSX/TS ===
+    -- Membres (propriétés/méthodes d'objets)
+    ["@lsp.type.member"] = { link = "@variable.member" },
+    ["@lsp.type.member.function"] = { link = "@function.method" },
+    ["@lsp.type.member.method"] = { link = "@function.method" },
+    ["@lsp.type.member.typescriptreact"] = { link = "@function.method" },
+    ["@lsp.type.member.typescript"] = { link = "@function.method" },
+
+    -- Membres venant de la lib standard
+    ["@lsp.typemod.member.defaultLibrary"] = { link = "@function.builtin" },
+    ["@lsp.typemod.member.defaultLibrary.typescriptreact"] = { link = "@function.builtin" },
+    -- ["@lsp.mod.defaultLibrary"] = { link = "@function.builtin" },
+    ["@lsp.mod.defaultLibrary.typescriptreact"] = { link = "@function.builtin" },
+    ["@lsp.typemod.variable.defaultLibrary"] = { link = "@variable.builtin" },
+    ["@lsp.typemod.class.defaultLibrary"] = { link = "@type.builtin" },
+
     ["@lsp.type.parameter.typescriptreact"] = { fg = colors.orange, italic = false },
     ["@lsp.type.variable.typescriptreact"] = { fg = colors.fg, italic = false },
     ["@lsp.type.parameter.typescript"] = { fg = colors.orange, italic = false },
+
+    -- === PYTHON SPECIFIC OVERRIDES ===
+    -- (à placer après Statement pour override)
+
+    pythonAsync = { link = "@keyword.coroutine" },
+    -- pythonStatement = { link = "@keyword.function" },
+    pythonException = { link = "@keyword.exception" },
+    pythonReturnStatement = { link = "@keyword.return" },
 
     -- LSP.
     ComplHint = { link = "Comment" },
