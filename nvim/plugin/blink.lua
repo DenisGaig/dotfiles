@@ -100,7 +100,7 @@ add {
                 list = {
                     -- Insert items while navigating the completion list.
                     selection = { preselect = false, auto_insert = false },
-                    max_items = 10,
+                    max_items = 15,
                 },
                 documentation = { auto_show = true },
                 menu = {

@@ -131,7 +131,7 @@ add {
             end, { desc = "LSP Workspace Symbols" })
 
             vim.keymap.set("n", "<leader>ss", function()
-                if vim.bo.filetype == "markdown" then
+                if vim.bo.filetype == "markdown" or vim.bo.filetype == "mdx" then
                     markdown_toc_picker()
                 else
                     -- Fallback sur le LSP habituel pour le code source
