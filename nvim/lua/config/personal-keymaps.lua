@@ -37,6 +37,16 @@ vim.keymap.set("n", "<leader>cw", function()
 end, { desc = "Search cword in next split" })
 
 -- ============================================================
+-- 🔑 Copie le chemin du fichier ouvert
+-- ============================================================
+
+vim.keymap.set("n", "<leader>cp", function()
+    local path = vim.fn.expand "%:p"
+    vim.fn.setreg("+", path)
+    print("Copié : " .. path)
+end, { desc = "Copier le chemin absolu" })
+
+-- ============================================================
 -- 🔑 Toggle autosnippets (parfait pour le Markdown)
 -- ============================================================
 vim.keymap.set("n", "<leader>cs", "<cmd>LuaSnipAutoToggle<cr>", { desc = "Toggle autosnippets" })
