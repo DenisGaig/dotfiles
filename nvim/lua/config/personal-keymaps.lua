@@ -26,6 +26,13 @@ vim.keymap.set('c', '<c-t>', function() return spltis 'tab' end, { expr = true }
 --stylua: ignore end
 
 -- ============================================================
+-- 🔑 Toggle inlay hints
+-- ============================================================
+vim.keymap.set("n", "<leader>th", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Basculer les inlay hints" })
+
+-- ============================================================
 -- 🔑 Search cword in next split
 -- Sélectionner un mot dans un split et le chercher dans l'autre
 -- ============================================================
