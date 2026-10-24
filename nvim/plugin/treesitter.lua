@@ -26,7 +26,7 @@ local parsers = {
     "query",
     "rasi",
     "regex",
-    --'rust',
+    "rust",
     "scss",
     "toml",
     "tsx",
