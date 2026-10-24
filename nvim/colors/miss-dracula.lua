@@ -298,6 +298,10 @@ local groups = {
     pythonException = { link = "@keyword.exception" },
     pythonReturnStatement = { link = "@keyword.return" },
 
+    -- === RUST SPECIFIC OVERRIDES ===
+    ["@lsp.typemod.variable.mutable.rust"] = { fg = colors.fg, underline = true },
+    ["@lsp.typemod.method.mutable.rust"] = { underline = true },
+
     -- LSP.
     ComplHint = { link = "Comment" },
     DiagnosticDeprecated = { strikethrough = true, fg = colors.fg },
