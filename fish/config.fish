@@ -32,6 +32,11 @@ alias ....="cd ../../../.."
 alias cd..="cd .."
 alias cp="cp -iv"
 
+# alias pour le fuzzy finder tv
+alias tvd='cd (tv dirs)'
+alias tvf='nv (tv files)'
+alias tvt='nv (tv text)'
+
 # alias de sécurité
 alias rm="rm -I --preserve-root"
 alias chown="chown --preserve-root"
@@ -50,7 +55,7 @@ alias g="git"
 alias gl="git log"
 alias gs="git status"
 alias ga="git add"
-alias gc="git commit"
+alias gc="git commit -m"
 alias gpu="git push"
 alias gpl="git pull"
 alias gd="git diff"
@@ -58,7 +63,7 @@ alias gco="git checkout"
 alias gb="git branch"
 alias gf="git fetch"
 alias gm="git merge"
-
+alias gremo="git remote -v"
 
 # Connexion ssh vers Dell ~/projets
 function p
@@ -98,7 +103,7 @@ set -gx FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200'"
 zoxide init fish | source
 atuin init fish | source
 
-tv init fish | source # active television tv (fuzzy finder) avec ctrl+t à la place de fzf
+# tv init fish | source # active television tv (fuzzy finder) avec ctrl+t à la place de fzf
 
 # ======= PATH NPM ET PNPM ==========
 # pnpm
