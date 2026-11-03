@@ -1,5 +1,6 @@
 // Config //
 configuration {
+    terminal:                    "kitty";
     modi:                        "drun,filebrowser,window,emoji:rofimoji";
     show-icons:                  true;
     display-drun:                " ";

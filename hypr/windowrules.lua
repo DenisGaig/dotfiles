@@ -75,12 +75,15 @@ hl.window_rule({
 hl.window_rule({ match = { class = "dev.zed.Zed" }, workspace = "1" })
 hl.window_rule({ match = { class = "brave-browser" }, workspace = "3" })
 hl.window_rule({ match = { class = "firefox" }, workspace = "4" })
+hl.window_rule({ match = { class = "vivaldi-stable" }, workspace = "4" })
 hl.window_rule({
 	match = { class = "com.anthropic.Claude" },
 	workspace = "5",
 	opacity = "0.95 override 0.94 override",
 })
 hl.window_rule({ match = { class = "obsidian" }, workspace = "6" })
+hl.window_rule({ match = { class = "emacs" }, workspace = "6" })
 hl.window_rule({ match = { class = "org.gnome.Geary" }, workspace = "7" })
 hl.window_rule({ match = { class = "brave-music.youtube.com__-Default" }, workspace = "8" })
+hl.window_rule({ match = { class = "kitty", title = "rmpc" }, workspace = "8" })
 hl.window_rule({ match = { class = "org.keepassxc.KeePassXC" }, workspace = "9" })
