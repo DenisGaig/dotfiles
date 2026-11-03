@@ -88,6 +88,10 @@
       "rev": "a1f73887af6cc4b09cb15cc96e0b72d7932552a5",
       "src": "https://github.com/monkoose/neocodeium"
     },
+    "nnn.vim": {
+      "rev": "e0104e369508fc12e3651ad4dee20261b5b3e87f",
+      "src": "https://github.com/mcchrish/nnn.vim"
+    },
     "nvim-autopairs": {
       "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
       "src": "https://github.com/windwp/nvim-autopairs"
