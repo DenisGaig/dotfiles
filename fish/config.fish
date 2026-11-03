@@ -86,24 +86,16 @@ fzf --fish | source
 bind --erase \cr # désactive la commande par défaut Ctrl+R pour celle de Atuin
 bind --erase -M insert \cr
 
-# Options globales SANS preview
-set -gx FZF_DEFAULT_OPTS "--preview-window 'right:50%:wrap'"
-
-# -- fd comme source --
-set -gx FZF_DEFAULT_COMMAND "fd --type f --hidden --exclude .git"
-set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-
-# -- Previews spécifiques: eza pour dossiers, bat pour fichiers --
-set show_file_or_dir_preview "if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
-
-set -gx FZF_CTRL_T_OPTS "--preview 'bash -c \"$show_file_or_dir_preview\"'"
-set -gx FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200'"
+# => Suite de la configuration de fzf dans ~/.config/fish/conf.d/fzf.fish
 
 # ==== ZOXIDE ET ATUIN ==========
 zoxide init fish | source
 atuin init fish | source
 
 # tv init fish | source # active television tv (fuzzy finder) avec ctrl+t à la place de fzf
+
+# ===== MISE (gestionnaire de version node, pnpm...) =====
+mise activate fish | source
 
 # ======= PATH NPM ET PNPM ==========
 # pnpm
@@ -113,9 +105,6 @@ if not string match -q -- $PNPM_HOME $PATH
 end
 # pnpm end
 set -x PATH ~/.npm-global/bin $PATH
-
-# ===== MISE (gestionnaire de version node, pnpm...) =====
-mise activate fish | source
 
 # ===== CONFIG DE LIBVIRT pour les VMs ======
 set -gx LIBVIRT_DEFAULT_URI qemu:///system
