@@ -70,6 +70,10 @@ hl.config({
 
 hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 
+-- ======= Ajout suite au bug de kitty qui ne se lance pas le 31/10/26 après une mise à jour de hyprland 0.57 =======
+-- [ ] -- A retirer à la prochaine mise à jour si nécéssaire
+hl.config({ quirks = { skip_non_kms_dmabuf_formats = false } })
+
 -- =============================================================================
 -- DEVICE
 -- =============================================================================
