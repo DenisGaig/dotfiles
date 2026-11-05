@@ -206,6 +206,107 @@ hl.bind(mainMod .. " + ALT + l", function()
 end, { description = "Largeur prédéfinie suivante" })
 
 -- =============================================================================
+-- MODE "NIRI" : fenêtre seule centrée avec marges (scrolling uniquement)
+-- =============================================================================
+
+-- true = une fenêtre seule garde sa largeur de colonne (centrée, avec marges)
+-- false = une fenêtre seule prend tout l'écran
+-- Doit correspondre à la valeur de fullscreen_on_one_column dans hyprland.lua
+
+local niri_mode = false
+local niri_margin_v = 40 -- marge haut/bas en pixels (à ajuster)
+
+-- Workspaces sur lesquels le mode Niri est désactivé
+local niri_excluded_workspaces = {
+	["3"] = true, -- Navigateur
+	["5"] = true, -- Claude
+	["8"] = true, -- Music
+	["9"] = true, -- KeypassXC
+}
+
+local function is_niri_excluded()
+	local ws = hl.get_active_workspace()
+	return niri_excluded_workspaces[tostring(ws.id)] == true
+end
+
+local function apply_niri_mode()
+	local active = niri_mode and not is_niri_excluded()
+
+	hl.config({
+		scrolling = {
+			fullscreen_on_one_column = not active,
+			focus_fit_method = active and 0 or 1,
+		},
+	})
+
+	if active then
+		hl.workspace_rule({
+			workspace = "w[tv1]s[false]",
+			gaps_out = {
+				top = niri_margin_v,
+				bottom = niri_margin_v,
+				left = 10,
+				right = 10,
+			},
+		})
+	else
+		hl.workspace_rule({
+			workspace = "w[tv1]s[false]",
+			gaps_out = 10,
+		})
+	end
+end
+
+-- apply_niri_mode()
+
+local function update_niri_behavior()
+	if not niri_mode or is_niri_excluded() then
+		return
+	end
+
+	local ws = hl.get_active_workspace()
+	local wins = hl.get_workspace_windows(tostring(ws.id))
+
+	local n = 0
+	for _, win in ipairs(wins) do
+		if not win.floating then
+			n = n + 1
+		end
+	end
+
+	-- Une fenêtre : centrage Niri
+	-- Plusieurs fenêtres : scrolling classique
+	hl.config({
+		scrolling = {
+			focus_fit_method = n <= 1 and 0 or 1,
+		},
+	})
+end
+
+hl.on("workspace.active", function()
+	apply_niri_mode()
+	update_niri_behavior()
+end)
+
+hl.on("window.open", function()
+	update_niri_behavior()
+end)
+
+hl.on("window.destroy", function()
+	update_niri_behavior()
+end)
+
+hl.bind(mainMod .. " + G", function()
+	niri_mode = not niri_mode
+	apply_niri_mode()
+	update_niri_behavior()
+
+	hl.config({
+		scrolling = { fullscreen_on_one_column = not niri_mode },
+	})
+end, { description = "Toggle fenêtre seule centrée / plein écran" })
+
+-- =============================================================================
 -- WORKSPACES — boucle comme dans l'exemple officiel
 -- code:10 = touche &  (1 sur AZERTY)
 -- code:19 = touche à  (0 sur AZERTY)
