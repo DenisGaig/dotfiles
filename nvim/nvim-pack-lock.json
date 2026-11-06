@@ -84,6 +84,10 @@
       "rev": "146aef247d9bfc58bab20dd921ba6b75ac4b8cf9",
       "src": "https://github.com/nvim-mini/mini.splitjoin"
     },
+    "minuet-ai.nvim": {
+      "rev": "50bf63b031c0391e926fdf0b3d044d37846e6e34",
+      "src": "https://github.com/milanglacier/minuet-ai.nvim"
+    },
     "neocodeium": {
       "rev": "a1f73887af6cc4b09cb15cc96e0b72d7932552a5",
       "src": "https://github.com/monkoose/neocodeium"
