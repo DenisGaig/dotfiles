@@ -1,2 +1,4 @@
 nvim/codeium_config.json
 nvim/db_ui/
+fish/secrets.fish
+fish/fish_variables
