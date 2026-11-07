@@ -108,3 +108,8 @@ set -x PATH ~/.npm-global/bin $PATH
 
 # ===== CONFIG DE LIBVIRT pour les VMs ======
 set -gx LIBVIRT_DEFAULT_URI qemu:///system
+
+# ===== Charge clé API de Codestral =====
+if test -f ~/.dotfiles/fish/secrets.fish
+    source ~/.dotfiles/fish/secrets.fish
+end
