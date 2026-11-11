@@ -71,6 +71,7 @@ function p
 end
 
 abbr reload 'source ~/.dotfiles/fish/config.fish'
+abbr -a c clear
 
 # NEOFETCH n'est plus maintenu: script perso pour le remplacer
 #if status is-interactive && test -z "$FZF_PREVIEW_COLUMNS"
