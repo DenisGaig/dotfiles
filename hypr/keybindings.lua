@@ -53,24 +53,42 @@ hl.bind(
 	{ description = "Emoji" }
 )
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("rofimark"), { description = "Bookmark" })
+
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.config/rofi/scripts/wallpaper.sh"), { description = "Wallpaper" })
+
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(rofidex .. "/rofidex.sh"), { description = "Fiches RofiDEX" })
+
 hl.bind(
 	mainMod .. " + SHIFT + S",
 	hl.dsp.exec_cmd(terminal .. " --class rofidex-capture " .. python .. " " .. rofidex .. "/capture.py"),
 	{ description = "Capture RofiDEX" }
 )
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("~/.dotfiles/scripts/skitty-note.sh"), { description = "Note (neovim)" })
+
+hl.bind(
+	mainMod .. " + SHIFT + N",
+	hl.dsp.exec_cmd("~/.dotfiles/scripts/skitty-note.sh"),
+	{ description = "Skitty Note (neovim)" }
+)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("geary"), { description = "Mail" })
+
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("hyprpicker -a"), { description = "Picker de Couleur" })
+
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("[float] speedcrunch"), { description = "Calculatrice" })
+
 hl.bind(
 	mainMod .. " + SHIFT + B",
 	hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-waybar.sh"),
 	{ description = "Toggle Waybar" }
 )
+
 hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'), { description = "Screenshot" })
+
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("[float] thunar"), { description = "Explorateur Thunar" })
+
+-- =============================================================================
+-- CLIPBOARD avec CLIPHIST (texte et image)
+-- =============================================================================
+
 hl.bind(
 	"SUPER + V",
 	hl.dsp.exec_cmd(
@@ -85,6 +103,32 @@ hl.bind(
 		"bash -c 'rofi -modi clipboard:~/.local/bin/cliphist-rofi-img -show clipboard -show-icons -theme ~/.config/rofi/cliphist-img.rasi '"
 	),
 	{ description = "Clipboard pour images" }
+)
+
+-- =============================================================================
+-- TERMINALS FLOTTANT AVEC KITTEN quick-access-terminal
+-- =============================================================================
+
+hl.bind(
+	mainMod .. " + P",
+	hl.dsp.exec_cmd("kitten quick-access-terminal --instance-group python-repl python -q"),
+	{ description = "REPL Python (flottant)" }
+)
+
+hl.bind(
+	mainMod .. " + d",
+	hl.dsp.exec_cmd(
+		"kitten quick-access-terminal --instance-group journal bash ~/.dotfiles/scripts/daily-journal.sh --float"
+	),
+	{ description = "Journal du jour (flottant)" }
+)
+
+hl.bind(
+	mainMod .. " + n",
+	hl.dsp.exec_cmd(
+		"kitten quick-access-terminal --instance-group journal bash ~/.dotfiles/scripts/daily-note.sh --float"
+	),
+	{ description = "Note du jour (flottant)" }
 )
 
 -- =============================================================================
