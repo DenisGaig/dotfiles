@@ -15,15 +15,20 @@ full_path=${note_dir}/${note_name}.md
 
 # Création du dossier de la note si besoin
 if [ ! -d "$note_dir" ]; then
-  mkdir -p "$note_dir"
+    mkdir -p "$note_dir"
 fi
 
 # Création de la note si besoin
 if [ ! -f "$full_path" ]; then
-  cat <<EOF >"$full_path"
+    cat <<EOF >"$full_path"
 # ${note_name}
 ## Daily Note
 EOF
+fi
+
+# Mode flottant (quick-access-terminal) : nvim directement, sans sessions kitty
+if [ "$1" = "--float" ]; then
+    exec nvim "+cd ${main_note_dir}" "+norm G" "$full_path"
 fi
 
 ###############################################################################
@@ -33,8 +38,8 @@ kitty_sess_file="$HOME/.dotfiles/kitty/sessions/daily.kitty-session"
 
 # Si la note d'aujourd'hui est déjà dans le fichier de session, on y saute
 if grep -Fq "${note_name}.md" "$kitty_sess_file"; then
-  kitten @ action goto_session "$kitty_sess_file"
-  exit 0
+    kitten @ action goto_session "$kitty_sess_file"
+    exit 0
 fi
 
 # Commande de lancement avec fish
