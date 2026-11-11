@@ -26,7 +26,7 @@ add_on_event("InsertEnter", {
             -- notify = "debug",
             virtualtext = {
                 auto_trigger_ft = { "*" },
-                -- auto_trigger_ignore_ft = { "markdown", "gitcommit" },
+                auto_trigger_ignore_ft = { "markdown", "gitcommit" },
                 keymap = {
                     accept = "<M-Tab>",
                     accept_line = "<M-l>",
